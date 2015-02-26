@@ -22,7 +22,7 @@ public class User extends Model {
 	@Required
 	@MinLength(6)
 	public String password;
-	
+
 	
 	public User(String username, String email, String password){
 		this.username = username;

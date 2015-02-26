@@ -27,7 +27,6 @@ public class Application extends Controller {
     }
     
     public static Result registration(){ 	
-    	
     	return ok(registration.render(bitName));
     }
     
@@ -41,10 +40,8 @@ public class Application extends Controller {
     	
     }
     
- 
     
   public static Result loginpage(){
-  	  		
     		return ok(Loginpage.render(bitName));   	
     }
   
@@ -58,6 +55,14 @@ public class Application extends Controller {
 	  
 	  return ok(loginFailed.render(bitName));   //ako ne prodje username 
 	  
+  }
+  
+  public static Result logout() {
+	  session().clear();
+	    flash("OK!", "You've been logged out");
+	    return redirect(
+	        routes.Application.index()
+	    );
   }
 
         
