@@ -1,7 +1,17 @@
-@(message: String)
+@(message: String)(name: String)
 
-@main("BitCoupon") {
+@import helper._
 
-    @play20.welcome(message, style = "Java")
+@main("Welcome to bitCoupon") {
+	
+	<h2>@message @name</h2>
+    <h4>Home: </h4>
+    
+    
+    <a href="/registration"> Registration </a> 
+    <br><br>
+    <a href="/loginpage"> Login </a> 
 
+		
 }
+
