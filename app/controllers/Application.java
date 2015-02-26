@@ -36,7 +36,7 @@ public class Application extends Controller {
     	String password = newUser.bindFromRequest().get().password;    	
     	session("name", username);
     	User.create(username, mail, password);
-    	return ok(index.render(message, username )); 
+    	  return ok(userIndex.render(message, username ));  
     	
     }
     
@@ -50,7 +50,7 @@ public class Application extends Controller {
 	  String password = login.bindFromRequest().get().password;  
 	  User u = new User(username, null, password);
 	  if ( u.verify(u.username, u.password) == true ){
-		  return ok(index.render(message, username )); 
+		  return ok(userIndex.render(message, username )); 
 	  }
 	  
 	  return ok(loginFailed.render(bitName));   //ako ne prodje username 
