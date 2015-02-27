@@ -46,14 +46,14 @@ public class Application extends Controller {
     }
   
   public static Result login(){
-	  String username = login.bindFromRequest().get().username;
+	  String mail = login.bindFromRequest().get().email;
 	  String password = login.bindFromRequest().get().password;  
-	  User u = new User(username, null, password);
-	  if ( u.verify(u.username, u.password) == true ){
-		  return ok(userIndex.render(message, username )); 
+	  User u = new User(null, mail, password);
+	  if ( u.verify(u.email, u.password) == true ){
+		  return ok(userIndex.render(message, mail )); 
 	  }
 	  
-	  return ok(Loginpage.render(bitName,"Invalid username or password"));  //ako ne prodje username 
+	  return ok(Loginpage.render(bitName,"Invalid email or password"));  //ako ne prodje username 
 	  
   }
   

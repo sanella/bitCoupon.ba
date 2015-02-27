@@ -47,7 +47,7 @@ public class User extends Model {
 	}
 	
 	public static boolean verify(String username, String password){
-		List<User> us = find.where().eq("username", username).findList();
+		List<User> us = find.where().eq("email", username).findList();
 		List<User> pas = find.where().eq("password", password).findList();
 		if ( us.isEmpty() ){
 			return false;
@@ -59,6 +59,12 @@ public class User extends Model {
 			 //find.where().contains("username", username) != null;
 	
 	}
+	
+//	public static List<User> findByMail(String mail){
+//		User ll = find.where().eq("email", mail).
+//		
+//		return find.where().eq("email", mail).findList();
+//	}
 	
 	public static void delete(int id){
 		find.byId(id).delete();
