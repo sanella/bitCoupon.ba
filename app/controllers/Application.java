@@ -27,7 +27,7 @@ public class Application extends Controller {
     		name = "Public user";	
     		return ok(index.render(message, name )); 
     	} else {
-    		return redirect("/");
+    		return ok(index.render(message, name )); 
     	}
     }
     
@@ -80,6 +80,7 @@ public class Application extends Controller {
 	  String mail = login.bindFromRequest().get().email;
 	  String password = login.bindFromRequest().get().password;  
 	  User u = new User(null, mail, password);
+	  session("name", mail);
 	  if ( u.verifyLogin(u.email, u.password) == true ){
 		  return ok(userIndex.render(message, mail )); 
 	  }

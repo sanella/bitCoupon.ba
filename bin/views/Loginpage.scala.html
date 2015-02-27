@@ -3,17 +3,67 @@
 @import helper._
 
 @main("Login"){
-	
+@*	
 	<h2>@message</h2>
-    <h4>@info: </h4>
+    <h4>@info: </h4> 
 
-  	  @helper.form(routes.Application.login(), 'id->"login"){
+ 	  @helper.form(routes.Application.login(), 'id->"login"){
     	<p> Enter email: </p>
-    	<input type="text" value="" id="email" name="email" /> <br>
+    	<input type="text" id="email" name="email" /> <br>
     	<p> Enter Password: </p>
-    	<input type="password" value="" id="password" name="password" /> <br>
+    	<input type="password"  id="password" name="password" /> <br>
     	<p></p>
     	<input type="submit" value="Login" />
       }
+   *@
+   <header id="header"><!--header-->
+		<div class="header_top"><!--header_top-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="col-sm-12">
+						
+							<ul class="nav navbar-nav">
+								<li><a href="/registration" class="active"><i class="fa fa-lock"></i> Register</a></li>
+							</ul>
+						</div>
+					</div>
+					</div>
+					
+				</div>
+			</div>
+		</div><!--/header_top-->
+		
+		<div class="header-middle"><!--header-middle-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="logo pull-left">
+							<a href="index.html"><img src="@routes.Assets.at("images/home/logo.png")" alt="" /></a>
+						</div>
+				</div>
+			</div>
+		</div>
+		
+		<section id="form"><!--form-->
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-4 col-sm-offset-1">
+					<div class="login-form"><!--login form-->
+						<h2>Login to your account</h2>
+						<form action="@routes.Application.login" method ="POST">
+							<input type="text" id="email" name="email" placeholder="Email" />
+							<input type="password" id="password" name="password" placeholder="Password" />
+							<button type="submit" class="btn btn-primary">Login</button>
+						</form>
+					</div><!--/login form-->
+				</div>
 
+    <script src="@routes.Assets.at("js/jquery.js")"></script>
+	<script src="@routes.Assets.at("js/price-range.js")"></script>
+    <script src="@routes.Assets.at("js/jquery.scrollUp.min.js")"></script>
+	<script src="@routes.Assets.at("js/bootstrap.min.js")"></script>
+    <script src="@routes.Assets.at("js/jquery.prettyPhoto.js")"></script>
+    <script src="@routes.Assets.at("js/main.js")"></script>  
+   
 }
