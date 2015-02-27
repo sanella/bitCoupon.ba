@@ -32,7 +32,7 @@ public class User extends Model {
 	@MinLength(6)
 	public String password;
 
-	
+
 	public User(String username, String email, String password){
 		this.username = username;
 		this.email = email;
@@ -58,8 +58,8 @@ public class User extends Model {
 	/**
 	 * Login verification
 	 * Verifies if the email and password exists by checking in the database
-	 * @param mail
-	 * @param password
+	 * @param mail submitted
+	 * @param password submitted
 	 * @return boolean true or false
 	 */
 	public static boolean verifyLogin(String mail, String password){
@@ -77,8 +77,8 @@ public class User extends Model {
 	/**
 	 * Checks if there already exists a user with given username or email
 	 * and blocks registration if does.
-	 * @param username
-	 * @param email
+	 * @param username from the input
+	 * @param email  from the input
 	 * @return boolean true or false
 	 */
 	public static boolean verifyRegistration(String username, String email){
