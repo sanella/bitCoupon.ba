@@ -21,7 +21,7 @@ public class Application extends Controller {
     	if (name == null){
     		name = "Public user";	
     		return ok(index.render(message, name )); 
-    	}else{
+    	} else {
     		return redirect("/");
     	}
     }
