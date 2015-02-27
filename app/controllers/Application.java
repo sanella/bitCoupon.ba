@@ -57,7 +57,7 @@ public class Application extends Controller {
     	  return ok(userIndex.render(message, username ));  
     	  
     	} else {
-    		return ok(index.render("Username or mail allready exists!", null));
+    		return ok(registration.render("Username or password allready exists!" ));
     	}
     	
     }
