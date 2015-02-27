@@ -8,6 +8,15 @@ import play.data.validation.Constraints.MinLength;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
+
+/**
+ * 
+ * Entity class for the User.
+ * Creates a table in the database with all of
+ * the properties
+ *
+ */
+
 @Entity
 public class User extends Model {
 	
@@ -46,8 +55,8 @@ public class User extends Model {
 		return find.where().eq("username", username).findList();
 	}
 	
-	public static boolean verify(String username, String password){
-		List<User> us = find.where().eq("email", username).findList();
+	public static boolean verifyLogin(String mail, String password){
+		List<User> us = find.where().eq("email", mail).findList();
 		List<User> pas = find.where().eq("password", password).findList();
 		if ( us.isEmpty() ){
 			return false;
@@ -55,10 +64,20 @@ public class User extends Model {
 			
 			return false;
 		} else return true;
-	
-			 //find.where().contains("username", username) != null;
-	
+			
 	}
+	
+	public static boolean verifyRegistration(String username, String email){
+		List<User> usname = find.where().eq("username", username).findList();
+		List<User> mail = find.where().eq("email", email).findList();
+		if ( usname.isEmpty() && mail.isEmpty() ){
+			return true;
+			
+		} else return false;
+			
+	}
+	
+	
 	
 //	public static List<User> findByMail(String mail){
 //		User ll = find.where().eq("email", mail).
