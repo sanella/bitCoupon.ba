@@ -55,6 +55,13 @@ public class User extends Model {
 		return find.where().eq("username", username).findList();
 	}
 	
+	/**
+	 * Login verification
+	 * Verifies if the email and password exists by checking in the database
+	 * @param mail
+	 * @param password
+	 * @return boolean true or false
+	 */
 	public static boolean verifyLogin(String mail, String password){
 		List<User> us = find.where().eq("email", mail).findList();
 		List<User> pas = find.where().eq("password", password).findList();
@@ -67,6 +74,13 @@ public class User extends Model {
 			
 	}
 	
+	/**
+	 * Checks if there already exists a user with given username or email
+	 * and blocks registration if does.
+	 * @param username
+	 * @param email
+	 * @return boolean true or false
+	 */
 	public static boolean verifyRegistration(String username, String email){
 		List<User> usname = find.where().eq("username", username).findList();
 		List<User> mail = find.where().eq("email", email).findList();
@@ -78,17 +92,27 @@ public class User extends Model {
 	}
 	
 	
-	
+	/* 
+	 * TODO
+	 * return a username by given mail  
+	 */
 //	public static List<User> findByMail(String mail){
 //		User ll = find.where().eq("email", mail).
 //		
 //		return find.where().eq("email", mail).findList();
 //	}
 	
+	
+	/*
+	 * Delete user by id
+	 */
 	public static void delete(int id){
 		find.byId(id).delete();
 	}
 
+	/*
+	 * Find user by ID
+	 */
 	public static User find(int id) {
 		return find.byId(id);
 	}
