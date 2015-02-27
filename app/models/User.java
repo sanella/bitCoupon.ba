@@ -64,4 +64,8 @@ public class User extends Model {
 		find.byId(id).delete();
 	}
 
+	public static User find(int id) {
+		return find.byId(id);
+	}
+
 }
