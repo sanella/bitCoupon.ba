@@ -35,7 +35,7 @@ public class Application extends Controller {
      * @return Renders the registration view
      */
     public static Result registration(){ 	
-    	return ok(registration.render(bitName));
+    	return ok(registration.render(bitName, "Registration"));
     }
     
     /**
@@ -57,7 +57,7 @@ public class Application extends Controller {
     	  return ok(userIndex.render(message, username ));  
     	  
     	} else {
-    		return ok(registration.render("Username or mail allready exists!" ));
+    		return ok(registration.render(bitName, "Username or mail allready exists!" ));
     	}
     	
     }
@@ -67,7 +67,7 @@ public class Application extends Controller {
      * @return renders the loginpage view
      */
   public static Result loginpage(){
-    		return ok(Loginpage.render(bitName, "Login"));   	
+    		return ok(Loginpage.render(bitName, "Login to your account"));   	
     }
   
   	/**
