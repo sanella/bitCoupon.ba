@@ -14,7 +14,6 @@ public class UserController extends Controller {
 	static String bitName = "bitCoupon";
 	static String name = null;
 	
-	
 	static Form<User> newUser = new Form<User>(User.class);
 	static Form<Login> login = new Form<Login>(Login.class);
 	
@@ -23,7 +22,7 @@ public class UserController extends Controller {
      * @return Renders the registration view
      */
     public static Result registration(){ 	
-    	return ok(registration.render(bitName, "Registration"));
+    	return ok(registration.render("Registration","Username","Email"));
     }
     
     /**
@@ -32,20 +31,35 @@ public class UserController extends Controller {
      * @return redirects to the index page with welcome.
      */
     public static Result register(){
+    	
     	String username = newUser.bindFromRequest().get().username;
     	String mail = newUser.bindFromRequest().get().email;
-    	String password = HashHelper.createPassword(newUser.bindFromRequest().get().password);   
+    	String password = newUser.bindFromRequest().get().password;   
+    	String hashPass= HashHelper.createPassword(password);   
   
-    	session("name", username);
+    	if( username.isEmpty() || username.equals("Username")){
+    		return ok(registration.render(
+    				"Username required for registration !",username, mail ));
+    	}
+    	if (mail.isEmpty() || mail.equals("Email")){
+    		return ok(registration.render(
+    				"Email required for registration !",username, mail ));
+    	}
+    	if (password.isEmpty()){
+    		return ok(registration.render(
+    				"Password required for registration !",username, mail ));
+    	}
+    	
     	User u = new User(username, mail, null);
     	
     	if ( u.verifyRegistration(u.username, u.email) == true){
     		
-    	long id = User.createUser(username, mail, password);
-    	  return ok(userIndex.render(message, username ));  
+    		session("name", username);
+    		long id = User.createUser(username, mail, hashPass);
+    		return ok(userIndex.render(message, username ));  
     	  
     	} else {
-    		return ok(registration.render(bitName, "Username or mail allready exists!" ));
+    		return ok(registration.render("Username or mail allready exists!", username, mail ));
     	}
     	
     }
@@ -68,8 +82,13 @@ public class UserController extends Controller {
 	  String mail = login.bindFromRequest().get().email;
 	  String password = login.bindFromRequest().get().password;  
 	  User u = new User(null, mail, password);
-	  session("name", mail);
+	  
+	  if ( mail.isEmpty() || password.isEmpty()){
+		  return ok(Loginpage.render(bitName, "Login to your account"));
+	  }
+	  
 	  if ( u.verifyLogin(u.email, u.password) == true ){
+		  session("name", mail);
 		  return ok(userIndex.render(message, mail )); 
 	  }
 	  
@@ -82,11 +101,11 @@ public class UserController extends Controller {
    * @return redirects to index
    */
   public static Result logout() {
-	  session().clear();
+	  
+	  	session().clear();
 	    flash("OK!", "You've been logged out");
-	    return redirect(
-	        routes.Application.index()
-	    );
+	    
+	    return redirect( routes.Application.index() );
   }
 
 }

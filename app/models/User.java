@@ -35,8 +35,8 @@ public class User extends Model {
 	@MinLength(6)
 	public String password;
 
-	static Finder<Integer, User> find = new Finder<Integer,User>(
-			Integer.class, User.class);
+	static Finder<Long, User> find = new Finder<Long,User>(
+			Long.class, User.class);
 
 	public User(String username, String email, String password){
 		this.username = username;
@@ -104,14 +104,14 @@ public class User extends Model {
 	/*
 	 * Delete user by id
 	 */
-	public static void delete(int id){
+	public static void delete(long id){
 		find.byId(id).delete();
 	}
 
 	/*
 	 * Find user by ID
 	 */
-	public static User find(int id) {
+	public static User find(long id) {
 		return find.byId(id);
 	}
 
