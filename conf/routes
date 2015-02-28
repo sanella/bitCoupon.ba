@@ -4,11 +4,11 @@
 
 # Home page
 GET     	/                           controllers.Application.index()
-GET			/registration				controllers.Application.registration()
-POST        /register					controllers.Application.register()
-GET			/loginpage					controllers.Application.loginpage()
-POST		/login			     		controllers.Application.login()
-GET    		 /logout                    controllers.Application.logout()
+GET			/registration				controllers.UserController.registration()
+POST        /register					controllers.UserController.register()
+GET		   	/loginpage					controllers.UserController.loginpage()
+POST	 	/login			     		controllers.UserController.login()
+GET    		 /logout                    controllers.UserController.logout()
 
 
 # Map static resources from the /public folder to the /assets URL path

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import play.data.validation.Constraints.Email;
 import play.data.validation.Constraints.MinLength;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
@@ -21,34 +22,32 @@ import play.db.ebean.Model;
 public class User extends Model {
 	
 	@Id
-	public int id;
+	public long id;
 	
-	@Required
-	@MinLength(4)
+	@MinLength(5)
 	public String username;
-	@Required
+	
+	@Email
 	public String email;
-	@Required
+
 	@MinLength(6)
 	public String password;
 
+	static Finder<Integer, User> find = new Finder<Integer,User>(
+			Integer.class, User.class);
 
 	public User(String username, String email, String password){
 		this.username = username;
 		this.email = email;
 		this.password = password;
 	}
-	
-	static Finder<Integer, User> find = new Finder<Integer,User>(
-			Integer.class, User.class);
-	
-//	public static void create(Customer c){
-//		c.save();
-//	}
+
 	
 	
-	public static void create(String username,String email, String password){
-		new User(username, email, password).save();
+	public static long createUser(String username,String email, String password){
+		User newUser = new User(username, email, password);
+		newUser.save();
+		return newUser.id;
 	}
 	
 	public static List<User> all(String username){
