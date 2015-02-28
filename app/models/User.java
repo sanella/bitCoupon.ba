@@ -1,5 +1,7 @@
 package models;
 
+import helpers.HashHelper;
+
 import java.util.List;
 
 import javax.persistence.*;
@@ -61,16 +63,13 @@ public class User extends Model {
 	 * @param password submitted
 	 * @return boolean true or false
 	 */
-	public static boolean verifyLogin(String mail, String password){
-		List<User> us = find.where().eq("email", mail).findList();
-		List<User> pas = find.where().eq("password", password).findList();
-		if ( us.isEmpty() ){
-			return false;
-		} else if (pas.isEmpty()){
-			
-			return false;
-		} else return true;
-			
+	public static boolean verifyLogin(String mail, String password){		
+		
+		User user = find.where().eq("email", mail).findUnique();
+		if ( HashHelper.checkPass(password, user.password) == true ){
+			return true;
+		} 
+		return false;
 	}
 	
 	/**

@@ -21,11 +21,9 @@ public class HashHelper {
 
 
 			if (clearString == null) {
-
-			throw new IllegalArgumentException("empty.password");
+				throw new IllegalArgumentException("empty.password");
 
 			}
-
 			return BCrypt.hashpw(clearString, BCrypt.gensalt());
 
 			}

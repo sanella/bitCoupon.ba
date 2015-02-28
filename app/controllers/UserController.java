@@ -1,5 +1,6 @@
 package controllers;
 
+import helpers.HashHelper;
 import play.*;
 import play.data.Form;
 import play.mvc.*;
@@ -33,9 +34,9 @@ public class UserController extends Controller {
     public static Result register(){
     	String username = newUser.bindFromRequest().get().username;
     	String mail = newUser.bindFromRequest().get().email;
-    	String password = newUser.bindFromRequest().get().password;    	
+    	String password = HashHelper.createPassword(newUser.bindFromRequest().get().password);   
+  
     	session("name", username);
-    	
     	User u = new User(username, mail, null);
     	
     	if ( u.verifyRegistration(u.username, u.email) == true){
