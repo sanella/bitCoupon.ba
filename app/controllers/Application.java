@@ -31,6 +31,8 @@ public class Application extends Controller {
     	}
     }
     
+    
+    	/* MOVED TO UserController */
 //    /**
 //     * @return Renders the registration view
 //     */

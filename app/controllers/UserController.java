@@ -50,8 +50,9 @@ public class UserController extends Controller {
     				"Enter a password whith minimum 6 characters !",username, mail ));
     	}
     	
-    	else if ( User.verifyRegistration(username, mail) == true){
-    		
+    	/* Creating new user if the username or mail is free for use, and there are no errors */
+    	
+    	else if ( User.verifyRegistration(username, mail) == true){		
     		session("name", username);
     		long id = User.createUser(username, mail, hashPass);
     		return ok(userIndex.render(message, username ));  
@@ -72,20 +73,20 @@ public class UserController extends Controller {
   
   	/**
   	 * Pulls the value from two login fields and verifies if the
-  	 * mail exists and the password is valid.
+  	 * mail exists and the password is valid by calling the 
+  	 * verifyLogin() method from the User class.
   	 * @return redirects to index if the verification is ok, or reloads the login page
-  	 * with warning message.
+  	 * with a warning message.
   	 */
   public static Result login(){
 	  String mail = login.bindFromRequest().get().email;
 	  String password = login.bindFromRequest().get().password;  
-	  User u = new User(null, mail, password);
-	  
-	  if ( mail.isEmpty() || password.length()<6){
+ 
+	  if ( mail.isEmpty() || password.length() < 6 ){
 		  return ok(Loginpage.render(bitName, "Login to your account"));
 	  }
 	  
-	  if ( u.verifyLogin(u.email, u.password) == true ){
+	  if ( User.verifyLogin( mail, password) == true ){
 		  session("name", mail);
 		  return ok(userIndex.render(message, mail )); 
 	  }

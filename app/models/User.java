@@ -45,12 +45,19 @@ public class User extends Model {
 	}
 
 	
-	
+	/**
+	 * Creates a new User and saves it to the database 
+	 * @param username String
+	 * @param email String
+	 * @param password String
+	 * @return the id of the new user (long)
+	 */
 	public static long createUser(String username,String email, String password){
 		User newUser = new User(username, email, password);
 		newUser.save();
 		return newUser.id;
 	}
+	
 	
 	public static List<User> all(String username){
 		return find.where().eq("username", username).findList();
@@ -59,24 +66,27 @@ public class User extends Model {
 	/**
 	 * Login verification
 	 * Verifies if the email and password exists by checking in the database
-	 * @param mail submitted
-	 * @param password submitted
+	 * @param mail String
+	 * @param password String
 	 * @return boolean true or false
 	 */
 	public static boolean verifyLogin(String mail, String password){		
-		
+		try{
 		User user = find.where().eq("email", mail).findUnique();
-		if ( HashHelper.checkPass(password, user.password) == true ){
+			if ( HashHelper.checkPass(password, user.password) == true ){
 			return true;
-		} 
+			} 
+		} catch (NullPointerException e){
+			return false;
+		}
 		return false;
 	}
 	
 	/**
-	 * Checks if there already exists a user with given username or email
+	 * Checks if there already exists a user with given username or email,
 	 * and blocks registration if does.
-	 * @param username from the input
-	 * @param email  from the input
+	 * @param username String
+	 * @param email  String
 	 * @return boolean true or false
 	 */
 	public static boolean verifyRegistration(String username, String email){
