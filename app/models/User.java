@@ -73,13 +73,12 @@ public class User extends Model {
 	public static boolean verifyLogin(String mail, String password){		
 		try{
 		User user = find.where().eq("email", mail).findUnique();
-			if ( HashHelper.checkPass(password, user.password) == true ){
-			return true;
-			} 
+			return HashHelper.checkPass(password, user.password);
+	
 		} catch (NullPointerException e){
 			return false;
 		}
-		return false;
+		
 	}
 	
 	/**
