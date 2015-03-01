@@ -41,18 +41,16 @@ public class UserController extends Controller {
     		return ok(registration.render(
     				"Enter a username whith minimum 4 characters !",null, mail ));
     	}
-    	if (mail.isEmpty() || mail.equals("Email")){
+    	else if ( mail.equals("Email")){
     		return ok(registration.render(
     				"Email required for registration !",username, null ));
     	}
-    	if (password.isEmpty() || password.length() < 6){
+    	else if ( password.length() < 6){
     		return ok(registration.render(
     				"Enter a password whith minimum 6 characters !",username, mail ));
     	}
     	
-    	User u = new User(username, mail, null);
-    	
-    	if ( u.verifyRegistration(u.username, u.email) == true){
+    	else if ( User.verifyRegistration(username, mail) == true){
     		
     		session("name", username);
     		long id = User.createUser(username, mail, hashPass);
