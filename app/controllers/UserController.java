@@ -37,17 +37,17 @@ public class UserController extends Controller {
     	String password = newUser.bindFromRequest().get().password;   
     	String hashPass= HashHelper.createPassword(password);   
   
-    	if( username.length() < 5 || username.equals("Username")){
+    	if( username.length() < 4 || username.equals("Username")){
     		return ok(registration.render(
-    				"Username must have minimum 5 characters !",username, mail ));
+    				"Enter a username whith minimum 4 characters !",null, mail ));
     	}
     	if (mail.isEmpty() || mail.equals("Email")){
     		return ok(registration.render(
-    				"Email required for registration !",username, mail ));
+    				"Email required for registration !",username, null ));
     	}
-    	if (password.isEmpty()){
+    	if (password.isEmpty() || password.length() < 6){
     		return ok(registration.render(
-    				"Password required for registration !",username, mail ));
+    				"Enter a password whith minimum 6 characters !",username, mail ));
     	}
     	
     	User u = new User(username, mail, null);

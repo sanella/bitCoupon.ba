@@ -26,13 +26,13 @@ public class User extends Model {
 	@Id
 	public long id;
 	
-	@MinLength(5)
+	@Required
 	public String username;
 	
 	@Email
 	public String email;
 
-	@MinLength(6)
+	@Required
 	public String password;
 
 	static Finder<Long, User> find = new Finder<Long,User>(
