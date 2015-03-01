@@ -16,7 +16,9 @@
     	<input type="submit" value="Login" />
       }
    *@
-   <header id="header"><!--header-->
+
+<body>
+		<header id="header"><!--header-->
 		<div class="header_top"><!--header_top-->
 			<div class="container">
 				<div class="row">
@@ -24,7 +26,7 @@
 						<div class="col-sm-12">
 						
 							<ul class="nav navbar-nav">
-								<li><a href="/registration" class="active"><i class="fa fa-lock"></i> Register</a></li>
+								<li><a href="/registration" class="active"><i class="fa fa-lock"></i> Registration </a></li>
 							</ul>
 						</div>
 					</div>
@@ -45,25 +47,22 @@
 			</div>
 		</div>
 		
+		
 		<section id="form"><!--form-->
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-4 col-sm-offset-1">
 					<div class="login-form"><!--login form-->
+					<div class="login-form"><!--login form-->
 						<h2>@info</h2>
-						<form action="@routes.UserController.login" method ="POST">
+						<form action="@routes.UserController.login" method="POST">
 							<input type="text" id="email" name="email" placeholder="Email" />
 							<input type="password" id="password" name="password" placeholder="Password" />
-							<button type="submit" class="btn btn-primary">Login</button>
+							<button type="submit">Login</button>
 						</form>
 					</div><!--/login form-->
 				</div>
-
-    <script src="@routes.Assets.at("js/jquery.js")"></script>
-	<script src="@routes.Assets.at("js/price-range.js")"></script>
-    <script src="@routes.Assets.at("js/jquery.scrollUp.min.js")"></script>
-	<script src="@routes.Assets.at("js/bootstrap.min.js")"></script>
-    <script src="@routes.Assets.at("js/jquery.prettyPhoto.js")"></script>
-    <script src="@routes.Assets.at("js/main.js")"></script>  
+			</body>
+		</html>
    
 }
