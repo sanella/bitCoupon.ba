@@ -93,7 +93,6 @@ public class User extends Model {
 		List<User> mail = find.where().eq("email", email).findList();
 		if ( usname.isEmpty() && mail.isEmpty() ){
 			return true;
-			
 		} else return false;
 			
 	}
