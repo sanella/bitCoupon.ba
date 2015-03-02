@@ -79,7 +79,6 @@ public class UserController extends Controller {
 		 return ok(registration.render(
 		 "Enter a password whith minimum 6 characters !",username, mail ));
 		 }
-
 		
 		if (request().method() == "POST") {
 			Form<User> filled_form = new Form<User>(User.class)
