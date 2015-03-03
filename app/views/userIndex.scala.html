@@ -4,9 +4,8 @@
 
 @main("User Panel") {
 
-		
-		 <!-- header for login and registration-->
-	<header id="header"><!--header-->
+<body>
+		<header id="header"><!--header-->
 		<div class="header_top"><!--header_top-->
 			<div class="container">
 				<div class="row">
@@ -14,21 +13,14 @@
 						<div class="col-sm-12">
 						
 							<ul class="nav navbar-nav">
-							<!-- if statement for enable od disable button in case of login -->
-								@if(name =="Public user") {
-									
-<li><a href="/loginpage" class="active"><i class="fa fa-lock"></i> Login </a></li>
-<li><a href="/registration" class="active"><i class="fa fa-lock"></i> Registration</a></li>
-} else {
- <li><a href="/register" class="active">@message @name </a></li>
- <li><a href="/logout" class="active"><i class="fa fa-lock"></i> Logout</a></li>
-
-}						
+ 							<li><a href="/register" class="active">@message @name </a></li>
+ 							<li><a href="/logout" class="active"><i class="fa fa-lock"></i> Logout</a></li>					
 							</ul>
 						</div>
 					</div>
-					</div>
-				</div>
+				</div>	
+			</div>
+		</div>
 		</div><!--/header_top-->
 		
 		<div class="header-middle"><!--header-middle-->
@@ -36,12 +28,11 @@
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="logo pull-left">
-							<a href="/"><img src="@routes.Assets.at("images/home/logo.png")"</a>
-						</div>			
+							<a href="/"><img src="@routes.Assets.at("images/home/logo.png")" alt="" /></a>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 			<div class="header-bottom"><!--header-bottom-->
 			<div class="container">
 				<div class="row">
@@ -77,11 +68,43 @@
 								<li><a href="/">Page10</a></li>
 							</ul>
 						</div>
+						
 					</div>
 				</div>
 			</div>
-		</div>
+			</div>
 		</header>
 	</section>
+	<div class="container">
+					<div class="features_items"><!--features_items-->
+						<h2 class="title text-center">Coupon Creation</h2>
+						<div class="col-sm-6">
+		<div class="container">
+					<div class="signup-form"><!--sign up form-->
+						<form action="#">
+							<input type="text" placeholder="Title"/>
+							<input type="text" placeholder="Price"/>
+							<input type="text" placeholder="Date of creation"/>
+							<input type="text" placeholder="Date of expire"/>
+							<input type="text" placeholder="URL of image"/>
+							<input type="text" placeholder="Category"/>
+							<textarea name="message" id="message" rows="8" placeholder="Description of Coupon"></textarea>
+							
+							<button type="submit" class="btn btn-default">Create Coupon</button>
+						</form>
+					</div><!--/sign up form-->
+				</div>
+			</div>
+		</div>
+	</section><!--/form-->
+							</div>
+						</div>
+					</div>
+
+	</body>
+		
+	
+
+	
 }
 
