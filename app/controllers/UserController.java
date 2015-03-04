@@ -67,6 +67,7 @@ public class UserController extends Controller {
 		String password = newUser.bindFromRequest().get().password;
 		String hashPass = HashHelper.createPassword(password);
 		
+		
 		 if( username.length() < 4 || username.equals("Username")){
 		 return ok(registration.render(
 		 "Enter a username whith minimum 4 characters !",null, mail ));
@@ -97,7 +98,7 @@ public class UserController extends Controller {
 				if (User.verifyRegistration(username, mail) == true) {
 					User new_user = filled_form.get();
 					session("name", username);
-					long id = User.createUser(username, mail, hashPass);
+					long id = User.createUser(username, mail, hashPass, false);
 					return ok(userIndex.render(message, username));
 				} else {
 					return ok(registration.render("Username or mail allready exists!", username, mail));
