@@ -6,6 +6,7 @@
 GET     	/                           controllers.Application.index()
 GET			/registration				controllers.UserController.registration()
 POST        /register					controllers.UserController.register()
+GET		/user/:id					controllers.UserController.show(id: Long)
 GET		   	/loginpage					controllers.UserController.loginpage()
 POST	 	/login			     		controllers.UserController.login()
 GET    		 /logout                    controllers.UserController.logout()
