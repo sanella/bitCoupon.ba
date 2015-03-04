@@ -16,7 +16,7 @@ public class ModelsTest extends WithApplication {
 
 	@Test
 	public void testCreate() {
-		User.create("test", "test.testovic@bitcamp.ba", "54321");
+		User.createUser("test", "test.testovic@bitcamp.ba", "54321");
 		User u = User.find(1);
 
 		assertNotNull(u);
@@ -34,7 +34,7 @@ public class ModelsTest extends WithApplication {
 
 	@Test
 	public void testDelete() {
-		User.create("test", "test.testovic@bitcamp.ba","12345");
+		User.createUser("test", "test.testovic@bitcamp.ba","12345");
 		User.delete(1);
 		User b = User.find(1);
 		assertNull(b);
