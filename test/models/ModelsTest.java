@@ -4,7 +4,10 @@ import java.util.List;
 
 import org.junit.*;
 
+import play.libs.F.Callback;
+import play.test.TestBrowser;
 import play.test.WithApplication;
+import static org.fest.assertions.Assertions.assertThat;
 import static org.junit.Assert.*;
 import static play.test.Helpers.*;
 
@@ -27,7 +30,7 @@ public class ModelsTest extends WithApplication {
 
 	@Test
 	public void testFindNonExisting() {
-		User u = User.find(13);
+		User u = User.find(1000);
 
 		assertNull(u);
 	}
@@ -39,4 +42,6 @@ public class ModelsTest extends WithApplication {
 		User b = User.find(1);
 		assertNull(b);
 	}
+
+
 }

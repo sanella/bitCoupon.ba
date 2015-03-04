@@ -102,11 +102,11 @@ public class User extends Model {
 	 * TODO
 	 * return a username by given mail  
 	 */
-//	public static List<User> findByMail(String mail){
-//		User ll = find.where().eq("email", mail).
-//		
-//		return find.where().eq("email", mail).findList();
-//	}
+	public static long getId(String mail){
+		User user = find.where().eq("email", mail).findUnique();
+		
+		return user.id;
+	}
 	
 	
 	/*
