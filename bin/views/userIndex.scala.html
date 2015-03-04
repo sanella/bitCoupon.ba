@@ -81,7 +81,7 @@
 						<div class="col-sm-6 col-sm-offset-1">
 						
 						
-					@if(Session.getCurrentUser(ctx().isAdmin) == false) {
+					@if(Sesija.adminCheck(ctx()) == false) {
 					<div class="signup-form"><!--sign up form-->
 						<form action="#">
 							<input type="text" placeholder="Title"/>
