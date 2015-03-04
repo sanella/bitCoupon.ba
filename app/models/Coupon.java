@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import org.openqa.selenium.support.FindAll;
-
 import play.data.validation.Constraints.MinLength;
 import play.db.ebean.Model;
 import play.db.ebean.Model.Finder;
