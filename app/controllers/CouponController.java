@@ -18,7 +18,7 @@ public class CouponController extends Controller {
 	 */
 	public static Result createCouponView() {
 		//TODO
-		return ok(userIndex.render("Create your coupon", couponForm));
+		return redirect("/");//todo//ok(userIndex.render("Create your coupon", couponForm));
 	}
 
 	/**
@@ -30,14 +30,14 @@ public class CouponController extends Controller {
 	public static Result create() {
 
 		if (couponForm.hasErrors()) {
-			return ok(createCouponView.render());
+			return redirect("/");//todo
 		}
 		Coupon coupon = couponForm.get();
 		Coupon.createCoupon(coupon.name, coupon.description,
 				coupon.picture, coupon.category_id, coupon.created,
 				coupon.ending, coupon.price);
 				
-		return ok(createCouponView.render());
+		return redirect("/");//todo
 	}
 
 	/**
@@ -52,7 +52,7 @@ public class CouponController extends Controller {
 	
 	public static Result viewCoupon(long id) {
 			Coupon coupon = Coupon.find(id);
-			return ok(viewCoupon.render(coupon, couponForm));
+			return redirect("/");//todo//ok(viewCoupon.render(coupon, couponForm));
 		}
 	
 }

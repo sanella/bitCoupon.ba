@@ -3,6 +3,18 @@
 
 # --- !Ups
 
+create table coupon (
+  id                        bigint not null,
+  name                      varchar(255),
+  description               varchar(255),
+  picture                   varchar(255),
+  category_id               bigint,
+  price                     double,
+  created                   timestamp,
+  ending                    timestamp,
+  constraint pk_coupon primary key (id))
+;
+
 create table user (
   id                        bigint not null,
   username                  varchar(255),
@@ -10,6 +22,8 @@ create table user (
   password                  varchar(255),
   constraint pk_user primary key (id))
 ;
+
+create sequence coupon_seq;
 
 create sequence user_seq;
 
@@ -20,9 +34,13 @@ create sequence user_seq;
 
 SET REFERENTIAL_INTEGRITY FALSE;
 
+drop table if exists coupon;
+
 drop table if exists user;
 
 SET REFERENTIAL_INTEGRITY TRUE;
+
+drop sequence if exists coupon_seq;
 
 drop sequence if exists user_seq;
 
