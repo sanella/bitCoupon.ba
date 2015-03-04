@@ -98,7 +98,8 @@ public class UserController extends Controller {
 					User new_user = filled_form.get();
 					session("name", username);
 					long id = User.createUser(username, mail, hashPass);
-					return ok(userIndex.render(message, username));
+					//return ok(userIndex.render(message, username)); *******
+					return redirect("/user/" + id);
 				} else {
 					return ok(registration.render("Username or mail allready exists!", username, mail));
 				}
@@ -129,14 +130,14 @@ public class UserController extends Controller {
 	public static Result login() {
 		String mail = login.bindFromRequest().get().email;
 		String password = login.bindFromRequest().get().password;
-
+		
 		if (mail.isEmpty() || password.length() < 6) {
 			return ok(Loginpage.render(bitName, "Login to your account"));
 		}
 
 		if (User.verifyLogin(mail, password) == true) {
 			session("name", mail);
-			return ok(userIndex.render(message, mail));
+			return redirect("/user/" + User.getId(mail));
 		}
 
 		return ok(Loginpage.render(bitName, "Invalid email or password"));
@@ -154,6 +155,12 @@ public class UserController extends Controller {
 		flash("OK!", "You've been logged out");
 
 		return redirect(routes.Application.index());
+	}
+	
+	
+	public static Result show(long id){
+		User u = User.find(id);
+		return ok(userIndex.render(message, u.username));
 	}
 
 }

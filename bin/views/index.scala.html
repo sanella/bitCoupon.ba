@@ -7,10 +7,8 @@
 	
 @*	<h2>@message @name</h2>
     <h4>Home: </h4> *@
-    
-
-	 <!-- header for login and registration-->
-	<header id="header"><!--header-->
+<body>
+		<header id="header"><!--header-->
 		<div class="header_top"><!--header_top-->
 			<div class="container">
 				<div class="row">
@@ -18,15 +16,21 @@
 						<div class="col-sm-12">
 						
 							<ul class="nav navbar-nav">
-								<li><a href="/loginpage" class="active"><i class="fa fa-lock"></i> Login </a></li>
-								<li><a href="/registration" class="active"><i class="fa fa-lock"></i> Registration</a></li>
+							<!-- if statement for enable od disable button in case of login -->
+								@if(name =="Public user") {
+									
+							<li><a href="/loginpage" class="active"><i class="fa fa-lock"></i> Login </a></li>
+							<li><a href="/registration" class="active"><i class="fa fa-lock"></i> Registration</a></li>
+							} else {
+ 							<li><a href="/register" class="active">@message @name </a></li>
+ 							<li><a href="/logout" class="active"><i class="fa fa-lock"></i> Logout</a></li>
+							}						
 							</ul>
 						</div>
 					</div>
-					</div>
-					
-				</div>
+				</div>	
 			</div>
+		</div>
 		</div><!--/header_top-->
 		
 		<div class="header-middle"><!--header-middle-->
@@ -34,19 +38,115 @@
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="logo pull-left">
-							<a href="/"><img src="@routes.Assets.at("images/home/logo.png")"</a>
+							<a href="/"><img src="@routes.Assets.at("images/home/logo.png")" alt="" /></a>
 						</div>
-					
-					
+					</div>
 				</div>
 			</div>
-		</div>
+			<div class="header-bottom"><!--header-bottom-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-9">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<div class="mainmenu pull-left">
+							<ul class="nav navbar-nav collapse navbar-collapse">
+								<li>
+								<a href="/">Home</a></li>
+								<li class="dropdown"><a href="#" class="active">Page1<i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu">
+                                        <li><a href="/" class="active">Page2</a></li>
+										<li><a href="/">Page3</a></li> 
+										<li><a href="/">Page4</a></li> 
+										<li><a href="/">Page5</a></li> 
+										<li><a href="/loginpage">Login</a></li> 
+                                    </ul>
+                                </li> 
+								<li class="dropdown"><a href="#">Page6<i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu">
+                                        <li><a href="/">Page7</a></li>
+										<li><a href="/">Page8</a></li>
+                                    </ul>
+                                </li> 
+								<li><a href="/">Page9</a></li>
+								<li><a href="/">Page10</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				</div>
+			</div>
+			
+		</header>
 		
-		<div class="container">
-		<h2>@message @name</h2>
-		</div>
-
-	</header>
-	
+	</section>
+	<div class="container">
+					<div class="features_items"><!--features_items-->
+						<h2 class="title text-center">Available Coupons</h2>
+						<div class="col-sm-4">
+							<div class="product-image-wrapper">
+								<div class="single-products">
+									<div class="productinfo text-center">
+									<img src="@routes.Assets.at("images/home/product5.jpg")" alt=""/>
+										<h2>Only 333 KM</h2>
+										<p>Putovanje u sunčani raj! Odmor iz snova provedite u Turskoj</p>
+										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>View Coupon</a>
+									</div>
+									<div class="product-overlay">
+										<div class="overlay-content">
+											<h2>429.00 KM</h2>
+											<p>Putovanje u sunčani raj! Odmor iz snova provedite u Turskoj</p>
+											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>View Coupon</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="product-image-wrapper">
+								<div class="single-products">
+									<div class="productinfo text-center">
+										<img src="@routes.Assets.at("images/home/product5.jpg")" alt=""/>
+										<h2>Only 1360 KM for two, all inclusive</h2>
+										<p>Month in Aspen Resort </p>
+										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>View Coupon</a>
+									</div>
+									<div class="product-overlay">
+										<div class="overlay-content">
+											<h2>Only 1360 KM for two, all inclusive</h2>
+											<p>Week in Aspen Resort</p>
+											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>View Coupon</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="product-image-wrapper">
+								<div class="single-products">
+									<div class="productinfo text-center">
+										<img src="@routes.Assets.at("images/home/product3.jpg")" alt=""/>
+										<h2>Save 33 KM</h2>
+										<p>Easy Polo Black Edition</p>
+										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>View Coupon</a>
+									</div>
+									<div class="product-overlay">
+										<div class="overlay-content">
+											<h2>Save 33 KM</h2>
+											<p>Easy Polo Black Edition</p>
+											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>View Coupon</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+</body>
 }
 
