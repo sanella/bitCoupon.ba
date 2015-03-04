@@ -9,6 +9,11 @@ create table coupon (
   description               varchar(255),
   picture                   varchar(255),
   category_id               bigint,
+<<<<<<< HEAD
+  price                     double,
+  created                   timestamp,
+  ending                    timestamp,
+=======
   code                      varchar(255),
   last_minute               boolean,
   created                   timestamp,
@@ -24,6 +29,7 @@ create table coupon (
   remark                    varchar(255),
   comment_user_id           bigint,
   response_company_id       bigint,
+>>>>>>> develop
   constraint pk_coupon primary key (id))
 ;
 

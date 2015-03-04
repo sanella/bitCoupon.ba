@@ -24,7 +24,7 @@ public class IntegrationTest {
                 assertThat(browser.pageSource()).contains("Welcome ");
                 assertThat(browser.pageSource()).contains("Registration");
                 assertThat(browser.pageSource()).contains("Login");
-          
+
             }
         });
     }
@@ -48,8 +48,7 @@ public class IntegrationTest {
             }
         });
     }
-   
-   
+
    
    @Test
    public void testLogin() {
@@ -74,5 +73,7 @@ public class IntegrationTest {
 
            }
        });
+
    } 
+
 }
