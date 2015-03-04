@@ -35,6 +35,7 @@ public class Coupon extends Model {
 	public String category;
 
 	public String description;
+
 	/*
 	 * public String code;
 	 * 
@@ -61,8 +62,9 @@ public class Coupon extends Model {
 	 * public long response_company_id;
 	 */
 
-	public Coupon(String name,double price, String dateCreated,String dateExpire, String picture,
-			String category_id, String description ) {
+	public Coupon(String name, double price, String dateCreated,
+			String dateExpire, String picture, String category_id,
+			String description) {
 
 		this.name = name;
 		this.price = price;
@@ -91,8 +93,8 @@ public class Coupon extends Model {
 	 */
 
 	public static long createCoupon(String name, double price,
-			String dateCreated, String dateExpire, String picture, String category,
-			String description) {
+			String dateCreated, String dateExpire, String picture,
+			String category, String description) {
 		Coupon newCoupon = new Coupon(name, price, dateCreated, dateExpire,
 				picture, category, description);
 		newCoupon.save();

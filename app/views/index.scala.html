@@ -1,4 +1,4 @@
-@(message: String)(name: String)
+@(name: String)
 
 @import helper._
 
@@ -22,7 +22,7 @@
 							<li><a href="/loginpage" class="active"><i class="fa fa-lock"></i> Login </a></li>
 							<li><a href="/signup" class="active"><i class="fa fa-lock"></i> Registration</a></li>
 							} else {
- 							<li><a href="/register" class="active">@message @name </a></li>
+ 							<li><a href="@routes.Application.index" method="GET" class="active"> @name </a></li>
  							<li><a href="/logout" class="active"><i class="fa fa-lock"></i> Logout</a></li>
 							}						
 							</ul>

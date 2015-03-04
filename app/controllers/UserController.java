@@ -2,6 +2,7 @@ package controllers;
 
 import helpers.HashHelper;
 import play.*;
+import play.api.mvc.Session;
 import play.data.Form;
 import play.mvc.*;
 import views.html.*;
@@ -67,57 +68,12 @@ public class UserController extends Controller {
 		 username, mail ));
 		 }
 	}
-
-	/**
-	 * 
-	 * @return renders the loginpage view
-	 */
-	public static Result loginpage() {
-		return ok(Loginpage.render(bitName, "Login to your account"));
-	}
-
-	/**
-	 * Pulls the value from two login fields and verifies if the mail exists and
-	 * the password is valid by calling the verifyLogin() method from the User
-	 * class.
-	 * 
-	 * @return redirects to index if the verification is ok, or reloads the
-	 *         login page with a warning message.
-	 */
-	public static Result login() {
-		String mail = login.bindFromRequest().get().email;
-		String password = login.bindFromRequest().get().password;
-		
-		if (mail.isEmpty() || password.length() < 6) {
-			return ok(Loginpage.render(bitName, "Login to your account"));
-		}
-
-		if (User.verifyLogin(mail, password) == true) {
-			session("name", mail);
-			return redirect("/user/" + User.getId(mail));
-		}
-
-		return ok(Loginpage.render(bitName, "Invalid email or password"));
-
-	}
-
-	/**
-	 * Clears the session
-	 * 
-	 * @return redirects to index
-	 */
-	public static Result logout() {
-
-		session().clear();
-		flash("OK!", "You've been logged out");
-
-		return redirect(routes.Application.index());
-	}
-	
 	
 	public static Result show(long id){
+		
 		User u = User.find(id);
 		return ok(userIndex.render(message, u.username, null));
+		
 	}
 
 }

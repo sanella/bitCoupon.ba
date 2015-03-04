@@ -7,7 +7,7 @@ create table coupon (
   id                        bigint not null,
   name                      varchar(255),
   price                     double,
-  created                   varchar(255),
+  date_created              varchar(255),
   date_expire               varchar(255),
   picture                   varchar(255),
   category                  varchar(255),
