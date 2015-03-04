@@ -6,12 +6,12 @@
 create table coupon (
   id                        bigint not null,
   name                      varchar(255),
-  description               varchar(255),
-  picture                   varchar(255),
-  category_id               bigint,
   price                     double,
-  created                   timestamp,
-  ending                    timestamp,
+  created                   varchar(255),
+  date_expire               varchar(255),
+  picture                   varchar(255),
+  category                  varchar(255),
+  description               varchar(255),
   constraint pk_coupon primary key (id))
 ;
 

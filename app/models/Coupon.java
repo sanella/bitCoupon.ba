@@ -1,6 +1,5 @@
 package models;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
@@ -25,19 +24,17 @@ public class Coupon extends Model {
 	@MinLength(5)
 	public String name;
 
-	@MinLength(20)
-	public String description;
+	public double price;
+
+	public String dateCreated;
+
+	public String dateExpire;
 
 	public String picture;
 
-	public long category_id;
+	public String category;
 
-	public double price;
-
-	public Date created;
-
-	public Date ending;
-
+	public String description;
 	/*
 	 * public String code;
 	 * 
@@ -64,18 +61,16 @@ public class Coupon extends Model {
 	 * public long response_company_id;
 	 */
 
-	public Coupon(String name, String description, String picture,
-			long category_id, Date created, Date ending, double price) {
+	public Coupon(String name,double price, String dateCreated,String dateExpire, String picture,
+			String category_id, String description ) {
 
-		super();
-		this.id = id;
 		this.name = name;
-		this.description = description;
-		this.picture = picture;
-		this.category_id = category_id;
 		this.price = price;
-		this.created = created;
-		this.ending = ending;
+		this.dateCreated = dateCreated;
+		this.dateExpire = dateExpire;
+		this.picture = picture;
+		this.category = category_id;
+		this.description = description;
 		/*
 		 * this.code = code; this.lastMinute = lastMinute; this.duration =
 		 * duration; this.specialPrice = specialPrice; this.viewCount =
@@ -95,11 +90,11 @@ public class Coupon extends Model {
 	 * @return the id of the new Coupon (long)
 	 */
 
-	public static long createCoupon(String name, String description,
-			String picture, long category_id, Date created, Date ending,
-			double price) {
-		Coupon newCoupon = new Coupon(name, description, picture, category_id,
-				created, ending, price);
+	public static long createCoupon(String name, double price,
+			String dateCreated, String dateExpire, String picture, String category,
+			String description) {
+		Coupon newCoupon = new Coupon(name, price, dateCreated, dateExpire,
+				picture, category, description);
 		newCoupon.save();
 		return newCoupon.id;
 	}

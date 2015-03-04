@@ -10,7 +10,7 @@ GET		/user/:id					controllers.UserController.show(id: Long)
 GET		   	/loginpage					controllers.UserController.loginpage()
 POST	 	/login			     		controllers.UserController.login()
 GET    		 /logout                    controllers.UserController.logout()
-
+POST		/addCoupon					controllers.CouponController.addCoupon()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

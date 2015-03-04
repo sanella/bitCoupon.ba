@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.Date;
+
 import models.Coupon;
 import models.User;
 import play.data.Form;
@@ -9,6 +11,7 @@ import views.html.Loginpage;
 import views.html.userIndex;
 
 public class CouponController extends Controller {
+	
 	static Form<Coupon> couponForm = new Form<Coupon>(Coupon.class);
 
 	/**
@@ -27,17 +30,26 @@ public class CouponController extends Controller {
 	 * 
 	 * @return redirect to create coupon view
 	 */
-	public static Result create() {
-
+	public static Result addCoupon() {
+		
+//		String name = couponForm.bindFromRequest().get().name;
+//		double price = couponForm.bindFromRequest().get().price;
+//		Date created = couponForm.bindFromRequest().get().created;
+//		Date ending = couponForm.bindFromRequest().get().ending;
+//		String picture = couponForm.bindFromRequest().get().picture;
+//		String category = couponForm.bindFromRequest().get().category;
+//		String description = couponForm.bindFromRequest().get().description;
+//		Coupon.createCoupon(name, price, created, ending, picture, category, description);
+//		return ok(userIndex.render(null, null, name));
+		
 		if (couponForm.hasErrors()) {
 			return redirect("/");//todo
 		}
-		Coupon coupon = couponForm.get();
-		Coupon.createCoupon(coupon.name, coupon.description,
-				coupon.picture, coupon.category_id, coupon.created,
-				coupon.ending, coupon.price);
-				
-		return redirect("/");//todo
+		Coupon newc = couponForm.bindFromRequest().get();
+		long couponID = Coupon.createCoupon(newc.name, newc.price, newc.dateCreated, 
+				newc.dateExpire, newc.picture, newc.category, newc.description);
+		
+		return ok(userIndex.render(null, null, newc.name));
 	}
 
 	/**
