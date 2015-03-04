@@ -4,7 +4,7 @@
 
 # Home page
 GET     	/                           controllers.Application.index()
-GET			/registration				controllers.UserController.registration()
+GET			/signup				controllers.UserController.signup()
 POST        /register					controllers.UserController.register()
 GET		/user/:id					controllers.UserController.show(id: Long)
 GET		   	/loginpage					controllers.UserController.loginpage()

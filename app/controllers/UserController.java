@@ -19,8 +19,8 @@ public class UserController extends Controller {
 	/**
 	 * @return Renders the registration view
 	 */
-	public static Result registration() {
-		return ok(registration.render("Registration", "Username", "Email"));
+	public static Result signup() {
+		return ok(signup.render("Registration", "Username", "Email"));
 	}
 
 	/**
@@ -31,84 +31,89 @@ public class UserController extends Controller {
 	 */
 	public static Result register() {
 
-		// String username = newUser.bindFromRequest().get().username;
-		// String mail = newUser.bindFromRequest().get().email;
-		// String password = newUser.bindFromRequest().get().password;
-		// String hashPass= HashHelper.createPassword(password);
-		//
-//		 if( username.length() < 4 || username.equals("Username")){
-//		 return ok(registration.render(
-//		 "Enter a username whith minimum 4 characters !",null, mail ));
-//		 }
-//		 else if ( mail.equals("Email")){
-//		 return ok(registration.render(
-//		 "Email required for registration !",username, null ));
-//		 }
-//		 else if ( password.length() < 6){
-//		 return ok(registration.render(
-//		 "Enter a password whith minimum 6 characters !",username, mail ));
-//		 }
-//		
-//		 /* Creating new user if the username or mail is free for use, and
-//		 there are no errors */
-//		
-//		 else if ( User.verifyRegistration(username, mail) == true){
-//		 session("name", username);
-//		 long id = User.createUser(username, mail, hashPass);
-//		 return ok(userIndex.render(message, username ));
-//		
-//		 } else {
-//		 return ok(registration.render("Username or mail allready exists!",
-//		 username, mail ));
-//		 }
-
-		String username = newUser.bindFromRequest().get().username;
-		String mail = newUser.bindFromRequest().get().email;
-		String password = newUser.bindFromRequest().get().password;
-		String hashPass = HashHelper.createPassword(password);
-		
+		 String username = newUser.bindFromRequest().get().username;
+		 String mail = newUser.bindFromRequest().get().email;
+		 String password = newUser.bindFromRequest().get().password;
+		 String hashPass= HashHelper.createPassword(password);
+		 String confPass = newUser.bindFromRequest().field("confirmPassword").value();
+		 
 		 if( username.length() < 4 || username.equals("Username")){
-		 return ok(registration.render(
+		 return ok(signup.render(
 		 "Enter a username whith minimum 4 characters !",null, mail ));
 		 }
 		 else if ( mail.equals("Email")){
-		 return ok(registration.render(
+		 return ok(signup.render(
 		 "Email required for registration !",username, null ));
 		 }
-		 else if ( password.length() < 6){
-		 return ok(registration.render(
+		 else if ( password.length() < 6 ){
+		 return ok(signup.render(
 		 "Enter a password whith minimum 6 characters !",username, mail ));
 		 }
+		 else if ( !password.equals(confPass)){
+			 return ok(signup.render(
+					 "Password dont match, try again ",username, mail ));
+		 }
 		
-		if (request().method() == "POST") {
-			Form<User> filled_form = new Form<User>(User.class)
-					.bindFromRequest();
-			if (!filled_form.field("password").valueOr("").isEmpty()) {
-				if (!filled_form.field("password").valueOr("")
-						.equals(filled_form.field("confirmPassword").value())) {
-					filled_form.reject("confirmPassword",
-							"Passwords don't match");
-				}
-			}
+		 /* Creating new user if the username or mail is free for use, and
+		 there are no errors */
+		
+		 else if ( User.verifyRegistration(username, mail) == true){
+		 session("name", username);
+		 long id = User.createUser(username, mail, hashPass);
+		 return redirect("/user/" + id);
+		
+		 } else {
+		 return ok(signup.render("Username or mail allready exists!",
+		 username, mail ));
+		 }
 
-			if (filled_form.hasErrors()) {
-				return badRequest(registration.render("Please fill out the fields to create your account!","", ""));
-			} else if (!filled_form.hasErrors()) {
-				if (User.verifyRegistration(username, mail) == true) {
-					User new_user = filled_form.get();
-					session("name", username);
-					long id = User.createUser(username, mail, hashPass);
-					//return ok(userIndex.render(message, username)); *******
-					return redirect("/user/" + id);
-				} else {
-					return ok(registration.render("Username or mail allready exists!", username, mail));
-				}
-
-			} else {
-				return ok(registration.render("REGISTRATION SUCCESSFUL!", "", ""));
-			}
-		}
-		return ok(registration.render("REGISTRATION SUCCESSFUL!", "", ""));
+//		String username = newUser.bindFromRequest().get().username;
+//		String mail = newUser.bindFromRequest().get().email;
+//		String password = newUser.bindFromRequest().get().password;
+//		String hashPass = HashHelper.createPassword(password);
+//		
+//		 if( username.length() < 4 || username.equals("Username")){
+//		 return ok(signup.render(
+//		 "Enter a username whith minimum 4 characters !",null, mail ));
+//		 }
+//		 else if ( mail.equals("Email")){
+//		 return ok(signup.render(
+//		 "Email required for registration !",username, null ));
+//		 }
+//		 else if ( password.length() < 6){
+//		 return ok(signup.render(
+//		 "Enter a password whith minimum 6 characters !",username, mail ));
+//		 }
+//		
+//		if (request().method() == "POST") {
+//			Form<User> filled_form = new Form<User>(User.class)
+//					.bindFromRequest();
+//			if (!filled_form.field("password").valueOr("").isEmpty()) {
+//				if (!filled_form.field("password").valueOr("")
+//						.equals(filled_form.field("confirmPassword").value())) {
+//					filled_form.reject("confirmPassword",
+//							"Passwords don't match");
+//				}
+//			}
+//
+//			if (filled_form.hasErrors()) {
+//				return badRequest(signup.render("Please fill out the fields to create your account!","", ""));
+//			} else if (!filled_form.hasErrors()) {
+//				if (User.verifyRegistration(username, mail) == true) {
+//					User new_user = filled_form.get();
+//					session("name", username);
+//					long id = User.createUser(username, mail, hashPass);
+//					//return ok(userIndex.render(message, username)); *******
+//					return redirect("/user/" + id);
+//				} else {
+//					return ok(signup.render("Username or mail allready exists!", username, mail));
+//				}
+//
+//			} else {
+//				return ok(signup.render("REGISTRATION SUCCESSFUL!", "", ""));
+//			}
+//		}
+//		return ok(signup.render("REGISTRATION SUCCESSFUL!", "", ""));
 	}
 
 	/**
