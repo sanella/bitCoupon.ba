@@ -39,7 +39,7 @@ public class UserController extends Controller {
 		 
 		 if( username.length() < 4 || username.equals("Username")){
 		 return ok(signup.render(
-		 "Enter a username whith minimum 4 characters !",null, mail ));
+		 "Enter a username with minimum 4 characters !",null, mail ));
 		 }
 		 else if ( mail.equals("Email")){
 		 return ok(signup.render(
@@ -47,11 +47,11 @@ public class UserController extends Controller {
 		 }
 		 else if ( password.length() < 6 ){
 		 return ok(signup.render(
-		 "Enter a password whith minimum 6 characters !",username, mail ));
+		 "Enter a password with minimum 6 characters !",username, mail ));
 		 }
 		 else if ( !password.equals(confPass)){
 			 return ok(signup.render(
-					 "Password dont match, try again ",username, mail ));
+					 "Passwords don't match, try again ",username, mail ));
 		 }
 		
 		 /* Creating new user if the username or mail is free for use, and
@@ -63,7 +63,7 @@ public class UserController extends Controller {
 		 return redirect("/user/" + id);
 		
 		 } else {
-		 return ok(signup.render("Username or mail allready exists!",
+		 return ok(signup.render("Username or email allready exists!",
 		 username, mail ));
 		 }
 
