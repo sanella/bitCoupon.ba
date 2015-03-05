@@ -97,7 +97,7 @@ public class UserController extends Controller {
 			} else if (!filled_form.hasErrors()) {
 				if (User.verifyRegistration(username, mail) == true) {
 					User new_user = filled_form.get();
-					session("name", username);
+					session("name", Long.toString(new_user.id));
 					long id = User.createUser(username, mail, hashPass, false);
 					return ok(userIndex.render(message, username));
 				} else {
