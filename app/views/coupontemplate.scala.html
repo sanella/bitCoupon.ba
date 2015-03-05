@@ -85,31 +85,29 @@
 	</section>
 	<div class="container">
 					<div class="features_items"><!--features_items-->
-						<h2 class="title text-center">Coupon Creation</h2>
-						<div class="col-sm-6 col-sm-offset-1">
-					<div class="signup-form"><!--sign up form-->
-					<section>
-							<!-- place for image link-->
-								<img src="http://wannabemagazine.com/wp-content/gallery/filip-travel/kemer-hotel-akka-antedon_0.jpg"></img>
-								<h3>NEW</h3>
+						<h2 class="title text-center">COUPON CREATION</h2>
+					
+								
+							
 							</div>
 						</div>
-						<div class="col-sm-7">
+						<div class="container">
+						<div class="col-sm-10">
+						<img src="@coupon.picture"></img>
 							<div class="product-information"><!--/product-information-->
-								<img src="images/product-details/new.jpg" class="newarrival" alt="" />
 								<h2> @coupon.name </h2>
 								<span>
 									<span> @coupon.price KM</span>
 									<label>Number of sold coupons:</label>
-									<input type="text" value="9" />
+									<input type="text" value="0" />
 									<button type="button" class="btn btn-fefault cart">
 										<i class="fa fa-shopping-cart"></i>
 										Buy Coupon
 									</button>
 								</span>
 								<p><b>Description</b> @coupon.description </p>
-								<p><b>Notes related to the coupon:</b> Jedna osoba može kupiti neograničen broj kupona za ovu ponudu. Kupon se može iskoristiti samo u terminu: 07.04.2015. godine. Ne može se zamijeniti za novac ili neki drugi aranžman. Ponuda se odnosi na organizovano osmodnevno putovanje za jednu osobu u Tursku (Antalija, Pamukkale, Hierapolis,  Slapovi Karpuzkaldiran) i uključuje: let iz Sarajeva za Antalyu i nazad (preko Istanbula) s uključenim aerodromskim taksama, piće dobrodošlice, 7 noćenja u hotelima s 4 ili 5 zvjezdica kao što su Karmir Resort & Spa 5* kod Kemera, Hotel Richmond Pamukkale 4* doručak – švedski sto, transfer autobusima, izleti prema programu bez ulaznica, organizaciju puta i turističke vodiče.Obavezno se javiti agenciji i dostaviti kopiju pasoša nakon kupovine kupona na mail infoATnikal.hr Ulaznice za lokalitete su 20€. Doplata za jednokrevetnu sobu je 90€, a doplata za večeru (svih sedam noći) je 100€.Kupon se smatra iskorištenim ukoliko je korisnik obavio kupovinu, a nije iskoristio kupon u navedenom roku iskoristivosti.Kupljene kupone nije moguće stornirati.</p>
-								<p><b>Location:</b> NIKAL d.o.o. putnička agencija Nadinska cesta 11, 10000 ZagrebTel/Fax: +385 1 555 68 42, +385 1 555 68</p>
+								<p><b>Remark: </b> @coupon.remark </p>
+								</div>
 							</div><!--/product-information-->
 						</div>
 					</div><!--/product-details-->

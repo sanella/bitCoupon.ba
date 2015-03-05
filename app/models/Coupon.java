@@ -35,6 +35,8 @@ public class Coupon extends Model {
 	public String category;
 
 	public String description;
+	
+	public String remark;
 
 	/*
 	 * public String code;
@@ -55,8 +57,6 @@ public class Coupon extends Model {
 	 * 
 	 * public long company_id;
 	 * 
-	 * public String remark;
-	 * 
 	 * public long comment_user_id;
 	 * 
 	 * public long response_company_id;
@@ -64,7 +64,7 @@ public class Coupon extends Model {
 
 	public Coupon(String name, double price, String dateCreated,
 			String dateExpire, String picture, String category_id,
-			String description) {
+			String description, String remark) {
 
 		this.name = name;
 		this.price = price;
@@ -73,12 +73,13 @@ public class Coupon extends Model {
 		this.picture = picture;
 		this.category = category_id;
 		this.description = description;
+		this.remark=remark;
 		/*
 		 * this.code = code; this.lastMinute = lastMinute; this.duration =
 		 * duration; this.specialPrice = specialPrice; this.viewCount =
 		 * viewCount; this.specialOffer = specialOffer; this.multiOffer_id =
 		 * multiOffer_id; this.status = status; this.company_id = company_id;
-		 * this.remark = remark; this.comment_user_id = comment_user_id;
+		 * this.comment_user_id = comment_user_id;
 		 * this.response_company_id = response_company_id;
 		 */
 	}
@@ -94,9 +95,9 @@ public class Coupon extends Model {
 
 	public static long createCoupon(String name, double price,
 			String dateCreated, String dateExpire, String picture,
-			String category, String description) {
+			String category, String description,String remark) {
 		Coupon newCoupon = new Coupon(name, price, dateCreated, dateExpire,
-				picture, category, description);
+				picture, category, description, remark);
 		newCoupon.save();
 		return newCoupon.id;
 	}

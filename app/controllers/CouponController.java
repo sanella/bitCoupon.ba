@@ -43,7 +43,7 @@ public class CouponController extends Controller {
 		Coupon newc = couponForm.bindFromRequest().get();
 		long couponID = Coupon.createCoupon(newc.name, newc.price,
 				newc.dateCreated, newc.dateExpire, newc.picture, newc.category,
-				newc.description);
+				newc.description, newc.remark);
 
 		return ok(userIndex.render(null, null, "Coupon \"" + newc.name
 				+ "\" added"));
