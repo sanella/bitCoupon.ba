@@ -2,6 +2,7 @@ package controllers;
 
 import helpers.HashHelper;
 import play.*;
+import play.api.mvc.Session;
 import play.data.Form;
 import play.mvc.*;
 import views.html.*;
@@ -39,7 +40,7 @@ public class UserController extends Controller {
 		 
 		 if( username.length() < 4 || username.equals("Username")){
 		 return ok(signup.render(
-		 "Enter a username whith minimum 4 characters !",null, mail ));
+		 "Enter a username with minimum 4 characters !",null, mail ));
 		 }
 		 else if ( mail.equals("Email")){
 		 return ok(signup.render(
@@ -47,11 +48,11 @@ public class UserController extends Controller {
 		 }
 		 else if ( password.length() < 6 ){
 		 return ok(signup.render(
-		 "Enter a password whith minimum 6 characters !",username, mail ));
+		 "Enter a password with minimum 6 characters !",username, mail ));
 		 }
 		 else if ( !password.equals(confPass)){
 			 return ok(signup.render(
-					 "Password dont match, try again ",username, mail ));
+					 "Passwords don't match, try again ",username, mail ));
 		 }
 		
 		 /* Creating new user if the username or mail is free for use, and
@@ -63,109 +64,16 @@ public class UserController extends Controller {
 		 return redirect("/user/" + id);
 		
 		 } else {
-		 return ok(signup.render("Username or mail allready exists!",
+		 return ok(signup.render("Username or email allready exists!",
 		 username, mail ));
 		 }
-
-//		String username = newUser.bindFromRequest().get().username;
-//		String mail = newUser.bindFromRequest().get().email;
-//		String password = newUser.bindFromRequest().get().password;
-//		String hashPass = HashHelper.createPassword(password);
-//		
-//		 if( username.length() < 4 || username.equals("Username")){
-//		 return ok(signup.render(
-//		 "Enter a username whith minimum 4 characters !",null, mail ));
-//		 }
-//		 else if ( mail.equals("Email")){
-//		 return ok(signup.render(
-//		 "Email required for registration !",username, null ));
-//		 }
-//		 else if ( password.length() < 6){
-//		 return ok(signup.render(
-//		 "Enter a password whith minimum 6 characters !",username, mail ));
-//		 }
-//		
-//		if (request().method() == "POST") {
-//			Form<User> filled_form = new Form<User>(User.class)
-//					.bindFromRequest();
-//			if (!filled_form.field("password").valueOr("").isEmpty()) {
-//				if (!filled_form.field("password").valueOr("")
-//						.equals(filled_form.field("confirmPassword").value())) {
-//					filled_form.reject("confirmPassword",
-//							"Passwords don't match");
-//				}
-//			}
-//
-//			if (filled_form.hasErrors()) {
-//				return badRequest(signup.render("Please fill out the fields to create your account!","", ""));
-//			} else if (!filled_form.hasErrors()) {
-//				if (User.verifyRegistration(username, mail) == true) {
-//					User new_user = filled_form.get();
-//					session("name", username);
-//					long id = User.createUser(username, mail, hashPass);
-//					//return ok(userIndex.render(message, username)); *******
-//					return redirect("/user/" + id);
-//				} else {
-//					return ok(signup.render("Username or mail allready exists!", username, mail));
-//				}
-//
-//			} else {
-//				return ok(signup.render("REGISTRATION SUCCESSFUL!", "", ""));
-//			}
-//		}
-//		return ok(signup.render("REGISTRATION SUCCESSFUL!", "", ""));
 	}
-
-	/**
-	 * 
-	 * @return renders the loginpage view
-	 */
-	public static Result loginpage() {
-		return ok(Loginpage.render(bitName, "Login to your account"));
-	}
-
-	/**
-	 * Pulls the value from two login fields and verifies if the mail exists and
-	 * the password is valid by calling the verifyLogin() method from the User
-	 * class.
-	 * 
-	 * @return redirects to index if the verification is ok, or reloads the
-	 *         login page with a warning message.
-	 */
-	public static Result login() {
-		String mail = login.bindFromRequest().get().email;
-		String password = login.bindFromRequest().get().password;
-		
-		if (mail.isEmpty() || password.length() < 6) {
-			return ok(Loginpage.render(bitName, "Login to your account"));
-		}
-
-		if (User.verifyLogin(mail, password) == true) {
-			session("name", mail);
-			return redirect("/user/" + User.getId(mail));
-		}
-
-		return ok(Loginpage.render(bitName, "Invalid email or password"));
-
-	}
-
-	/**
-	 * Clears the session
-	 * 
-	 * @return redirects to index
-	 */
-	public static Result logout() {
-
-		session().clear();
-		flash("OK!", "You've been logged out");
-
-		return redirect(routes.Application.index());
-	}
-	
 	
 	public static Result show(long id){
+		
 		User u = User.find(id);
-		return ok(userIndex.render(message, u.username));
+		return ok(userIndex.render(message, u.username, null));
+		
 	}
 
 }

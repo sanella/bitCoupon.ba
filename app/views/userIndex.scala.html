@@ -1,4 +1,4 @@
-@(message: String)(name: String)
+@(message: String)(name: String)(addCouponInfo: String)
 
 @import helper._
 
@@ -13,7 +13,7 @@
 						<div class="col-sm-12">
 						
 							<ul class="nav navbar-nav">
- 							<li><a href="/signup" class="active">@message @name </a></li>
+ 							<li><a class="active">@message @name </a></li>
  							<li><a href="/logout" class="active"><i class="fa fa-lock"></i> Logout</a></li>					
 							</ul>
 						</div>
@@ -75,22 +75,27 @@
 			</div>
 		</header>
 	</section>
+	
+	
+	
 	<div class="container">
+					<h4>@addCouponInfo</h4>
 					<div class="features_items"><!--features_items-->
 						<h2 class="title text-center">Coupon Creation</h2>
 						<div class="col-sm-6 col-sm-offset-1">
 					<div class="signup-form"><!--sign up form-->
-						<form action="#">
-							<input type="text" placeholder="Title"/>
-							<input type="text" placeholder="Price"/>
-							<input type="text" placeholder="Date of creation"/>
-							<input type="text" placeholder="Date of expire"/>
-							<input type="text" placeholder="URL of image"/>
-							<input type="text" placeholder="Category"/>
-							<textarea name="message" id="message" rows="8" placeholder="Description of Coupon"></textarea>
-							
+						<form action="@routes.CouponController.addCoupon" method ="POST" >
+							<input type="text" name="name" id="name" placeholder="Title"/>
+							<input type="text" name="price" id="price" placeholder="Price"/>
+							<input type="text" name="dateCreated" id="dateCreated" placeholder="Date of creation"/>
+							<input type="text" name="dateExpire" id="dateExpire" placeholder="Date of expire"/>
+							<input type="text" name="picture" id="picture" placeholder="URL of image"/>
+							<input type="text" name="category" id="category" placeholder="Category"/>
+							<textarea name="description" id="description" rows="8" placeholder="Description of Coupon"></textarea>	
 							<button type="submit" class="btn btn-default">Create Coupon</button>
+							
 						</form>
+						
 					</div><!--/sign up form-->
 				</div>
 			</div>

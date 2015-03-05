@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.Date;
+
 import models.Coupon;
 import models.User;
 import play.data.Form;
@@ -9,6 +11,7 @@ import views.html.Loginpage;
 import views.html.userIndex;
 
 public class CouponController extends Controller {
+
 	static Form<Coupon> couponForm = new Form<Coupon>(Coupon.class);
 
 	/**
@@ -17,8 +20,9 @@ public class CouponController extends Controller {
 	 * @return redirect to create coupon view
 	 */
 	public static Result createCouponView() {
-		//TODO
-		return redirect("/");//todo//ok(userIndex.render("Create your coupon", couponForm));
+		// TODO
+		return redirect("/");// todo//ok(userIndex.render("Create your coupon",
+								// couponForm));
 	}
 
 	/**
@@ -27,18 +31,25 @@ public class CouponController extends Controller {
 	 * 
 	 * @return redirect to create coupon view
 	 */
-	public static Result create() {
+	public static Result addCoupon() {
 
 		if (couponForm.hasErrors()) {
-			return redirect("/");//todo
+			return redirect("/");// todo
 		}
-		Coupon coupon = couponForm.get();
-		Coupon.createCoupon(coupon.name, coupon.description,
-				coupon.picture, coupon.category_id, coupon.created,
-				coupon.ending, coupon.price);
-				
-		return redirect("/");//todo
+		
+		//TODO handle invalid inputs
+		
+		Coupon newc = couponForm.bindFromRequest().get();
+		long couponID = Coupon.createCoupon(newc.name, newc.price,
+				newc.dateCreated, newc.dateExpire, newc.picture, newc.category,
+				newc.description);
+
+		return ok(userIndex.render(null, null, "Coupon \"" + newc.name
+				+ "\" added"));
 	}
+	
+	
+	
 
 	/**
 	 * Finds certain coupon
@@ -49,10 +60,9 @@ public class CouponController extends Controller {
 		return TODO;
 	}
 
-	
-	public static Result viewCoupon(long id) {
-			Coupon coupon = Coupon.find(id);
-			return redirect("/");//todo//ok(viewCoupon.render(coupon, couponForm));
-		}
-	
+	public static Result viewCoupon(int id) {
+		Coupon coupon = Coupon.find(id);
+		return redirect("/");// todo//ok(viewCoupon.render(coupon, couponForm));
+	}
+
 }

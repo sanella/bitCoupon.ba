@@ -1,4 +1,4 @@
-@(message: String)(name: String)
+@(name: String)(coupons: List[Coupon])
 
 @import helper._
 
@@ -22,7 +22,7 @@
 							<li><a href="/loginpage" class="active"><i class="fa fa-lock"></i> Login </a></li>
 							<li><a href="/signup" class="active"><i class="fa fa-lock"></i> Registration</a></li>
 							} else {
- 							<li><a href="/register" class="active">@message @name </a></li>
+ 							<li><a href="@routes.Application.index" method="GET" class="active"> @name </a></li>
  							<li><a href="/logout" class="active"><i class="fa fa-lock"></i> Logout</a></li>
 							}						
 							</ul>
@@ -86,67 +86,40 @@
 		</header>
 		
 	</section>
+	
+	<ul>
+	
+		
+
+	
 	<div class="container">
 					<div class="features_items"><!--features_items-->
 						<h2 class="title text-center">Available Coupons</h2>
+						
+				@for(coupon <- coupons){
+					
 						<div class="col-sm-4">
 							<div class="product-image-wrapper">
 								<div class="single-products">
 									<div class="productinfo text-center">
 									<img src="@routes.Assets.at("images/home/product5.jpg")" alt=""/>
-										<h2>Only 333 KM</h2>
-										<p>Putovanje u sunčani raj! Odmor iz snova provedite u Turskoj</p>
+										<h2>Only @coupon.price KM</h2>
+										<p>@coupon.name</p>
 										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>View Coupon</a>
 									</div>
 									<div class="product-overlay">
 										<div class="overlay-content">
-											<h2>429.00 KM</h2>
-											<p>Putovanje u sunčani raj! Odmor iz snova provedite u Turskoj</p>
+											<h2>@coupon.price KM</h2>
+											<p>@coupon.name</p>
 											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>View Coupon</a>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="col-sm-4">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-										<img src="@routes.Assets.at("images/home/product5.jpg")" alt=""/>
-										<h2>Only 1360 KM for two, all inclusive</h2>
-										<p>Month in Aspen Resort </p>
-										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>View Coupon</a>
-									</div>
-									<div class="product-overlay">
-										<div class="overlay-content">
-											<h2>Only 1360 KM for two, all inclusive</h2>
-											<p>Week in Aspen Resort</p>
-											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>View Coupon</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-4">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-										<img src="@routes.Assets.at("images/home/product3.jpg")" alt=""/>
-										<h2>Save 33 KM</h2>
-										<p>Easy Polo Black Edition</p>
-										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>View Coupon</a>
-									</div>
-									<div class="product-overlay">
-										<div class="overlay-content">
-											<h2>Save 33 KM</h2>
-											<p>Easy Polo Black Edition</p>
-											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>View Coupon</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+			}			
+
+		</ul>
 </body>
 }
 
