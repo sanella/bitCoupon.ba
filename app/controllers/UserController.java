@@ -55,16 +55,22 @@ public class UserController extends Controller {
 			 return ok(signup.render(
 					 "Passwords don't match, try again ",username, mail ));
 		 }
+		 /* Creating new user if the username or mail is free for use, and
+		 there are no errors */
+		
+		 else if ( User.verifyRegistration(username, mail) == true){
+		 session("name", mail);
+		 long id = User.createUser(username, mail, hashPass, false);
+		 return redirect("/user/" + id);
+		
+		 } else {
+		 return ok(signup.render("Username or email allready exists!",
+		 username, mail ));
+		 }
 		
 	}
 
-	/**
-	 * 
-	 * @return renders the loginpage view
-	 */
-	public static Result loginpage() {
-		return ok(Loginpage.render(bitName, "Login to your account"));
-	}
+
 	
 	public static Result show(long id){
 		
