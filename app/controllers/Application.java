@@ -12,6 +12,8 @@ public class Application extends Controller {
 	static String name = null;
 
 	static Form<User> newUser = new Form<User>(User.class);
+	
+	
 
 	/**
 	 * 
@@ -21,9 +23,9 @@ public class Application extends Controller {
 		name = session("name");
 		if (name == null) {
 			name = "Public user";
-			return ok(index.render(name));
+			return ok(index.render(name, Coupon.all()));
 		} else {
-			return ok(index.render(name));
+			return ok(index.render(name, Coupon.all()));
 		}
 	}
 

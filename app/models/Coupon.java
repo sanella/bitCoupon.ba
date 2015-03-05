@@ -21,7 +21,7 @@ public class Coupon extends Model {
 	@Id
 	public long id;
 
-	@MinLength(5)
+	@MinLength(4)
 	public String name;
 
 	public double price;
