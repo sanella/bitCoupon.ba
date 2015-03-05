@@ -112,6 +112,16 @@ public class User extends Model {
 
 		return user.id;
 	}
+	/*
+	 * Return user by mail
+	 */
+	public static User getUser(String mail) {
+		User user = find.where().eq("email", mail).findUnique();
+
+		return user;
+	}
+	
+	
 
 	/*
 	 * Delete user by id
@@ -126,5 +136,7 @@ public class User extends Model {
 	public static User find(long id) {
 		return find.byId(id);
 	}
+	
+	
 
 }

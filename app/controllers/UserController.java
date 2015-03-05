@@ -59,10 +59,13 @@ public class UserController extends Controller {
 		 there are no errors */
 		
 		 else if ( User.verifyRegistration(username, mail) == true){
-		 session("name", username);
+		 session().clear();
+		 session("name", mail);
 		 long id = User.createUser(username, mail, hashPass);
-		 return redirect("/user/" + id);
-		
+		// return redirect("/user/" + id);
+		 User cc = User.getUser(mail);
+		 return ok(index.render(cc, Coupon.all()));
+		 
 		 } else {
 		 return ok(signup.render("Username or email allready exists!",
 		 username, mail ));
@@ -72,7 +75,7 @@ public class UserController extends Controller {
 	public static Result show(long id){
 		
 		User u = User.find(id);
-		if ( !u.username.equals(session("name"))){
+		if ( !u.email.equals(session("name"))){
 			return redirect("/");
 		}
 		

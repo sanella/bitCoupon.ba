@@ -8,6 +8,7 @@ import views.html.*;
 
 public class Application extends Controller {
 
+	
 	static String loginMsg = "Login to your account";
 	static String name = null;
 
@@ -22,10 +23,11 @@ public class Application extends Controller {
 	public static Result index() {
 		name = session("name");
 		if (name == null) {
-			name = "Public user";
-			return ok(index.render(name, Coupon.all()));
+			//name = "Public user";
+			return ok(index.render(null, Coupon.all()));
 		} else {
-			return ok(index.render(name, Coupon.all()));
+			User currentUser = User.getUser(name);
+			return ok(index.render(currentUser, Coupon.all()));
 		}
 	}
 
@@ -50,8 +52,10 @@ public class Application extends Controller {
 		}
 
 		if (User.verifyLogin(mail, password) == true) {
+			session().clear();
 			session("name", mail);
-			return redirect("/user/" + User.getId(mail));
+			 User cc = User.getUser(mail);
+			 return ok(index.render(cc, Coupon.all()));
 		}
 
 		return ok(Loginpage.render("Invalid email or password"));
