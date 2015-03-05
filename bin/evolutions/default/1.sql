@@ -12,6 +12,7 @@ create table coupon (
   picture                   varchar(255),
   category                  varchar(255),
   description               varchar(255),
+  remark                    varchar(255),
   constraint pk_coupon primary key (id))
 ;
 
@@ -20,6 +21,7 @@ create table user (
   username                  varchar(255),
   email                     varchar(255),
   password                  varchar(255),
+  is_admin                  boolean,
   constraint pk_user primary key (id))
 ;
 

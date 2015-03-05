@@ -1,4 +1,4 @@
-@(name: String)(coupons: List[Coupon])
+@(user: User)(coupons: List[Coupon])
 
 @import helper._
 
@@ -17,12 +17,12 @@
 						
 							<ul class="nav navbar-nav">
 							<!-- if statement for enable od disable button in case of login -->
-								@if(name =="Public user") {
+								@if( user == null) {
 									
 							<li><a href="/loginpage" class="active"><i class="fa fa-lock"></i> Login </a></li>
 							<li><a href="/signup" class="active"><i class="fa fa-lock"></i> Registration</a></li>
 							} else {
- 							<li><a href="@routes.Application.index" method="GET" class="active"> @name </a></li>
+ 							<li><a href="@routes.UserController.show(user.id)" method="GET" class="active"> @user.username </a></li>
  							<li><a href="/logout" class="active"><i class="fa fa-lock"></i> Logout</a></li>
 							}						
 							</ul>
@@ -32,7 +32,7 @@
 			</div>
 		</div>
 		</div><!--/header_top-->
-		
+	
 		<div class="header-middle"><!--header-middle-->
 			<div class="container">
 				<div class="row">
@@ -102,7 +102,7 @@
 							<div class="product-image-wrapper">
 								<div class="single-products">
 									<div class="productinfo text-center">
-									<img src="@routes.Assets.at("images/home/product5.jpg")" alt=""/>
+									<img src="@coupon.picture" alt=""/>
 										<h2>Only @coupon.price KM</h2>
 										<p>@coupon.name</p>
 										<a href="/coupon/@coupon.id" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>View Coupon</a>
