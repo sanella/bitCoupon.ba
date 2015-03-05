@@ -38,6 +38,7 @@ public class UserController extends Controller {
 		 String hashPass= HashHelper.createPassword(password);
 		 String confPass = newUser.bindFromRequest().field("confirmPassword").value();
 		 
+
 		 if( username.length() < 4 || username.equals("Username")){
 		 return ok(signup.render(
 		 "Enter a username with minimum 4 characters !",null, mail ));
@@ -54,15 +55,14 @@ public class UserController extends Controller {
 			 return ok(signup.render(
 					 "Passwords don't match, try again ",username, mail ));
 		 }
-		
 		 /* Creating new user if the username or mail is free for use, and
 		 there are no errors */
 		
 		 else if ( User.verifyRegistration(username, mail) == true){
 		 session().clear();
 		 session("name", mail);
-		 long id = User.createUser(username, mail, hashPass);
-		// return redirect("/user/" + id);
+		 
+		 long id = User.createUser(username, mail, hashPass, false);
 		 User cc = User.getUser(mail);
 		 return ok(index.render(cc, Coupon.all()));
 		 
@@ -70,7 +70,10 @@ public class UserController extends Controller {
 		 return ok(signup.render("Username or email allready exists!",
 		 username, mail ));
 		 }
+		
 	}
+
+
 	
 	public static Result show(long id){
 		
