@@ -82,7 +82,7 @@
 						<div class="col-sm-6 col-sm-offset-1">
 						
 						
-					@if(Sesija.adminCheck(ctx()) == false) {
+					@if(Sesija.adminCheck(ctx()) == true) {
 					<div class="signup-form"><!--sign up form-->
 						<form action="#">
 							<input type="text" placeholder="Title"/>
@@ -96,25 +96,9 @@
 						</form>
 					</div><!--/sign up form-->		
 					} else {
-					<div class="signup-form"><!--sign up form-->
-						<form action="#">
-							<input type="text" placeholder="Title"/>
-							<input type="text" placeholder="Price"/>
-							<input type="text" placeholder="Date of creation"/>
-							<input type="text" placeholder="Date of expire"/>
-							<input type="text" placeholder="URL of image"/>
-							<input type="text" placeholder="Category"/>
-							<textarea name="message" id="message" rows="8" placeholder="Description of Coupon"></textarea>
-						</form>
-					</div><!--/sign up form-->	
-					
-					
+				  		<h4>Sorry! You need to be registered company to be able to create a coupon!</h4>
 					
 					}	
-					
-				
-					
-					
 					
 				</div>
 			</div>

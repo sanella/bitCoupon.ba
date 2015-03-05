@@ -30,8 +30,8 @@ public class Sesija extends Security.Authenticator {
 		if ( !ctx.session().containsKey("name") ){
 			return null;
 		}
-		long id = Long.parseLong(ctx.session().get("name"));
-		User u = User.find(id);
+		String mail =ctx.session().get("name");
+		User u = User.find(mail);
 		return u;
 	}
 	
@@ -40,6 +40,8 @@ public class Sesija extends Security.Authenticator {
 //			return false;
 //		}
 //		boolean isAdmin = Boolean.parseBoolean(ctx.session().get("user_isAdmin"));
+		if(getCurrentUser(ctx) == null)
+			return false;
 		return getCurrentUser(ctx).isAdmin;
 	}
 	

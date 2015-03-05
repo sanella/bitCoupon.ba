@@ -133,5 +133,9 @@ public class User extends Model {
 		return find.where().eq("isAdmin", isAdmin).findUnique();
 	}
 	
+	public static User find(String mail) {
+		return find.where().eq("email", mail).findUnique();
+	}
+	
 
 }
