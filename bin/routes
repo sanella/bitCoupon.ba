@@ -3,15 +3,15 @@
 # ~~~~
 
 # Home page
-GET     	/                           controllers.Application.index()
-GET			/registration				controllers.UserController.registration()
-POST        /register					controllers.UserController.register()
-GET		/user/:id					controllers.UserController.show(id: Long)
-GET		   	/loginpage					controllers.UserController.loginpage()
-POST	 	/login			     		controllers.UserController.login()
-GET    		 /logout                    controllers.UserController.logout()
-
+GET    /                controllers.Application.index()
+GET    /signup          controllers.UserController.signup()
+POST   /register        controllers.UserController.register()
+GET    /user/:id        controllers.UserController.show(id: Long)
+GET    /loginpage       controllers.Application.loginpage()
+POST   /login           controllers.Application.login()
+GET    /logout          controllers.Application.logout()
+POST   /addCoupon       controllers.CouponController.addCoupon()
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.at(path="/public", file)
-GET     /webjars/*file                    controllers.WebJarAssets.at(file)
+GET    /assets/*file    controllers.Assets.at(path="/public", file)
+GET    /webjars/*file   controllers.WebJarAssets.at(file)

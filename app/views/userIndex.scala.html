@@ -1,13 +1,114 @@
-@(message: String)(name: String)
+@(message: String)(name: String)(addCouponInfo: String)
 
 @import helper._
 
-@main("bitCoupon") {
+@main("User Panel") {
+
+<body>
+		<header id="header"><!--header-->
+		<div class="header_top"><!--header_top-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="col-sm-12">
+						
+							<ul class="nav navbar-nav">
+ 							<li><a class="active">@message @name </a></li>
+ 							<li><a href="/logout" class="active"><i class="fa fa-lock"></i> Logout</a></li>					
+							</ul>
+						</div>
+					</div>
+				</div>	
+			</div>
+		</div>
+		</div><!--/header_top-->
+		
+		<div class="header-middle"><!--header-middle-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="logo pull-left">
+							<a href="/"><img src="@routes.Assets.at("images/home/logo.png")" alt="" /></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="header-bottom"><!--header-bottom-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-9">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<div class="mainmenu pull-left">
+							<ul class="nav navbar-nav collapse navbar-collapse">
+								<li>
+								<a href="/">Home</a></li>
+								<li class="dropdown"><a href="#" class="active">Page1<i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu">
+                                        <li><a href="/" class="active">Page2</a></li>
+										<li><a href="/">Page3</a></li> 
+										<li><a href="/">Page4</a></li> 
+										<li><a href="/">Page5</a></li> 
+										<li><a href="/loginpage">Login</a></li> 
+                                    </ul>
+                                </li> 
+								<li class="dropdown"><a href="#">Page6<i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu">
+                                        <li><a href="/">Page7</a></li>
+										<li><a href="/">Page8</a></li>
+                                    </ul>
+                                </li> 
+								<li><a href="/">Page9</a></li>
+								<li><a href="/">Page10</a></li>
+							</ul>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+			</div>
+		</header>
+	</section>
 	
-	<h2>@message @name</h2>
-    <h4>Home: </h4>
 	
-	<a href="/logout"> Logout </a> 
+	
+	<div class="container">
+					<h4>@addCouponInfo</h4>
+					<div class="features_items"><!--features_items-->
+						<h2 class="title text-center">Coupon Creation</h2>
+						<div class="col-sm-6 col-sm-offset-1">
+					<div class="signup-form"><!--sign up form-->
+						<form action="@routes.CouponController.addCoupon" method ="POST" >
+							<input type="text" name="name" id="name" placeholder="Title"/>
+							<input type="text" name="price" id="price" placeholder="Price"/>
+							<input type="text" name="dateCreated" id="dateCreated" placeholder="Date of creation"/>
+							<input type="text" name="dateExpire" id="dateExpire" placeholder="Date of expire"/>
+							<input type="text" name="picture" id="picture" placeholder="URL of image"/>
+							<input type="text" name="category" id="category" placeholder="Category"/>
+							<textarea name="description" id="description" rows="8" placeholder="Description of Coupon"></textarea>	
+							<button type="submit" class="btn btn-default">Create Coupon</button>
+							
+						</form>
+						
+					</div><!--/sign up form-->
+				</div>
+			</div>
+		</div>
+	</section><!--/form-->
+							</div>
+						</div>
+					</div>
+
+	</body>
+		
+	
+
 	
 }
 
