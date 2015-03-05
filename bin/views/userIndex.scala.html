@@ -7,6 +7,7 @@
 <body>
 		<header id="header"><!--header-->
 		<div class="header_top"><!--header_top-->
+		
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-6">
@@ -83,7 +84,11 @@
 					<div class="features_items"><!--features_items-->
 						<h2 class="title text-center">Coupon Creation</h2>
 						<div class="col-sm-6 col-sm-offset-1">
+						
+						
+					@if(Sesija.adminCheck(ctx()) == true) {
 					<div class="signup-form"><!--sign up form-->
+
 						<form action="@routes.CouponController.addCoupon" method ="POST" >
 							<input type="text" name="name" id="name" placeholder="Title"/>
 							<input type="text" name="price" id="price" placeholder="Price"/>
@@ -97,6 +102,11 @@
 						</form>
 						
 					</div><!--/sign up form-->
+					} else {
+				  		<h4>Sorry! You need to be registered company to be able to create a coupon!</h4>
+					
+					}	
+					
 				</div>
 			</div>
 		</div>
