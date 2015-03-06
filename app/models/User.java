@@ -152,5 +152,9 @@ public class User extends Model {
 		return find.where().eq("email", mail).findUnique();
 	}
 	
+	public static boolean check(String mail) {
+		return find.where().eq("email", mail).findUnique() != null;
+	}
+	
 
 }
