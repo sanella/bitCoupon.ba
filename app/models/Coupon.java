@@ -125,5 +125,9 @@ public class Coupon extends Model {
 	public static void delete(long id) {
 		find.byId(id).delete();
 	}
+	
+	public static boolean checkByName(String name){
+		return find.where().eq("name", name).findUnique() != null;
+	}
 
 }
