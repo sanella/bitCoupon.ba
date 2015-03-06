@@ -89,8 +89,8 @@
 					@if(Sesija.adminCheck(ctx()) == true) {
 					<div class="signup-form"><!--sign up form-->
 						<form action="@routes.CouponController.addCoupon" method ="POST" >
-							<input type="text" name="name" id="name" placeholder="Title"/>
-							<input type="text" name="price" id="price" placeholder="Price"/>
+							<input type="text" name="name" id="name" placeholder="Title" required/>
+							<input type="text" name="price" id="price" placeholder="Price" required/>
 							<input type="text" name="dateCreated" id="dateCreated" placeholder="Date of creation"/>
 							<input type="text" name="dateExpire" id="dateExpire" placeholder="Date of expire"/>
 							<input type="text" name="picture" id="picture" placeholder="URL of image"/>
