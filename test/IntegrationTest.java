@@ -1,4 +1,5 @@
 import helpers.HashHelper;
+import models.Coupon;
 import models.User;
 
 import org.junit.*;
@@ -71,5 +72,20 @@ public class IntegrationTest {
        });
 
    } 
-
+   
+   @Test
+   public void testShowAddedCoupon(){
+	   running(testServer(3333, fakeApplication(inMemoryDatabase())), HTMLUNIT, new Callback<TestBrowser>() {
+           public void invoke(TestBrowser browser) {
+        	   
+        	   Coupon.createCoupon("TestCoupon", 55, "11.11.1111", "11.11.2222", "url", "category", "description", "remark");
+        	   browser.goTo("http://localhost:3333/");
+        	   assertThat(browser.pageSource()).contains("TestCoupon");
+               assertThat(browser.pageSource()).contains("Only 55.0 KM");
+        	   
+        	   
+           }
+   });
+   
+   }
 }
