@@ -45,8 +45,19 @@ public class CouponController extends Controller {
 			return ok(userIndex.render("Welcome", session("name"), null));
 			
 		}
+		
+		double price;
+		String strPrice = couponForm.bindFromRequest().field("price").value();
+		try{
+			price = Double.valueOf(strPrice);
+		} catch (NumberFormatException e){
+			//TODO Logger(e);
+			return ok(userIndex.render(null, session("name"), "Enter a valid price"));
+		}
+		
+		
 		Coupon newc = couponForm.bindFromRequest().get();
-		long couponID = Coupon.createCoupon(name, newc.price,
+		long couponID = Coupon.createCoupon(name, price,
 				newc.dateCreated, newc.dateExpire, newc.picture, newc.category,
 				newc.description, newc.remark);
 
