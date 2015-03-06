@@ -49,6 +49,14 @@ public class ModelsTest extends WithApplication {
 		assertNotNull(c);
 		
 	}
+	
+	@Test
+	public void testFindNonExistingCoupon(){
+		Coupon c = Coupon.find(1500);
+		assertNull(c);
+	}
+	
+	
 
 
 }
