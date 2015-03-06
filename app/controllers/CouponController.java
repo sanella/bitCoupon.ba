@@ -48,6 +48,7 @@ public class CouponController extends Controller {
 		
 		double price;
 		String strPrice = couponForm.bindFromRequest().field("price").value();
+		strPrice = strPrice.replace(",", ".");
 		try{
 			price = Double.valueOf(strPrice);
 		} catch (NumberFormatException e){
@@ -55,13 +56,17 @@ public class CouponController extends Controller {
 			return ok(userIndex.render(null, session("name"), "Enter a valid price"));
 		}
 		
-		
-		Coupon newc = couponForm.bindFromRequest().get();
+		String dateCreated = couponForm.bindFromRequest().field("dateCreated").value();
+		String dateExpire = couponForm.bindFromRequest().field("dateExpire").value();
+		String picture = couponForm.bindFromRequest().field("price").value();
+		String category = couponForm.bindFromRequest().field("category").value();
+		String description = couponForm.bindFromRequest().field("description").value();
+		String remark = couponForm.bindFromRequest().field("remark").value();
 		long couponID = Coupon.createCoupon(name, price,
-				newc.dateCreated, newc.dateExpire, newc.picture, newc.category,
-				newc.description, newc.remark);
+				dateCreated, dateExpire, picture, category,
+				description, remark);
 
-		return ok(userIndex.render(null, null, "Coupon \"" + newc.name
+		return ok(userIndex.render(null, null, "Coupon \"" + name
 				+ "\" added"));
 	}
 	
