@@ -40,8 +40,13 @@ public class CouponController extends Controller {
 		
 		//TODO handle invalid inputs
 		
+		String name = couponForm.bindFromRequest().field("name").value();
+		if (name.length() < 4){
+			return ok(userIndex.render("Welcome", session("name"), null));
+			
+		}
 		Coupon newc = couponForm.bindFromRequest().get();
-		long couponID = Coupon.createCoupon(newc.name, newc.price,
+		long couponID = Coupon.createCoupon(name, newc.price,
 				newc.dateCreated, newc.dateExpire, newc.picture, newc.category,
 				newc.description, newc.remark);
 
