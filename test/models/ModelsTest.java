@@ -1,11 +1,9 @@
 package models;
 
-import java.util.List;
+import helpers.HashHelper;
 
 import org.junit.*;
 
-import play.libs.F.Callback;
-import play.test.TestBrowser;
 import play.test.WithApplication;
 import static org.fest.assertions.Assertions.assertThat;
 import static org.junit.Assert.*;
@@ -14,18 +12,18 @@ import static play.test.Helpers.*;
 public class ModelsTest extends WithApplication {
 	@Before
 	public void setUp() {
-		fakeApplication(inMemoryDatabase());
+		
+		fakeApplication( inMemoryDatabase()); //,fakeGlobal() ne radi u play verzijama > 2.0, uzeti u obzir admina na mjestu 1 zbog global klase
 	}
 
 	@Test
 	public void testCreate() {
-		User.createUser("test", "test.testovic@bitcamp.ba", "54321");
-		User u = User.find(1);
-
+		User.createUser("tester", "test@mail.com", "654321", false);
+		User u = User.find(2);
 		assertNotNull(u);
-		assertEquals(u.username, "test");
-		assertEquals(u.email, "test.testovic@bitcamp.ba");
-		assertEquals(u.password, "54321");
+		assertEquals(u.username, "tester");
+		assertEquals(u.email, "test@mail.com");
+		assertEquals(u.password, "654321");
 	}
 
 	@Test
@@ -37,10 +35,19 @@ public class ModelsTest extends WithApplication {
 
 	@Test
 	public void testDelete() {
-		User.createUser("test", "test.testovic@bitcamp.ba","12345");
+		User.createUser("test", "test@bitcamp.ba", HashHelper.createPassword("54321"), false);
 		User.delete(1);
 		User b = User.find(1);
 		assertNull(b);
+	}
+	
+	@Test
+	public void testCouponCreate(){
+		
+		Coupon.createCoupon("Test", 55, "11.11.1111", "11.11.2222", "url", "category", "description", "remark");
+		Coupon c = Coupon.find(4);
+		assertNotNull(c);
+		
 	}
 
 
