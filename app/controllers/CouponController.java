@@ -37,13 +37,13 @@ public class CouponController extends Controller {
 		if (couponForm.hasErrors()) {
 			return redirect("/");// todo
 		}
-		
-		//TODO handle invalid inputs
-		
+
+		// TODO handle invalid inputs
+
 		String name = couponForm.bindFromRequest().field("name").value();
-		if (name.length() < 4){
+		if (name.length() < 4) {
 			return ok(userIndex.render("Welcome", session("name"), null));
-			
+
 		}
 		
 		double price;
@@ -66,12 +66,10 @@ public class CouponController extends Controller {
 				dateCreated, dateExpire, picture, category,
 				description, remark);
 
+
 		return ok(userIndex.render(null, null, "Coupon \"" + name
 				+ "\" added"));
 	}
-	
-	
-	
 
 	/**
 	 * Finds certain coupon
@@ -86,12 +84,17 @@ public class CouponController extends Controller {
 		Coupon coupon = Coupon.find(id);
 		return redirect("/");// todo//ok(viewCoupon.render(coupon, couponForm));
 	}
-	
+
 	public static Result showCoupon(long id) {
 		Coupon current = Coupon.find(id);
-		
+
 		return ok(coupontemplate.render(session("name"), current));
-		
+
 	}
 
+	public static Result deleteCoupon(long id) {
+		Coupon current = Coupon.find(id);
+		current.delete();
+		return redirect("/");
+	}
 }

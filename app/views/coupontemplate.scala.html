@@ -95,10 +95,17 @@
 									<span> @coupon.price KM</span>
 									<label>Enter the amount of coupons </label>
 									<input type="text" value="0" />
+								@if(Sesija.adminCheck(ctx()) == false) {
 									<button type="button" class="btn btn-fefault cart">
 										<i class="fa fa-shopping-cart"></i>
 										Buy Coupon
+										}
 									</button>
+									@if(Sesija.adminCheck(ctx()) == true) {
+						    <button type="button" href="@routes.CouponController.deleteCoupon(coupon.id)" class="btn btn-fefault cart">
+							Delete Coupon
+							</button>
+							}
 								</span>
 								<p><b>Description</b> @coupon.description </p>
 								<p><b>Remark: </b> @coupon.remark </p>
