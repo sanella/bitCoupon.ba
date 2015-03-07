@@ -93,8 +93,9 @@ public class CouponController extends Controller {
 	}
 
 	public static Result deleteCoupon(long id) {
-		Coupon current = Coupon.find(id);
-		current.delete();
+//		Coupon current = Coupon.find(id);
+//		current.delete();
+		Coupon.delete(id);
 		return redirect("/");
 	}
 }
