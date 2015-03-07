@@ -129,6 +129,11 @@ public class Coupon extends Model {
 		find.byId(id).delete();
 	}
 	
+	/**
+	 * Checks if the coupon exists
+	 * @param name - name of coupon
+	 * @return true if exists, else return false
+	 */
 	public static boolean checkByName(String name){
 		return find.where().eq("name", name).findUnique() != null;
 	}

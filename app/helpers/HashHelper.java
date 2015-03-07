@@ -4,6 +4,12 @@ import org.mindrot.jbcrypt.BCrypt;
 
 public class HashHelper {
 	
+	/**
+	 * Checks if the entered password is correct
+	 * @param candidate - entered password
+	 * @param encryptedPassword - user password
+	 * @return true if the entered password is correct, else return false
+	 */
 	public static boolean checkPass(String candidate, String encryptedPassword){
 		
 		if (candidate == null){
@@ -16,9 +22,13 @@ public class HashHelper {
 	}
 	
 	
+	/**
+	 * Create hashed password
+	 * @param clearString - user password
+	 * @return hashed password
+	 * @throws IllegalArgumentException
+	 */
 	public static String createPassword(String clearString)throws IllegalArgumentException {
-
-
 
 			if (clearString == null) {
 				throw new IllegalArgumentException("empty.password");

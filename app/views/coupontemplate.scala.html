@@ -104,7 +104,7 @@
 									@if(Sesija.adminCheck(ctx()) == true) {
 										<!-- edibe dodaj css za ovaj form sa id-eom macic -->
 							<form action="@routes.CouponController.deleteCoupon(coupon.id)" id="macic" method ="GET" >
-						    <button type="submit" class="btn btn-fefault cart">
+						    <button type="submit" id="delete" class="btn btn-fefault cart">
 							Delete Coupon
 							</button>
 							</form>

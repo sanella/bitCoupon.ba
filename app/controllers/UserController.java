@@ -74,7 +74,6 @@ public class UserController extends Controller {
 	}
 
 
-	
 	public static Result show(long id){
 		
 		User u = User.find(id);
