@@ -56,7 +56,19 @@ public class ModelsTest extends WithApplication {
 		assertNull(c);
 	}
 	
-	
-
+	@Test
+	public void deleteCoupon(){
+		Coupon.createCoupon("test", 2.22, "12.12.2012", "13.12.2012", "testurl", "category", "description", "remark");
+		Coupon.delete(4);
+		Coupon c = Coupon.find(4);
+		assertNull(c);
+		
+	}
+	@Test
+	public void deleteExistingCoupon(){  //tests delete coupon which is made in Global class
+		Coupon.delete(2);
+		Coupon c = Coupon.find(2);
+		assertNull(c);
+	}
 
 }
