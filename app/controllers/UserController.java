@@ -1,5 +1,7 @@
 package controllers;
 
+import com.avaje.ebeaninternal.server.persist.BindValues.Value;
+
 import helpers.HashHelper;
 import play.*;
 import play.api.mvc.Session;
@@ -14,8 +16,7 @@ public class UserController extends Controller {
 	static String bitName = "bitCoupon";
 	static String name = null;
 
-	static Form<User> newUser = new Form<User>(User.class);
-	static Form<Login> login = new Form<Login>(Login.class);
+	static Form<User> userForm = new Form<User>(User.class);
 
 	/**
 	 * @return Renders the registration view
@@ -32,11 +33,11 @@ public class UserController extends Controller {
 	 */
 	public static Result register() {
 
-		 String username = newUser.bindFromRequest().get().username;
-		 String mail = newUser.bindFromRequest().get().email;
-		 String password = newUser.bindFromRequest().get().password;
+		 String username = userForm.bindFromRequest().get().username;
+		 String mail = userForm.bindFromRequest().get().email;
+		 String password = userForm.bindFromRequest().get().password;
 		 String hashPass= HashHelper.createPassword(password);
-		 String confPass = newUser.bindFromRequest().field("confirmPassword").value();
+		 String confPass = userForm.bindFromRequest().field("confirmPassword").value();
 		 
 
 		 if( username.length() < 4 || username.equals("Username")){
@@ -71,6 +72,28 @@ public class UserController extends Controller {
 		 username, mail ));
 		 }
 		
+	}
+	
+	public static Result updateUser(String mail){
+		
+		String username = userForm.bindFromRequest().field("username").value();	 
+		String email = userForm.bindFromRequest().field("email").value();
+	//String password = userForm.bindFromRequest().get().password;
+		String admin = userForm.bindFromRequest().field("isAdmin").value();
+		
+		User cUser = User.find(mail);
+		cUser.setUsername(username);
+		cUser.setEmail(email);
+	//cUser.setPassword(password);
+		cUser.setAdmin(Boolean.parseBoolean(admin));
+		cUser.save();
+		
+		return ok(userUpdate.render(cUser));//TODO
+	}
+	
+	public static Result userUpdateView(){
+		User u = User.find(session("name"));
+		return ok(userUpdate.render(u));
 	}
 
 

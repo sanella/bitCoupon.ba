@@ -12,9 +12,6 @@ public class Application extends Controller {
 	static String loginMsg = "Login to your account";
 	static String name = null;
 
-	static Form<User> newUser = new Form<User>(User.class);
-	
-	
 
 	/**
 	 * 
