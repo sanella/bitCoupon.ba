@@ -58,7 +58,7 @@ public class CouponController extends Controller {
 		
 		String dateCreated = couponForm.bindFromRequest().field("dateCreated").value();
 		String dateExpire = couponForm.bindFromRequest().field("dateExpire").value();
-		String picture = couponForm.bindFromRequest().field("price").value();
+		String picture = couponForm.bindFromRequest().field("picture").value();
 		String category = couponForm.bindFromRequest().field("category").value();
 		String description = couponForm.bindFromRequest().field("description").value();
 		String remark = couponForm.bindFromRequest().field("remark").value();
