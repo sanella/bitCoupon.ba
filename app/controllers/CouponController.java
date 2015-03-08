@@ -92,7 +92,8 @@ public class CouponController extends Controller {
 	 */
 	public static Result showCoupon(long id) {
 		Coupon current = Coupon.find(id);
-		return ok(coupontemplate.render(session("name"), current));
+		User cUser = User.find(session("name"));
+		return ok(coupontemplate.render(session("name"),cUser, current));
 	}
 
 	/**
