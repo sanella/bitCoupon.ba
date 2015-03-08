@@ -85,16 +85,23 @@ public class CouponController extends Controller {
 		return redirect("/");// todo//ok(viewCoupon.render(coupon, couponForm));
 	}
 
+	/**
+	 * Finds coupon using id and shows it
+	 * @param id - Coupon id
+	 * @return redirect to the Coupon view
+	 */
 	public static Result showCoupon(long id) {
 		Coupon current = Coupon.find(id);
-
 		return ok(coupontemplate.render(session("name"), current));
-
 	}
 
+	/**
+	 * Delete coupon using id
+	 * @param id - Coupon id
+	 * @return redirect to the view of all existing coupons
+	 */
 	public static Result deleteCoupon(long id) {
-		Coupon current = Coupon.find(id);
-		current.delete();
+		Coupon.delete(id);
 		return redirect("/");
 	}
 }

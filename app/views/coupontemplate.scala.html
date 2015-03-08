@@ -99,12 +99,15 @@
 									<button type="button" class="btn btn-fefault cart">
 										<i class="fa fa-shopping-cart"></i>
 										Buy Coupon
-										}
 									</button>
+										}
 									@if(Sesija.adminCheck(ctx()) == true) {
-						    <button type="button" href="@routes.CouponController.deleteCoupon(coupon.id)" class="btn btn-fefault cart">
+										<!-- edibe dodaj css za ovaj form sa id-eom macic -->
+							<form action="@routes.CouponController.deleteCoupon(coupon.id)" id="macic" method ="GET" >
+						    <button type="submit" id="delete" class="btn btn-fefault cart">
 							Delete Coupon
 							</button>
+							</form>
 							}
 								</span>
 								<p><b>Description</b> @coupon.description </p>
@@ -115,6 +118,7 @@
 					</div><!--/product-details-->
 					</div>
 						</div>
+						</body>
 					
 }
 
