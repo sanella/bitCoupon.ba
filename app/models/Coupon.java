@@ -1,5 +1,6 @@
 package models;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.persistence.*;
@@ -99,10 +100,15 @@ public class Coupon extends Model {
 		if(!picture.contains("http://") ){
 			picture = "http://www.facebookfun99.com/wp-content/uploads/2012/03/cute-cat-facebook-cover.jpg";
 		}
+		
 		Coupon newCoupon = new Coupon(name, price, dateCreated, dateExpire,
 				picture, category, description, remark);
 		newCoupon.save();
 		return newCoupon.id;
+	}
+
+	public String getPriceString() {
+		return String.format("%1.2f",price);
 	}
 
 	/*

@@ -8,7 +8,6 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  background:;
   position: relative;
   font-weight:400px;
 }
@@ -28,6 +27,7 @@ a:focus {
 }
 
 a {
+	
   -webkit-transition: 300ms;
   -moz-transition: 300ms;
     -o-transition: 300ms;
