@@ -58,7 +58,7 @@ public class CouponController extends Controller {
 		
 		String dateCreated = couponForm.bindFromRequest().field("dateCreated").value();
 		String dateExpire = couponForm.bindFromRequest().field("dateExpire").value();
-		String picture = couponForm.bindFromRequest().field("price").value();
+		String picture = couponForm.bindFromRequest().field("picture").value();
 		String category = couponForm.bindFromRequest().field("category").value();
 		String description = couponForm.bindFromRequest().field("description").value();
 		String remark = couponForm.bindFromRequest().field("remark").value();
@@ -85,16 +85,24 @@ public class CouponController extends Controller {
 		return redirect("/");// todo//ok(viewCoupon.render(coupon, couponForm));
 	}
 
+	/**
+	 * Finds coupon using id and shows it
+	 * @param id - Coupon id
+	 * @return redirect to the Coupon view
+	 */
 	public static Result showCoupon(long id) {
 		Coupon current = Coupon.find(id);
-
-		return ok(coupontemplate.render(session("name"), current));
-
+		User cUser = User.find(session("name"));
+		return ok(coupontemplate.render(session("name"),cUser, current));
 	}
 
+	/**
+	 * Delete coupon using id
+	 * @param id - Coupon id
+	 * @return redirect to the view of all existing coupons
+	 */
 	public static Result deleteCoupon(long id) {
-		Coupon current = Coupon.find(id);
-		current.delete();
+		Coupon.delete(id);
 		return redirect("/");
 	}
 }
