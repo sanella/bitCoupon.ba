@@ -9,7 +9,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.Loginpage;
 import views.html.coupontemplate;
-import views.html.userIndex;
+import views.html.adminPanel;
 
 public class CouponController extends Controller {
 
@@ -22,7 +22,7 @@ public class CouponController extends Controller {
 	 */
 	public static Result createCouponView() {
 		// TODO
-		return redirect("/");// todo//ok(userIndex.render("Create your coupon",
+		return redirect("/");// todo//ok(adminPanel.render("Create your coupon",
 								// couponForm));
 	}
 
@@ -42,7 +42,7 @@ public class CouponController extends Controller {
 
 		String name = couponForm.bindFromRequest().field("name").value();
 		if (name.length() < 4) {
-			return ok(userIndex.render("Welcome", session("name"), null));
+			return ok(adminPanel.render("Welcome", session("name"), null));
 
 		}
 		
@@ -53,7 +53,7 @@ public class CouponController extends Controller {
 			price = Double.valueOf(strPrice);
 		} catch (NumberFormatException e){
 			//TODO Logger(e);
-			return ok(userIndex.render(null, session("name"), "Enter a valid price"));
+			return ok(adminPanel.render(null, session("name"), "Enter a valid price"));
 		}
 		
 		String dateCreated = couponForm.bindFromRequest().field("dateCreated").value();
@@ -67,7 +67,7 @@ public class CouponController extends Controller {
 				description, remark);
 
 
-		return ok(userIndex.render(null, null, "Coupon \"" + name
+		return ok(adminPanel.render(null, null, "Coupon \"" + name
 				+ "\" added"));
 	}
 

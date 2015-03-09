@@ -104,7 +104,18 @@ public class UserController extends Controller {
 			return redirect("/");
 		}
 		
-		return ok(userIndex.render(message, u.username, null));
+		return ok(adminPanel.render(message, u.username, null));
+		
+	}
+	
+	public static Result profilePage(String username){
+		
+		User u = User.findByUsername(username);
+		if ( !u.email.equals(session("name"))){
+			return redirect("/");
+		}
+		
+		return ok(profile.render(u));
 		
 	}
 

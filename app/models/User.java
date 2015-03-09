@@ -157,6 +157,10 @@ public class User extends Model {
 		return find.where().eq("email", mail).findUnique() != null;
 	}
 	
+	public static User findByUsername(String username) {
+		return find.where().eq("username", username).findUnique();
+	}
+	
 	
 	/* setter */
 	
