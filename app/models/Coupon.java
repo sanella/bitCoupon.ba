@@ -1,6 +1,7 @@
 package models;
 
 import java.text.DecimalFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
@@ -8,6 +9,9 @@ import javax.persistence.*;
 import play.data.validation.Constraints.MinLength;
 import play.db.ebean.Model;
 import play.db.ebean.Model.Finder;
+
+import com.avaje.ebean.annotation.CreatedTimestamp;
+import com.avaje.ebean.annotation.UpdatedTimestamp;
 
 /**
  * 
@@ -26,10 +30,12 @@ public class Coupon extends Model {
 	public String name;
 
 	public double price;
+	
+	@Column(name="created_at")
+	public Date dateCreated;
 
-	public String dateCreated;
-
-	public String dateExpire;
+	@Column(name="expired_at")
+	public Date dateExpire;
 
 	public String picture;
 
@@ -63,13 +69,13 @@ public class Coupon extends Model {
 	 * public long response_company_id;
 	 */
 
-	public Coupon(String name, double price, String dateCreated,
-			String dateExpire, String picture, String category_id,
+	public Coupon(String name, double price,
+			Date dateExpire, String picture, String category_id,
 			String description, String remark) {
 
 		this.name = name;
 		this.price = price;
-		this.dateCreated = dateCreated;
+		this.dateCreated = new Date();
 		this.dateExpire = dateExpire;
 		this.picture = picture;
 		this.category = category_id;
@@ -94,14 +100,13 @@ public class Coupon extends Model {
 	 * @return the id of the new Coupon (long)
 	 */
 
-	public static long createCoupon(String name, double price,
-			String dateCreated, String dateExpire, String picture,
+	public static long createCoupon(String name, double price, Date dateExpire, String picture,
 			String category, String description,String remark) {
 		if(!picture.contains("http://") ){
 			picture = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAyMuVdpfRWZohd288y7EIqVsnwJPi92txgrn5DBWxEOZDnhJL";
 		}
 		
-		Coupon newCoupon = new Coupon(name, price, dateCreated, dateExpire,
+		Coupon newCoupon = new Coupon(name, price,dateExpire,
 				picture, category, description, remark);
 		newCoupon.save();
 		return newCoupon.id;
