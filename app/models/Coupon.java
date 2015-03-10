@@ -103,7 +103,7 @@ public class Coupon extends Model {
 	public static long createCoupon(String name, double price, Date dateExpire, String picture,
 			String category, String description,String remark) {
 		if(!picture.contains("http://") ){
-			picture = "http://www.facebookfun99.com/wp-content/uploads/2012/03/cute-cat-facebook-cover.jpg";
+			picture = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAyMuVdpfRWZohd288y7EIqVsnwJPi92txgrn5DBWxEOZDnhJL";
 		}
 		
 		Coupon newCoupon = new Coupon(name, price,dateExpire,
