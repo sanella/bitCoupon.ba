@@ -9,25 +9,28 @@ import models.User;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.Loginpage;
-import views.html.coupontemplate;
-import views.html.userIndex;
-
+import views.html.*;
 public class CouponController extends Controller {
 
 	static Form<Coupon> couponForm = new Form<Coupon>(Coupon.class);
 
 	
 	
-	/**
-	 * Shows view for adding coupon
-	 * 
-	 * @return redirect to create coupon view
-	 */
-	public static Result createCouponView() {
-		// TODO
-		return redirect("/");// todo//ok(userIndex.render("Create your coupon",
-								// couponForm));
+//	/**
+//	 * Shows view for adding coupon
+//	 * 
+//	 * @return redirect to create coupon view
+//	 */
+//	public static Result createCouponView() {
+//		// TODO
+//		return redirect("/");// todo//ok(adminPanel.render("Create your coupon",
+//								// couponForm));
+//	}
+	
+	
+	public static Result couponControl(){
+		
+		return ok(couponPanel.render(session("name"), null));
 	}
 
 	/**
@@ -47,7 +50,7 @@ public class CouponController extends Controller {
 
 		String name = couponForm.bindFromRequest().field("name").value();
 		if (name.length() < 4) {
-			return ok(userIndex.render("Welcome", session("name"), null));
+			return ok(couponPanel.render(session("name"), null));
 
 		}
 		
@@ -58,7 +61,7 @@ public class CouponController extends Controller {
 			price = Double.valueOf(strPrice);
 		} catch (NumberFormatException e){
 			//TODO Logger(e);
-			return ok(userIndex.render(null, session("name"), "Enter a valid price"));
+			return ok(couponPanel.render(session("name"), "Enter a valid price"));
 		}
 		
 		
@@ -74,7 +77,7 @@ public class CouponController extends Controller {
 				description, remark);
 
 
-		return ok(userIndex.render(null, null, "Coupon \"" + name
+		return ok(couponPanel.render( session("name"), "Coupon \"" + name
 				+ "\" added"));
 	}
 
