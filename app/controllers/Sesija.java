@@ -16,7 +16,7 @@ public class Sesija extends Security.Authenticator {
 		long id = Long.parseLong(ctx.session().get("user_id"));
 		User u = User.find(id);
 		if ( u != null){
-			return u.email;
+			return u.username;
 		}
 		return null;
 	}
@@ -30,8 +30,8 @@ public class Sesija extends Security.Authenticator {
 		if ( !ctx.session().containsKey("name") ){
 			return null;
 		}
-		String mail =ctx.session().get("name");
-		User u = User.find(mail);
+		String username =ctx.session().get("name");
+		User u = User.find(username);
 		return u;
 	}
 	

@@ -149,8 +149,11 @@ public class User extends Model {
 		return find.where().eq("isAdmin", isAdmin).findUnique();
 	}
 
-	public static User find(String mail) {
-		return find.where().eq("email", mail).findUnique();
+	/* 
+	 * Find and return user by username 
+	 */
+	public static User find(String username) {
+		return find.where().eq("username", username).findUnique();
 	}
 
 	public static boolean check(String mail) {
@@ -162,23 +165,6 @@ public class User extends Model {
 	}
 	
 	
-	/* setter */
-	
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public void setAdmin(boolean isAdmin) {
-		this.isAdmin = isAdmin;
-	}
 
 	
 }

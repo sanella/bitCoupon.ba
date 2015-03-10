@@ -1,32 +1,21 @@
-@(info: String)
+@(name: String)(addCouponInfo: String)
 
 @import helper._
 
-@main("Login"){
-@*	
-	
-    <h4>@info: </h4> 
-
- 	  @helper.form(routes.Application.login(), 'id->"login"){
-    	<p> Enter email: </p>
-    	<input type="text" id="email" name="email" /> <br>
-    	<p> Enter Password: </p>
-    	<input type="password"  id="password" name="password" /> <br>
-    	<p></p>
-    	<input type="submit" value="Login" />
-      }
-   *@
+@main("User Panel") {
 
 <body>
 		<header id="header"><!--header-->
 		<div class="header_top"><!--header_top-->
+		
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-6">
 						<div class="col-sm-12">
 						
 							<ul class="nav navbar-nav">
-							<li><a href="/signup" class="active"><i class="fa fa-lock"></i> Registration</a></li>				
+ 							<li><a class="active"> @name </a></li>
+ 							<li><a href="/logout" class="active"><i class="fa fa-lock"></i> Logout</a></li>					
 							</ul>
 						</div>
 					</div>
@@ -77,35 +66,62 @@
                                     </ul>
                                 </li> 
 								<li><a href="/">Page9</a></li>
-								<li><a href="/">Page10</a></li>
+								<li><a href="@routes.CouponController.couponControl">Coupon panel</a></li>
 							</ul>
 						</div>
+						
 					</div>
 				</div>
+			</div>
+			</div>
+		</header>
+	</section>
+	
+
+	<div class="container">
+					<h4>@addCouponInfo</h4>
+					<div class="features_items"><!--features_items-->
+						<h2 class="title text-center">Coupon Creation</h2>
+						<div class="col-sm-6 col-sm-offset-1">
+						
+						
+					@if(Sesija.adminCheck(ctx()) == true) {
+					<div class="signup-form"><!--sign up form-->
+						<form action="@routes.CouponController.addCoupon" method ="POST" >
+							<input type="text" name="name" id="name" placeholder="Title" required/>
+							<input type="text" name="price" id="price" placeholder="Price" required/>
+							<input type="date" name="dateExpire"  max="2030-1-12"  min="2015-3-10" id="dateExpire" placeholder="Date of expire" required/>
+							<input type="text" name="picture" id="picture" placeholder="URL of image" />
+							<input type="text" name="category" id="category" placeholder="Category" required/>
+							<textarea name="description" id="description" rows="6" placeholder="Description of Coupon" required></textarea>	
+							<p></p>
+							<textarea name="remark" id="remark" rows="6" placeholder="Remark of Coupon"></textarea>
+							<button type="submit" class="btn btn-default">Create Coupon</button>
+								<p></p>
+									<p></p>
+										<p></p>
+											<p></p>
+						</form>
+					</div><!--/sign up form-->
+					} else {
+					<div class="container">
+					<label>Sorry! You need to be registered company to be able to create a coupon!</label>
+					</div>
+					}	
 				</div>
 			</div>
-			
-		</header>
+		</div>
+	</section><!--/form-->
+							</div>
+						</div>
+					</div>
+	<p></p>
+										<p></p>
+											<p></p>
+	</body>
 		
-	</section>
-		<div class="container">
-					<div class="features_items"><!--features_items-->
-						<h2 class="title text-center">Login</h2>
-						<div class="col-sm-6 col-sm-offset-1">
-					<div class="signup-form"><!--sign up form-->
-						<h2>@info</h2>
-						<form action="@routes.Application.login" method="POST">
-							<input type="text" id="email" name="email" placeholder="Email" />
-							<input type="password" id="password" name="password" placeholder="Password" />
-							<button type="submit" id="submit">Login</button>
-						</form>
-					</div><!--/login form-->
-						<br>
-						<br>
-						<br>
-						<br>
-				</div>
-			</body>
-		</html>
-   
+	
+
+	
 }
+

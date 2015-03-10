@@ -61,7 +61,7 @@ public class UserController extends Controller {
 		
 		 else if ( User.verifyRegistration(username, mail) == true){
 		 session().clear();
-		 session("name", mail);
+		 session("name", username);
 		 
 		 long id = User.createUser(username, mail, hashPass, false);
 		 User cc = User.getUser(mail);
@@ -74,21 +74,19 @@ public class UserController extends Controller {
 		
 	}
 	
-	public static Result updateUser(String mail){
+	public static Result updateUser(String useName){
 		
 		String username = userForm.bindFromRequest().field("username").value();	 
 		String email = userForm.bindFromRequest().field("email").value();
-	//String password = userForm.bindFromRequest().get().password;
 		String admin = userForm.bindFromRequest().field("isAdmin").value();
 		
-		User cUser = User.find(mail);
-		cUser.setUsername(username);
-		cUser.setEmail(email);
-	//cUser.setPassword(password);
-		cUser.setAdmin(Boolean.parseBoolean(admin));
+		User cUser = User.find(useName);
+		cUser.username = username;
+		cUser.email = email;
+		cUser.isAdmin = Boolean.parseBoolean(admin);
 		cUser.save();
 		
-		return ok(userUpdate.render(cUser));//TODO
+		return ok(userUpdate.render(cUser));
 	}
 	
 	public static Result userUpdateView(){
@@ -97,26 +95,28 @@ public class UserController extends Controller {
 	}
 
 
-	public static Result show(long id){
+	public static Result controlPanel(long id){
 		
 		User u = User.find(id);
-		if ( !u.email.equals(session("name"))){
+		if ( !u.username.equals(session("name"))){
 			return redirect("/");
 		}
 		
-		return ok(adminPanel.render(message, u.username, null));
+		return ok(adminPanel.render(u.username, null));
 		
 	}
 	
 	public static Result profilePage(String username){
 		
 		User u = User.findByUsername(username);
-		if ( !u.email.equals(session("name"))){
+		if ( !u.username.equals(session("name"))){
 			return redirect("/");
 		}
 		
 		return ok(profile.render(u));
 		
 	}
-
+	
+	
+	
 }

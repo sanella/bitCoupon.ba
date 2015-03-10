@@ -71,7 +71,7 @@
 						
 					
 					<div class="signup-form"><!--sign up form-->
-						<form action="@routes.UserController.updateUser(user.email)" method ="POST" >
+						<form action="@routes.UserController.updateUser(user.username)" method ="POST" >
 							<input type="text" name="username" id="username" placeholder="Username" value=@user.username required/>
 							<input type="text" name="email" id="email" placeholder=Email value=@user.email required/>
 							<input type="text" name="isAdmin" id="isAdmin" placeholder="Admin" value="@user.isAdmin" required/>

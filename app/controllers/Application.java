@@ -23,7 +23,7 @@ public class Application extends Controller {
 			//name = "Public user";
 			return ok(index.render(null, Coupon.all()));
 		} else {
-			User currentUser = User.getUser(name);
+			User currentUser = User.find(name);
 			return ok(index.render(currentUser, Coupon.all()));
 		}
 	}
@@ -49,9 +49,9 @@ public class Application extends Controller {
 		}
 
 		if (User.verifyLogin(mail, password) == true) {
+			User cc = User.getUser(mail);
 			session().clear();
-			session("name", mail);
-			 User cc = User.getUser(mail);
+			session("name", cc.username);
 			 return ok(index.render(cc, Coupon.all()));
 		}
 
