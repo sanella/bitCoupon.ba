@@ -1,5 +1,7 @@
 package controllers;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import models.Coupon;
@@ -15,6 +17,8 @@ public class CouponController extends Controller {
 
 	static Form<Coupon> couponForm = new Form<Coupon>(Coupon.class);
 
+	
+	
 	/**
 	 * Shows view for adding coupon
 	 * 
@@ -31,8 +35,9 @@ public class CouponController extends Controller {
 	 * coupon view, else creates new coupon.
 	 * 
 	 * @return redirect to create coupon view
+	 * @throws ParseException 
 	 */
-	public static Result addCoupon() {
+	public static Result addCoupon() throws ParseException {
 
 		if (couponForm.hasErrors()) {
 			return redirect("/");// todo
@@ -56,14 +61,16 @@ public class CouponController extends Controller {
 			return ok(userIndex.render(null, session("name"), "Enter a valid price"));
 		}
 		
-		String dateCreated = couponForm.bindFromRequest().field("dateCreated").value();
+		
 		String dateExpire = couponForm.bindFromRequest().field("dateExpire").value();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+		Date date = formatter.parse(dateExpire);
+		
 		String picture = couponForm.bindFromRequest().field("picture").value();
 		String category = couponForm.bindFromRequest().field("category").value();
 		String description = couponForm.bindFromRequest().field("description").value();
 		String remark = couponForm.bindFromRequest().field("remark").value();
-		long couponID = Coupon.createCoupon(name, price,
-				dateCreated, dateExpire, picture, category,
+		long couponID = Coupon.createCoupon(name, price, date, picture, category,
 				description, remark);
 
 

@@ -91,8 +91,7 @@
 						<form action="@routes.CouponController.addCoupon" method ="POST" >
 							<input type="text" name="name" id="name" placeholder="Title" required/>
 							<input type="text" name="price" id="price" placeholder="Price" required/>
-							<input type="text" name="dateCreated" id="dateCreated" placeholder="Date of creation" required/>
-							<input type="text" name="dateExpire" id="dateExpire" placeholder="Date of expire" required/>
+							<input type="date" name="dateExpire"  max="2030-1-12"  min="2015-3-10" id="dateExpire" placeholder="Date of expire" required/>
 							<input type="text" name="picture" id="picture" placeholder="URL of image" />
 							<input type="text" name="category" id="category" placeholder="Category" required/>
 							<textarea name="description" id="description" rows="6" placeholder="Description of Coupon" required></textarea>	
