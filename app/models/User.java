@@ -114,7 +114,7 @@ public class User extends Model {
 	 */
 	public static long getId(String mail) {
 		User user = find.where().eq("email", mail).findUnique();
-
+		
 		return user.id;
 	}
 
@@ -125,6 +125,10 @@ public class User extends Model {
 		User user = find.where().eq("email", mail).findUnique();
 
 		return user;
+	}
+	
+	public static void update(long id){
+		//TODO
 	}
 
 	/*
@@ -145,12 +149,22 @@ public class User extends Model {
 		return find.where().eq("isAdmin", isAdmin).findUnique();
 	}
 
-	public static User find(String mail) {
-		return find.where().eq("email", mail).findUnique();
+	/* 
+	 * Find and return user by username 
+	 */
+	public static User find(String username) {
+		return find.where().eq("username", username).findUnique();
 	}
 
 	public static boolean check(String mail) {
 		return find.where().eq("email", mail).findUnique() != null;
 	}
+	
+	public static User findByUsername(String username) {
+		return find.where().eq("username", username).findUnique();
+	}
+	
+	
 
+	
 }

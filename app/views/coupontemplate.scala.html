@@ -19,7 +19,7 @@
 							<li><a href="/loginpage" class="active"><i class="fa fa-lock"></i> Login </a></li>
 							<li><a href="/signup" class="active"><i class="fa fa-lock"></i> Registration</a></li>
 							} else {
- 							<li><a href="@routes.UserController.show(curUser.id)" method="GET" class="active"> @curUser.username </a></li>
+ 							<li><a href="@routes.UserController.controlPanel(curUser.id)" method="GET" class="active"> @curUser.username </a></li>
  							<li><a href="/logout" class="active"><i class="fa fa-lock"></i> Logout</a></li>
 							}						
 							</ul>
@@ -103,11 +103,10 @@
 										}
 									@if(Sesija.adminCheck(ctx()) == true) {
 										<!-- edibe dodaj css za ovaj form sa id-eom macic -->
-							<form action="@routes.CouponController.deleteCoupon(coupon.id)" id="macic" method ="GET" >
-						    <button type="submit" id="delete" class="btn btn-fefault cart">
-							Delete Coupon
-							</button>
-							</form>
+				
+						   <a href='@routes.CouponController.deleteCoupon(coupon.id)' onclick="return confirm('Are you sure you want to delete this coupon?');"
+					class="btn btn-fefault cart">Delete coupon</a>
+							
 							}
 								</span>
 								<p><b>Description</b> @coupon.description </p>

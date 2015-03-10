@@ -1,5 +1,7 @@
 package controllers;
 
+import com.avaje.ebeaninternal.server.persist.BindValues.Value;
+
 import helpers.HashHelper;
 import play.*;
 import play.api.mvc.Session;
@@ -14,8 +16,7 @@ public class UserController extends Controller {
 	static String bitName = "bitCoupon";
 	static String name = null;
 
-	static Form<User> newUser = new Form<User>(User.class);
-	static Form<Login> login = new Form<Login>(Login.class);
+	static Form<User> userForm = new Form<User>(User.class);
 
 	/**
 	 * @return Renders the registration view
@@ -32,57 +33,95 @@ public class UserController extends Controller {
 	 */
 	public static Result register() {
 
-		 String username = newUser.bindFromRequest().get().username;
-		 String mail = newUser.bindFromRequest().get().email;
-		 String password = newUser.bindFromRequest().get().password;
-		 String hashPass= HashHelper.createPassword(password);
-		 String confPass = newUser.bindFromRequest().field("confirmPassword").value();
-		 
+		String username = userForm.bindFromRequest().get().username;
+		String mail = userForm.bindFromRequest().get().email;
+		String password = userForm.bindFromRequest().get().password;
+		String hashPass = HashHelper.createPassword(password);
+		String confPass = userForm.bindFromRequest().field("confirmPassword")
+				.value();
 
-		 if( username.length() < 4 || username.equals("Username")){
-		 return ok(signup.render(
-		 "Enter a username with minimum 4 characters !",null, mail ));
-		 }
-		 else if ( mail.equals("Email")){
-		 return ok(signup.render(
-		 "Email required for registration !",username, null ));
-		 }
-		 else if ( password.length() < 6 ){
-		 return ok(signup.render(
-		 "Enter a password with minimum 6 characters !",username, mail ));
-		 }
-		 else if ( !password.equals(confPass)){
-			 return ok(signup.render(
-					 "Passwords don't match, try again ",username, mail ));
-		 }
-		 /* Creating new user if the username or mail is free for use, and
-		 there are no errors */
-		
-		 else if ( User.verifyRegistration(username, mail) == true){
-		 session().clear();
-		 session("name", mail);
-		 
-		 long id = User.createUser(username, mail, hashPass, false);
-		 User cc = User.getUser(mail);
-		 return ok(index.render(cc, Coupon.all()));
-		 
-		 } else {
-		 return ok(signup.render("Username or email allready exists!",
-		 username, mail ));
-		 }
-		
+		if (username.length() < 4 || username.equals("Username")) {
+			return ok(signup.render(
+					"Enter a username with minimum 4 characters !", null, mail));
+		} else if (mail.equals("Email")) {
+			return ok(signup.render("Email required for registration !",
+					username, null));
+		} else if (password.length() < 6) {
+			return ok(signup.render(
+					"Enter a password with minimum 6 characters !", username,
+					mail));
+		} else if (!password.equals(confPass)) {
+			return ok(signup.render("Passwords don't match, try again ",
+					username, mail));
+		}
+		/*
+		 * Creating new user if the username or mail is free for use, and there
+		 * are no errors
+		 */
+
+		else if (User.verifyRegistration(username, mail) == true) {
+			session().clear();
+			session("name", username);
+
+			long id = User.createUser(username, mail, hashPass, false);
+			User cc = User.getUser(mail);
+			return ok(index.render(cc, Coupon.all()));
+
+		} else {
+			return ok(signup.render("Username or email allready exists!",
+					username, mail));
+		}
+
 	}
 
+	public static Result updateUser(String useName) {
 
-	public static Result show(long id){
-		
+		String username = userForm.bindFromRequest().field("username").value();
+		String email = userForm.bindFromRequest().field("email").value();
+		String oldPass = userForm.bindFromRequest().field("password").value();
+		String newPass = userForm.bindFromRequest().field("newPassword")
+				.value();
+		// String admin = userForm.bindFromRequest().field("isAdmin").value();
+
+		User cUser = User.find(useName);
+		cUser.username = username;
+		cUser.email = email;
+		// cUser.isAdmin = Boolean.parseBoolean(admin);
+		if (HashHelper.checkPass(oldPass, cUser.password) == true) {
+			cUser.password = HashHelper.createPassword(newPass);
+			cUser.save();
+			return ok(userUpdate.render(cUser, "Update Successful"));
+		} else {
+			return ok(userUpdate.render(cUser, "Incorrect Password"));
+		}
+
+	}
+
+	public static Result userUpdateView() {
+		User u = User.find(session("name"));
+		return ok(userUpdate.render(u, "Update account"));
+	}
+
+	public static Result controlPanel(long id) {
+
 		User u = User.find(id);
-		if ( !u.email.equals(session("name"))){
+		if (!u.username.equals(session("name"))) {
 			return redirect("/");
 		}
-		
-		return ok(userIndex.render(message, u.username, null));
-		
+
+		return ok(adminPanel.render(u.username, null));
+
+	}
+
+	public static Result profilePage(String username) {
+
+		User u = User.findByUsername(username);
+		if (!u.username.equals(session("name"))) {
+			return redirect("/");
+		}
+
+		return ok(profile.render(u));
+
 	}
 
 }

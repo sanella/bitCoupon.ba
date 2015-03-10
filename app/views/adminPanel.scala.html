@@ -1,0 +1,90 @@
+@(name: String)(addCouponInfo: String)
+
+@import helper._
+
+@main("User Panel") {
+
+<body>
+		<header id="header"><!--header-->
+		<div class="header_top"><!--header_top-->
+		
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="col-sm-12">
+						
+							<ul class="nav navbar-nav">
+ 							<li><a class="active"> @name </a></li>
+ 							<li><a href="/logout" class="active"><i class="fa fa-lock"></i> Logout</a></li>					
+							</ul>
+						</div>
+					</div>
+				</div>	
+			</div>
+		</div>
+		</div><!--/header_top-->
+		
+		<div class="header-middle"><!--header-middle-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="logo pull-left">
+							<a href="/"><img src="@routes.Assets.at("images/home/logo.png")" alt="" /></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="header-bottom"><!--header-bottom-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-9">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<div class="mainmenu pull-left">
+							<ul class="nav navbar-nav collapse navbar-collapse">
+								<li><a href="/">Home</a></li>
+								<li><a href="#">Users panel</a></li>
+								<li><a href="#">Coupons panel</a></li>
+								<li><a href="@routes.CouponController.couponControl">Add Coupon panel</a></li>
+							</ul>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+			</div>
+		</header>
+	</section>
+	
+
+	<div class="container">
+					<h4>@addCouponInfo</h4>
+					<div class="features_items"><!--features_items-->
+						<h2 class="title text-center">Dashboard</h2>
+						<div class="col-sm-6 col-sm-offset-1">
+						
+						
+				
+				</div>
+			</div>
+		</div>
+	</section><!--/form-->
+							</div>
+						</div>
+					</div>
+	<p></p>
+										<p></p>
+											<p></p>
+	</body>
+		
+	
+
+	
+}
+
