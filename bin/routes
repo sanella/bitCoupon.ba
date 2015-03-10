@@ -12,7 +12,7 @@ GET    /signup        					  controllers.UserController.signup()
 POST   /register       					  controllers.UserController.register()
 GET    /control-panel/user/:id     		  controllers.UserController.controlPanel(id: Long)
 GET	   /profile/@:username	   			  controllers.UserController.profilePage(username: String)
-POST   /updateUser					  	  controllers.UserController.updateUser(mail: String)
+POST   /updateUser					  	  controllers.UserController.updateUser(username: String)
 GET    /updateUser						  controllers.UserController.userUpdateView()
 
 GET	   /couponPanel						  controllers.CouponController.couponControl()

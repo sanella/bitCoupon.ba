@@ -33,90 +33,95 @@ public class UserController extends Controller {
 	 */
 	public static Result register() {
 
-		 String username = userForm.bindFromRequest().get().username;
-		 String mail = userForm.bindFromRequest().get().email;
-		 String password = userForm.bindFromRequest().get().password;
-		 String hashPass= HashHelper.createPassword(password);
-		 String confPass = userForm.bindFromRequest().field("confirmPassword").value();
-		 
+		String username = userForm.bindFromRequest().get().username;
+		String mail = userForm.bindFromRequest().get().email;
+		String password = userForm.bindFromRequest().get().password;
+		String hashPass = HashHelper.createPassword(password);
+		String confPass = userForm.bindFromRequest().field("confirmPassword")
+				.value();
 
-		 if( username.length() < 4 || username.equals("Username")){
-		 return ok(signup.render(
-		 "Enter a username with minimum 4 characters !",null, mail ));
-		 }
-		 else if ( mail.equals("Email")){
-		 return ok(signup.render(
-		 "Email required for registration !",username, null ));
-		 }
-		 else if ( password.length() < 6 ){
-		 return ok(signup.render(
-		 "Enter a password with minimum 6 characters !",username, mail ));
-		 }
-		 else if ( !password.equals(confPass)){
-			 return ok(signup.render(
-					 "Passwords don't match, try again ",username, mail ));
-		 }
-		 /* Creating new user if the username or mail is free for use, and
-		 there are no errors */
-		
-		 else if ( User.verifyRegistration(username, mail) == true){
-		 session().clear();
-		 session("name", username);
-		 
-		 long id = User.createUser(username, mail, hashPass, false);
-		 User cc = User.getUser(mail);
-		 return ok(index.render(cc, Coupon.all()));
-		 
-		 } else {
-		 return ok(signup.render("Username or email allready exists!",
-		 username, mail ));
-		 }
-		
+		if (username.length() < 4 || username.equals("Username")) {
+			return ok(signup.render(
+					"Enter a username with minimum 4 characters !", null, mail));
+		} else if (mail.equals("Email")) {
+			return ok(signup.render("Email required for registration !",
+					username, null));
+		} else if (password.length() < 6) {
+			return ok(signup.render(
+					"Enter a password with minimum 6 characters !", username,
+					mail));
+		} else if (!password.equals(confPass)) {
+			return ok(signup.render("Passwords don't match, try again ",
+					username, mail));
+		}
+		/*
+		 * Creating new user if the username or mail is free for use, and there
+		 * are no errors
+		 */
+
+		else if (User.verifyRegistration(username, mail) == true) {
+			session().clear();
+			session("name", username);
+
+			long id = User.createUser(username, mail, hashPass, false);
+			User cc = User.getUser(mail);
+			return ok(index.render(cc, Coupon.all()));
+
+		} else {
+			return ok(signup.render("Username or email allready exists!",
+					username, mail));
+		}
+
 	}
-	
-	public static Result updateUser(String useName){
-		
-		String username = userForm.bindFromRequest().field("username").value();	 
+
+	public static Result updateUser(String useName) {
+
+		String username = userForm.bindFromRequest().field("username").value();
 		String email = userForm.bindFromRequest().field("email").value();
-		String admin = userForm.bindFromRequest().field("isAdmin").value();
-		
+		String oldPass = userForm.bindFromRequest().field("password").value();
+		String newPass = userForm.bindFromRequest().field("newPassword")
+				.value();
+		// String admin = userForm.bindFromRequest().field("isAdmin").value();
+
 		User cUser = User.find(useName);
 		cUser.username = username;
 		cUser.email = email;
-		cUser.isAdmin = Boolean.parseBoolean(admin);
-		cUser.save();
-		
-		return ok(userUpdate.render(cUser));
+		// cUser.isAdmin = Boolean.parseBoolean(admin);
+		if (HashHelper.checkPass(oldPass, cUser.password) == true) {
+			cUser.password = HashHelper.createPassword(newPass);
+			cUser.save();
+			return ok(userUpdate.render(cUser, "Update Successful"));
+		} else {
+			return ok(userUpdate.render(cUser, "Incorrect Password"));
+		}
+
 	}
-	
-	public static Result userUpdateView(){
+
+	public static Result userUpdateView() {
 		User u = User.find(session("name"));
-		return ok(userUpdate.render(u));
+		return ok(userUpdate.render(u, "Update account"));
 	}
 
+	public static Result controlPanel(long id) {
 
-	public static Result controlPanel(long id){
-		
 		User u = User.find(id);
-		if ( !u.username.equals(session("name"))){
+		if (!u.username.equals(session("name"))) {
 			return redirect("/");
 		}
-		
+
 		return ok(adminPanel.render(u.username, null));
-		
+
 	}
-	
-	public static Result profilePage(String username){
-		
+
+	public static Result profilePage(String username) {
+
 		User u = User.findByUsername(username);
-		if ( !u.username.equals(session("name"))){
+		if (!u.username.equals(session("name"))) {
 			return redirect("/");
 		}
-		
+
 		return ok(profile.render(u));
-		
+
 	}
-	
-	
-	
+
 }
