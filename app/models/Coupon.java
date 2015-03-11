@@ -143,5 +143,9 @@ public class Coupon extends Model {
 	public static boolean checkByName(String name){
 		return find.where().eq("name", name).findUnique() != null;
 	}
+	
+	public static void updateCoupon(Coupon coupon){
+		coupon.save();
+	}
 
 }

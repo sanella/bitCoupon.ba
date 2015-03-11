@@ -1,27 +1,21 @@
-@(session: String)(curUser: User)(coupon: Coupon)
+@(coupon: Coupon)(message: String)
 
 @import helper._
 
-@main("Welcome to bitCoupon") {
-	
+@main("Coupon Panel") {
+
 <body>
 		<header id="header"><!--header-->
 		<div class="header_top"><!--header_top-->
+		
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-6">
 						<div class="col-sm-12">
 						
 							<ul class="nav navbar-nav">
-							<!-- if statement for enable od disable button in case of login -->
-								@if(session == null) {
-									
-							<li><a href="/loginpage" class="active"><i class="fa fa-lock"></i> Login </a></li>
-							<li><a href="/signup" class="active"><i class="fa fa-lock"></i> Registration</a></li>
-							} else {
- 							<li><a href="@routes.UserController.show(curUser.id)" method="GET" class="active"> @curUser.username </a></li>
- 							<li><a href="/logout" class="active"><i class="fa fa-lock"></i> Logout</a></li>
-							}						
+ 							<li><a class="active">@coupon.name </a></li>
+ 							<li><a href="/logout" class="active"><i class="fa fa-lock"></i> Logout</a></li>					
 							</ul>
 						</div>
 					</div>
@@ -75,56 +69,57 @@
 								<li><a href="/">Page10</a></li>
 							</ul>
 						</div>
+						
 					</div>
-				</div>
 				</div>
 			</div>
-			
+			</div>
 		</header>
-		
 	</section>
+	
+	
+	
 	<div class="container">
-	<div class="col-sm-8">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-						<img src="@coupon.picture"></img>
-							<div class="product-information"><!--/product-information-->
-								<h2> @coupon.name </h2>
-								<span>
-									<span> @coupon.getPriceString() KM</span>
-									<label>Enter the amount of coupons </label>
-									<input type="text" value="0" />
-								@if(Sesija.adminCheck(ctx()) == false) {
-									<button type="button" class="btn btn-fefault cart">
-										<i class="fa fa-shopping-cart"></i>
-										Buy Coupon
-									</button>
-										}
-									@if(Sesija.adminCheck(ctx()) == true) {
-										<!-- edibe dodaj css za ovaj form sa id-eom macic -->
-							<form action="@routes.CouponController.deleteCoupon(coupon.id)" id="delete" method ="GET" >
-						    <button type="submit" id="delete" class="btn btn-fefault cart">
-							Delete Coupon
-							</button>
-							</form>
-							<form action="@routes.CouponController.editCoupon(coupon.id)" id="update" method ="GET" >
-							<button type="submit" id="update" class="btn btn-fefault cart">
-							Update Coupon
-							</button>
-							</form>
-							}
-								</span>
-								<p><b>Description</b> @coupon.description </p>
-								<p><b>Remark: </b> @coupon.remark </p>
-								</div>
-							</div><!--/product-information-->
+				
+					<div class="features_items"><!--features_items-->
+						<h2 class="title text-center">Coupon Update</h2>
+						<div class="col-sm-6 col-sm-offset-1">
+						
+						<h3>@coupon.name @message</h3>
+				
+					<div class="signup-form"><!--sign up form-->
+						<form action="@routes.CouponController.updateCoupon(coupon.id)" method ="POST" >
+							<input type="text" name="name" id="name" placeholder="Title" value=@coupon.name required/>
+							<input type="text" name="price" id="price" placeholder="Price" value=@coupon.price required/>
+							<input type="text" name="dateCreated" id="dateCreated" placeholder="Date of creation" value=@coupon.dateCreated required/>
+							<input type="text" name="dateExpire" id="dateExpire" placeholder="Date of expire" value=@coupon.dateExpire required/>
+							<input type="text" name="picture" id="picture" placeholder="URL of image" value="@coupon.picture" />
+							<input type="text" name="category" id="category" placeholder="Category" value=@coupon.category required/>
+							<textarea name="description" id="description" rows="6" placeholder="Description of Coupon" value="@coupon.description" required></textarea>	
+							<p></p>
+							<textarea name="remark" id="remark" rows="6" placeholder="Remark of Coupon" value=remark></textarea>
+							<button type="submit" class="btn btn-default">Update Coupon</button>
+								<p></p>
+									<p></p>
+										<p></p>
+											<p></p>
+						</form>
+					</div><!--/update Coupon form-->
+				
+				</div>
+			</div>
+		</div>
+	</section><!--/form-->
+							</div>
 						</div>
-					</div><!--/product-details-->
 					</div>
-						</div>
-						</body>
-					
-}
+	<p></p>
+										<p></p>
+											<p></p>
+	</body>
+		
+	
 
+	
+}
 

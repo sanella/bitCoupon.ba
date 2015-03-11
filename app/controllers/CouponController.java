@@ -7,13 +7,12 @@ import models.User;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.Loginpage;
-import views.html.coupontemplate;
-import views.html.userIndex;
+import views.html.*;
 
 public class CouponController extends Controller {
 
 	static Form<Coupon> couponForm = new Form<Coupon>(Coupon.class);
+	
 
 	/**
 	 * Shows view for adding coupon
@@ -105,4 +104,46 @@ public class CouponController extends Controller {
 		Coupon.delete(id);
 		return redirect("/");
 	}
+	
+	public static Result editCoupon(long id){
+	Coupon coupon=Coupon.find(id);
+		return ok(updateCouponView.render(coupon, null));
+	
+	}
+	
+	public static Result updateCoupon(long id){
+		Coupon coupon=Coupon.find(id);
+		
+		if (couponForm.hasErrors()) {
+			return redirect("/");
+		}
+
+		// TODO handle invalid inputs
+
+		coupon.name = couponForm.bindFromRequest().field("name").value();
+		if (coupon.name.length() < 4) {
+			return ok(updateCouponView.render(coupon, "Name must be minimal 4 characters"));		}
+
+		String strPrice = couponForm.bindFromRequest().field("price").value();
+		strPrice = strPrice.replace(",", ".");
+		try{
+			coupon.price = Double.valueOf(strPrice);
+		} catch (NumberFormatException e){
+			//TODO Logger(e);
+			return ok(updateCouponView.render(coupon, null));
+		}
+		coupon.dateCreated = couponForm.bindFromRequest().field("dateCreated").value();
+		coupon.dateExpire = couponForm.bindFromRequest().field("dateExpire").value();
+		coupon.picture = couponForm.bindFromRequest().field("picture").value();
+		coupon.category = couponForm.bindFromRequest().field("category").value();
+		coupon.description = couponForm.bindFromRequest().field("description").value();
+		coupon.remark = couponForm.bindFromRequest().field("remark").value();
+		Coupon.updateCoupon(coupon);
+
+
+		return ok(updateCouponView.render(coupon, "updated"));
+	
+		
+	}
 }
+
