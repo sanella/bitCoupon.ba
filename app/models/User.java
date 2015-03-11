@@ -168,7 +168,8 @@ public class User extends Model {
 
 	/* Delete user */
 	public static void deleteUser(String username) {
-		find(username).delete();	
+		User.findByUsername(username).delete();
+		
 	}
 	
 	
