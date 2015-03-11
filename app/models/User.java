@@ -168,7 +168,11 @@ public class User extends Model {
 
 	/* Delete user */
 	public static void deleteUser(String username) {
+		try{
 		User.findByUsername(username).delete();
+		} catch (NullPointerException e){
+			//TODO Logger.log(e) 
+		}
 		
 	}
 	
