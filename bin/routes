@@ -14,6 +14,8 @@ GET    /control-panel/user/:id     		  controllers.UserController.controlPanel(i
 GET	   /profile/@:username	   			  controllers.UserController.profilePage(username: String)
 POST   /updateUser					  	  controllers.UserController.updateUser(username: String)
 GET    /updateUser						  controllers.UserController.userUpdateView()
+GET	   /userPanel						  controllers.UserController.listUsers()
+GET	   /deletUser						  controllers.UserController.deleteUser(username: String)
 
 GET	   /couponPanel						  controllers.CouponController.couponControl()
 POST   /addCoupon      					  controllers.CouponController.addCoupon()

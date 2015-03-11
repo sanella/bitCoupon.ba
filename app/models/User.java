@@ -64,8 +64,9 @@ public class User extends Model {
 		return newUser.id;
 	}
 
-	public static List<User> all(String username) {
-		return find.where().eq("username", username).findList();
+	/* Return all users */
+	public static List<User> all() {
+		return find.all();
 	}
 
 	/**
@@ -160,8 +161,19 @@ public class User extends Model {
 		return find.where().eq("email", mail).findUnique() != null;
 	}
 	
+	/* dupla metoda, srediti ! */
 	public static User findByUsername(String username) {
 		return find.where().eq("username", username).findUnique();
+	}
+
+	/* Delete user */
+	public static void deleteUser(String username) {
+		try{
+		User.findByUsername(username).delete();
+		} catch (NullPointerException e){
+			//TODO Logger.log(e) 
+		}
+		
 	}
 	
 	
