@@ -115,12 +115,26 @@ public class UserController extends Controller {
 
 	public static Result profilePage(String username) {
 
-		User u = User.findByUsername(username);
+		User u = User.findByUsername(username); 
 		if (!u.username.equals(session("name"))) {
 			return redirect("/");
 		}
 
 		return ok(profile.render(u));
+
+	} 
+	
+	public static Result listUsers(){
+		
+		return ok( userList.render(session("name"),User.all()) );
+	}
+	
+	public static Result deleteUser(String username){
+		User currentUser = Sesija.getCurrentUser(ctx());
+		if (currentUser.username.equals(username)
+				|| Sesija.adminCheck(ctx()))
+			User.deleteUser(username);
+		return ok( userList.render(session("name"),User.all()) );
 
 	}
 
