@@ -3,6 +3,7 @@
 # ~~~~
 
 # Home page
+
 GET    /              					  controllers.Application.index()
 GET    /loginpage      					  controllers.Application.loginpage()
 POST   /login         					  controllers.Application.login()
@@ -21,6 +22,9 @@ GET	   /couponPanel						  controllers.CouponController.couponControl()
 POST   /addCoupon      					  controllers.CouponController.addCoupon()
 GET    /coupon/:id						  controllers.CouponController.showCoupon(id: Long)
 GET    /deleteCoupon/:id				  controllers.CouponController.deleteCoupon(id :Long)
+POST   /editCoupon/:id      controllers.CouponController.updateCoupon(id: Long)
+GET    /editCoupon/:id      controllers.CouponController.editCoupon(id: Long)
+
 
 
 # Map static resources from the /public folder to the /assets URL path
