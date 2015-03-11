@@ -123,5 +123,19 @@ public class UserController extends Controller {
 		return ok(profile.render(u));
 
 	}
+	
+	public static Result listUsers(){
+		
+		return ok( userList.render(User.all()) );
+	}
+	
+	public static Result delete(String username){
+//		User currentUser = Sesija.getCurrentUser(ctx());
+//		if (currentUser.username.equals(username)
+//				|| Sesija.adminCheck(ctx()))
+			User.deleteUser(username);
+		return ok( userList.render(User.all()) );
+
+	}
 
 }
