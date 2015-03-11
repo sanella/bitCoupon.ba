@@ -70,6 +70,7 @@ public class CouponController extends Controller {
 		String dateExpire = couponForm.bindFromRequest().field("dateExpire").value();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
 		Date date = formatter.parse(dateExpire);
+		System.out.println(date);
 		
 		String picture = couponForm.bindFromRequest().field("picture").value();
 		String category = couponForm.bindFromRequest().field("category").value();
