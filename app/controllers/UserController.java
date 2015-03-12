@@ -155,11 +155,10 @@ public class UserController extends Controller {
 		return ok( userList.render(session("name"),User.all()) );
 	}
 	
-	public static Result deleteUser(String username){
+	public static Result deleteUser(Long id){
 		User currentUser = Sesija.getCurrentUser(ctx());
-		if (currentUser.username.equals(username)
-				|| Sesija.adminCheck(ctx()))
-			User.deleteUser(username);
+		if (currentUser.id == id || Sesija.adminCheck(ctx()))
+			User.delete(id);
 		return ok( userList.render(session("name"),User.all()) );
 
 	}
