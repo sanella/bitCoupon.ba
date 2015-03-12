@@ -45,7 +45,7 @@ public class CouponController extends Controller {
 
 		String name = couponForm.bindFromRequest().field("name").value();
 		if (name.length() < 4) {
-			return ok(couponPanel.render(session("name"), null));
+			return ok(couponPanel.render(session("name"), "Name must be 4 characters long"));
 
 		}
 		
@@ -63,11 +63,7 @@ public class CouponController extends Controller {
 			return ok(couponPanel.render(session("name"), "Enter a valid price"));
 		}
 		
-		/* Parsing date */
-		String dateExpire = couponForm.bindFromRequest().field("dateExpire").value();
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
-		Date date = formatter.parse(dateExpire);
-		
+		Date date = couponForm.bindFromRequest().get().dateExpire;		
 		String picture = couponForm.bindFromRequest().field("picture").value();
 		String category = couponForm.bindFromRequest().field("category").value();
 		String description = couponForm.bindFromRequest().field("description").value();
