@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.Date;
+
 import com.avaje.ebeaninternal.server.persist.BindValues.Value;
 
 import helpers.HashHelper;
@@ -120,7 +122,7 @@ public class UserController extends Controller {
 		cUser.email = email;
 		if (newPass != null) { cUser.password = HashHelper.createPassword(newPass); }
 	    cUser.isAdmin = Boolean.parseBoolean(admin);
-	    
+	    cUser.updated = new Date();
 		cUser.save();
 		return ok(adminEditUser.render(cUser, "Update successful!"));
 	}
