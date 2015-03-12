@@ -1,3 +1,5 @@
+import java.util.Date;
+
 import helpers.HashHelper;
 import models.Coupon;
 import models.User;
@@ -93,13 +95,13 @@ public class IntegrationTest {
 				HTMLUNIT, new Callback<TestBrowser>() {
 					public void invoke(TestBrowser browser) {
 
-						Coupon.createCoupon("TestCoupon", 55, "11.11.1111",
-								"11.11.2222", "url", "category", "description",
+						Coupon.createCoupon("TestCoupon", 55.4, 
+								new Date(), "url", "category", "description",
 								"remark");
 						browser.goTo("http://localhost:3333/");
 						assertThat(browser.pageSource()).contains("TestCoupon");
 						assertThat(browser.pageSource()).contains(
-								"Only 55.0 KM");
+								"Only 55.4 KM");
 
 					}
 				});
@@ -133,8 +135,7 @@ public class IntegrationTest {
 				HTMLUNIT, new Callback<TestBrowser>() {
 					public void invoke(TestBrowser browser) {
 
-						long couponId = Coupon.createCoupon("TestCoupon", 55,
-								"11.11.1111", "11.11.2222", "url", "category",
+						long couponId = Coupon.createCoupon("TestCoupon", 55.8, new Date(), "url", "category",
 								"description", "remark");
 						Coupon.delete(couponId);
 						browser.goTo("http://localhost:3333/coupon/" + couponId);

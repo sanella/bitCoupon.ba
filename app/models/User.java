@@ -2,7 +2,9 @@ package models;
 
 import helpers.HashHelper;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Stack;
 
 import javax.persistence.*;
 
@@ -34,6 +36,10 @@ public class User extends Model {
 	public String password;
 
 	public boolean isAdmin;
+	
+	public Date created;
+	
+	public Date updated;
 
 	static Finder<Long, User> find = new Finder<Long, User>(Long.class,
 			User.class);
@@ -43,6 +49,7 @@ public class User extends Model {
 		this.username = username;
 		this.email = email;
 		this.password = password;
+		this.created = new Date();
 		this.isAdmin = isAdmin;
 	}
 
@@ -160,23 +167,6 @@ public class User extends Model {
 	public static boolean check(String mail) {
 		return find.where().eq("email", mail).findUnique() != null;
 	}
-	
-	/* dupla metoda, srediti ! */
-	public static User findByUsername(String username) {
-		return find.where().eq("username", username).findUnique();
-	}
-
-	/* Delete user */
-	public static void deleteUser(String username) {
-		try{
-		User.findByUsername(username).delete();
-		} catch (NullPointerException e){
-			//TODO Logger.log(e) 
-		}
 		
-	}
 	
-	
-
-	
-}
+}//end of class User
