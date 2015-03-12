@@ -21,7 +21,7 @@ GET	   /deletUser						  controllers.UserController.deleteUser(id: Long)
 GET	   /@editUser/:id					  controllers.UserController.adminEditUserView(id: Long)
 POST   /@updateUser/:id					  controllers.UserController.adminUpdateUser(id: Long)
 
-GET	   /couponPanel						  controllers.CouponController.couponControl()
+GET	   /couponPanel						  controllers.CouponController.addCouponView()
 POST   /addCoupon      					  controllers.CouponController.addCoupon()
 GET    /coupon/:id						  controllers.CouponController.showCoupon(id: Long)
 GET    /deleteCoupon/:id				  controllers.CouponController.deleteCoupon(id :Long)
