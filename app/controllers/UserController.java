@@ -120,7 +120,7 @@ public class UserController extends Controller {
 		User cUser = User.find(id);
 		cUser.username = username;
 		cUser.email = email;
-		if (newPass != null) { cUser.password = HashHelper.createPassword(newPass); }
+		if (newPass.length() > 0) { cUser.password = HashHelper.createPassword(newPass); }
 	    cUser.isAdmin = Boolean.parseBoolean(admin);
 	    cUser.updated = new Date();
 		cUser.save();
