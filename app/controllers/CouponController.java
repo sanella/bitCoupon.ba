@@ -12,32 +12,25 @@ import play.mvc.Result;
 import views.html.*;
 
 public class CouponController extends Controller {
-
+	
+	
 	static Form<Coupon> couponForm = new Form<Coupon>(Coupon.class);
+		
 	
-
-	
-	
-//	/**
-//	 * Shows view for adding coupon
-//	 * 
-//	 * @return redirect to create coupon view
-//	 */
-//	public static Result createCouponView() {
-//		// TODO
-//		return redirect("/");// todo//ok(adminPanel.render("Create your coupon",
-//								// couponForm));
-//	}
-	
-	
-	public static Result couponControl(){
+	/**
+	 * 
+	 * @return renders the view for coupon add form
+	 */
+	public static Result addCouponView(){
 		
 		return ok(couponPanel.render(session("name"), null));
 	}
+	
 
 	/**
-	 * First check if coupon form have errors. If have, return us to create
-	 * coupon view, else creates new coupon.
+	 * First checks if the coupon form has errors.
+	 * Creates a new coupon ot renders the view again if any error
+	 * occurs.
 	 * 
 	 * @return redirect to create coupon view
 	 * @throws ParseException 
@@ -45,7 +38,7 @@ public class CouponController extends Controller {
 	public static Result addCoupon() throws ParseException {
 
 		if (couponForm.hasErrors()) {
-			return redirect("/");// todo
+			return redirect("/couponPanel");
 		}
 
 		// TODO handle invalid inputs
@@ -56,27 +49,32 @@ public class CouponController extends Controller {
 
 		}
 		
+		/* Taking the price value from the string and checking if it's valid*/
 		double price;
-		String strPrice = couponForm.bindFromRequest().field("price").value();
-		strPrice = strPrice.replace(",", ".");
+		String stringPrice = couponForm.bindFromRequest().field("price").value();
+		stringPrice = stringPrice.replace(",", ".");
 		try{
-			price = Double.valueOf(strPrice);
+			price = Double.valueOf(stringPrice);
+			if ( price <= 0){
+				return ok(couponPanel.render(session("name"), "Enter a valid price"));
+			}
 		} catch (NumberFormatException e){
 			//TODO Logger(e);
 			return ok(couponPanel.render(session("name"), "Enter a valid price"));
 		}
 		
-		
+		/* Parsing date */
 		String dateExpire = couponForm.bindFromRequest().field("dateExpire").value();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
 		Date date = formatter.parse(dateExpire);
-		System.out.println(date);
 		
 		String picture = couponForm.bindFromRequest().field("picture").value();
 		String category = couponForm.bindFromRequest().field("category").value();
 		String description = couponForm.bindFromRequest().field("description").value();
 		String remark = couponForm.bindFromRequest().field("remark").value();
-		long couponID = Coupon.createCoupon(name, price, date, picture, category,
+		
+		/* Creating the new coupon */
+		Coupon.createCoupon(name, price, date, picture, category,
 				description, remark);
 
 
@@ -84,19 +82,7 @@ public class CouponController extends Controller {
 				+ "\" added"));
 	}
 
-	/**
-	 * Finds certain coupon
-	 * 
-	 * @return
-	 */
-	public static Result find() {
-		return TODO;
-	}
-
-	public static Result viewCoupon(int id) {
-		Coupon coupon = Coupon.find(id);
-		return redirect("/");// todo//ok(viewCoupon.render(coupon, couponForm));
-	}
+		
 
 	/**
 	 * Finds coupon using id and shows it
@@ -111,23 +97,40 @@ public class CouponController extends Controller {
 
 	/**
 	 * Delete coupon using id
-	 * @param id - Coupon id
-	 * @return redirect to the view of all existing coupons
+	 * @param id - Coupon id (long)
+	 * @return redirect to index after delete
 	 */
 	public static Result deleteCoupon(long id) {
 		Coupon.delete(id);
 		return redirect("/");
 	}
 	
+	
+	/**
+	 * Renders the view of a coupon.
+	 * Method receives the id of the coupon and finds 
+	 * the coupon by id and send's the coupon to the view.
+	 * @param id long
+	 * @return Result render couponView
+	 */
 	public static Result editCoupon(long id){
-	Coupon coupon=Coupon.find(id);
+		Coupon coupon=Coupon.find(id);
 		return ok(updateCouponView.render(coupon, null));
 	
 	}
 	
+	/**
+	 * Update coupon 
+	 * Method receives an id, finds the specific coupon and
+	 * renders the update View for the coupon.
+	 * If any error occurs, the view is rendered repeatedly.
+	 * 
+	 * @param id long
+	 * @return Result render the coupon update view
+	 */
 	public static Result updateCoupon(long id){
-		Coupon coupon=Coupon.find(id);
 		
+		Coupon coupon=Coupon.find(id);	
 		if (couponForm.hasErrors()) {
 			return redirect("/");
 		}
@@ -146,8 +149,7 @@ public class CouponController extends Controller {
 			//TODO Logger(e);
 			return ok(updateCouponView.render(coupon, null));
 		}
-	//	coupon.dateCreated = couponForm.bindFromRequest().field("dateCreated").value();
-	//	coupon.dateExpire = couponForm.bindFromRequest().field("dateExpire").value();
+		coupon.dateExpire = couponForm.bindFromRequest().get().dateExpire;
 		coupon.picture = couponForm.bindFromRequest().field("picture").value();
 		coupon.category = couponForm.bindFromRequest().field("category").value();
 		coupon.description = couponForm.bindFromRequest().field("description").value();
