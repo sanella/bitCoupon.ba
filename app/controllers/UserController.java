@@ -14,6 +14,7 @@ import models.*;
 
 public class UserController extends Controller {
 
+	/* TODO move all messages to conf */
 	static String message = "Welcome ";
 	static String bitName = "bitCoupon";
 	static String name = null;
@@ -28,12 +29,17 @@ public class UserController extends Controller {
 	}
 
 	/**
-	 * Pulls the input form from the three registration fields and creates a new
+	 * Pulls the input form from the registration form fields and creates a new
 	 * user in the Database.
 	 * 
-	 * @return redirects to the index page with welcome.
+	 * @return redirects to the index page with welcome,
+	 * or renders the page repeatedly if any error occurs
 	 */
 	public static Result register() {
+		
+		if (userForm.hasErrors()) {
+			return redirect("/signup ");
+		}
 
 		String username = userForm.bindFromRequest().get().username;
 		String mail = userForm.bindFromRequest().get().email;
@@ -56,11 +62,11 @@ public class UserController extends Controller {
 			return ok(signup.render("Passwords don't match, try again ",
 					username, mail));
 		}
+		
 		/*
 		 * Creating new user if the username or mail is free for use, and there
 		 * are no errors
 		 */
-
 		else if (User.verifyRegistration(username, mail) == true) {
 			session().clear();
 			session("name", username);
@@ -75,20 +81,40 @@ public class UserController extends Controller {
 		}
 
 	}
+	
+	/**
+	 * Method sends the current user to the userUpdate() method
+	 * @return Renders the user update view for editing profile
+	 */
+	public static Result userUpdateView() {
+		User u = User.find(session("name"));
+		return ok(userUpdate.render(u, "Update account"));
+	}
 
+	/**
+	 * Update user by getting the values from the form in the
+	 * userUpdate view. This method is for every user that is editing
+	 * his/her own profile.
+	 * 
+	 * @param useName received from the userUpdateView() method
+	 * @return Result renders the update view with info messages
+	 * according to update success or fail
+	 */
 	public static Result updateUser(String useName) {
 
+		if (userForm.hasErrors()) {
+			return redirect("/updateUser ");
+		}
+		
 		String username = userForm.bindFromRequest().field("username").value();
 		String email = userForm.bindFromRequest().field("email").value();
 		String oldPass = userForm.bindFromRequest().field("password").value();
-		String newPass = userForm.bindFromRequest().field("newPassword")
-				.value();
-		// String admin = userForm.bindFromRequest().field("isAdmin").value();
+		String newPass = userForm.bindFromRequest().field("newPassword").value();
 
 		User cUser = User.find(useName);
 		cUser.username = username;
 		cUser.email = email;
-		// cUser.isAdmin = Boolean.parseBoolean(admin);
+
 		if (HashHelper.checkPass(oldPass, cUser.password) == true) {
 			cUser.password = HashHelper.createPassword(newPass);
 			cUser.save();
@@ -98,19 +124,29 @@ public class UserController extends Controller {
 		}
 
 	}
-
-	public static Result userUpdateView() {
-		User u = User.find(session("name"));
-		return ok(userUpdate.render(u, "Update account"));
-	}
 	
+	/**
+	 * Receives a user id, initializes the user, and renders the adminEditUser
+	 * passing the user to the view
+	 * @param id of the User (long)
+	 * @return Result render adminEditUser
+	 */
 	public static Result adminEditUserView(long id){
 		User u = User.find(id);
 		return ok(adminEditUser.render(u, "Update user"));
 	}
 	
+	/**
+	 * Updates the user from the Admin control.
+	 * @param id of the user to update
+	 * @return Result render the vies
+	 */
 	public static Result adminUpdateUser(long id){
 		
+		if (userForm.hasErrors()) {
+			return redirect("/@editUser/:"+id); //provjeriti
+		}
+
 		String username = userForm.bindFromRequest().field("username").value();
 		String email = userForm.bindFromRequest().field("email").value();
 		String newPass = userForm.bindFromRequest().field("newPassword")
@@ -120,6 +156,7 @@ public class UserController extends Controller {
 		User cUser = User.find(id);
 		cUser.username = username;
 		cUser.email = email;
+		/* if admin doesn't explicitly change the users password, it stays intact */
 		if (newPass.length() > 0) { cUser.password = HashHelper.createPassword(newPass); }
 	    cUser.isAdmin = Boolean.parseBoolean(admin);
 	    cUser.updated = new Date();
@@ -127,7 +164,11 @@ public class UserController extends Controller {
 		return ok(adminEditUser.render(cUser, "Update successful!"));
 	}
 	
-
+	/*
+	 * 
+	 * 
+	 * 
+	 */
 	public static Result controlPanel(long id) {
 
 		User u = User.find(id);
@@ -139,22 +180,38 @@ public class UserController extends Controller {
 
 	}
 
+	/**
+	 * Renders the profile page view
+	 * @param username
+	 * @return Result
+	 */
 	public static Result profilePage(String username) {
-
 		User u = User.find(username); 
 		if (!u.username.equals(session("name"))) {
 			return redirect("/");
 		}
 
 		return ok(profile.render(u));
-
 	} 
 	
+	/**
+	 * Renders the user list view.
+	 * Lists all user from the database
+	 *
+	 * @return Result
+	 */
 	public static Result listUsers(){
 		
 		return ok( userList.render(session("name"),User.all()) );
 	}
 	
+	/**
+	 * Delete user by id.
+	 * Delete is possible only for own deletion, or if it's
+	 * done by Admin. 
+	 * @param id Long
+	 * @return Result renders the same view
+	 */
 	public static Result deleteUser(Long id){
 		User currentUser = Sesija.getCurrentUser(ctx());
 		if (currentUser.id == id || Sesija.adminCheck(ctx()))
