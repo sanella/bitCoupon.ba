@@ -166,16 +166,6 @@ public class User extends Model {
 		return find.where().eq("username", username).findUnique();
 	}
 
-	/* Delete user */
-	public static void deleteUser(String username) {
-		try{
-		User.findByUsername(username).delete();
-		} catch (NullPointerException e){
-			//TODO Logger.log(e) 
-		}
-		
-	}
-	
 	
 
 	
