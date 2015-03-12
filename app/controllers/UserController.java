@@ -141,7 +141,7 @@ public class UserController extends Controller {
 
 	public static Result profilePage(String username) {
 
-		User u = User.findByUsername(username); 
+		User u = User.find(username); 
 		if (!u.username.equals(session("name"))) {
 			return redirect("/");
 		}

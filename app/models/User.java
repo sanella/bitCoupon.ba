@@ -167,11 +167,6 @@ public class User extends Model {
 	public static boolean check(String mail) {
 		return find.where().eq("email", mail).findUnique() != null;
 	}
-	
-	/* dupla metoda, srediti ! */
-	public static User findByUsername(String username) {
-		return find.where().eq("username", username).findUnique();
-	}
-	
+		
 	
 }//end of class User
