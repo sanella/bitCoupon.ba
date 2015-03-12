@@ -1,0 +1,1146 @@
+[33mcommit a70294f7d06eab536f1500f9f233d9dfde50929f[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Wed Mar 11 16:58:37 2015 +0100
+
+    fix updateCoupon date set
+
+[33mcommit 65ed77aa3b2735bbd239ac050509ed369777032b[m
+Author: selmatab <selma_st@live.com>
+Date:   Wed Mar 11 16:33:02 2015 +0100
+
+    coupon update coupon update description added
+
+[33mcommit 8e1a11a855d6bfafd81559fae3b69b216dd45b07[m
+Merge: 5118637 54f9ec4
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Wed Mar 11 16:16:32 2015 +0100
+
+    conflict solve
+
+[33mcommit 511863743515a36be69f7bc240bbfb2a1f8747eb[m
+Merge: 980c71e 526a170
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Wed Mar 11 16:05:13 2015 +0100
+
+    Merge branch 'develop' of github.com:Jesenko88/bitCoupon.ba into develop
+
+[33mcommit 54f9ec452b6475da93c645cf2998ed54fed78cd9[m
+Author: selmatab <selma_st@live.com>
+Date:   Wed Mar 11 16:00:16 2015 +0100
+
+    added coupon update
+
+[33mcommit 526a1701e448264f3e78331bdf5531ff7e178cad[m
+Merge: 785fcc4 ee9fae6
+Author: Edib Imamovic <edib.imamovic@gmail.com>
+Date:   Wed Mar 11 14:57:38 2015 +0100
+
+    Merge pull request #34 from Jesenko88/listAndDelete
+    
+    List and delete
+
+[33mcommit ee9fae67cd75c41c5e30f4d8477f279013493d15[m
+Author: edibi <edibimamovic@BitCamps-Mac-mini-31.local>
+Date:   Wed Mar 11 14:56:33 2015 +0100
+
+    add html view for userList control
+
+[33mcommit 980c71ed2f22fb817d273c2bf2d6f017ee5a7b80[m
+Merge: 7726ca7 785fcc4
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Wed Mar 11 11:29:03 2015 +0100
+
+    Merge branch 'develop' of github.com:Jesenko88/bitCoupon.ba into develop
+
+[33mcommit e3e9bcc08d22b7502292fca63242ef7353085517[m
+Author: edibi <edibimamovic@BitCamps-Mac-mini-31.local>
+Date:   Wed Mar 11 11:26:28 2015 +0100
+
+    handle null pointer exception
+
+[33mcommit 14937fda3a49730e1b7f745ea16672fef68e6200[m
+Author: edibi <edibimamovic@BitCamps-Mac-mini-31.local>
+Date:   Wed Mar 11 11:16:39 2015 +0100
+
+    delete user works, still in progress
+
+[33mcommit abd6f29e43f2e8e3a0179730860d80c4bd8196a6[m
+Author: edibi <edibimamovic@BitCamps-Mac-mini-31.local>
+Date:   Wed Mar 11 10:39:18 2015 +0100
+
+    list users progress
+
+[33mcommit 785fcc4f272f35c486f9c381fa8a01d5ca257784[m
+Author: Emir Imamovic <emir92@outlook.com>
+Date:   Wed Mar 11 00:33:05 2015 +0100
+
+    add avatar picture
+
+[33mcommit 7726ca7654a9d17ef575a9290c1ea48eccbddc30[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Tue Mar 10 23:51:25 2015 +0100
+
+    build
+
+[33mcommit ef628032da2223a5bdb2e03ee3c393066355f656[m
+Merge: a47f837 962c5f5
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Tue Mar 10 23:43:04 2015 +0100
+
+    Merge pull request #32 from Jesenko88/updateUser
+    
+    Update user
+
+[33mcommit 962c5f5b4f46bf9aae754388d2fe74e3bf8beb9a[m
+Merge: f349016 a47f837
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Tue Mar 10 23:39:15 2015 +0100
+
+    build conflict
+
+[33mcommit f3490162ab32ef93485a77e4be1bafbbdcd78f35[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Tue Mar 10 23:33:02 2015 +0100
+
+    update user account, username, mail, pass
+
+[33mcommit a47f83778e12af2e9fd01114e735ee091eaf76cc[m
+Author: Emir Imamovic <emir92@outlook.com>
+Date:   Tue Mar 10 23:31:28 2015 +0100
+
+    fixed warning window for coupon deletion
+
+[33mcommit 72a4c9c57bc2a8d1c7012e72b230e2ac4dbf0d95[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Tue Mar 10 22:16:12 2015 +0100
+
+    changed session to use username instead of email, add profile page,control panel, reorganize views and redirections
+
+[33mcommit 92e1a607fbb5dcb849f99518391f8da43f16c41e[m
+Merge: c4bdb52 54007b8
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Tue Mar 10 20:36:54 2015 +0100
+
+    resolve conflict
+
+[33mcommit 54007b83ee323cd30b7e17410388b81640a316b1[m
+Merge: a05a10c b64c6a1
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Tue Mar 10 17:51:44 2015 +0100
+
+    Merge pull request #31 from Jesenko88/date
+    
+    Date
+
+[33mcommit b64c6a1a989c7ebd13248678f7b35cc93bfe0639[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Tue Mar 10 17:50:52 2015 +0100
+
+    set global
+
+[33mcommit 3f11f7f50ee0c3b1a5b079ccd5b3c0f8dc4e2b97[m
+Merge: 51db2f5 d9f77e2
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Tue Mar 10 17:44:06 2015 +0100
+
+    conflict
+
+[33mcommit 51db2f5ffe9581aa0ff3ea77a40aa0df312d3601[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Tue Mar 10 17:42:40 2015 +0100
+
+    build
+
+[33mcommit d9f77e2fd23232aad012e6efcbea06f060f7efbd[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Tue Mar 10 17:38:28 2015 +0100
+
+    build
+
+[33mcommit cdf199e860af0f09389886ecf139d086b4da29a0[m
+Author: Uqluiorrae <hariskrkalic@gmail.com>
+Date:   Tue Mar 10 17:15:55 2015 +0100
+
+    changed creation date and expiration date input format
+
+[33mcommit a05a10cfa470c2cb0f4043d630e6a532903e931b[m
+Author: emir-imamovic <emir92@outlook.com>
+Date:   Tue Mar 10 17:03:02 2015 +0100
+
+    added warning window for coupon deletion
+
+[33mcommit c4bdb52ea29537637bb672d5bef85e18ab0ba381[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Mon Mar 9 17:32:28 2015 +0100
+
+    add profile page and make redirections
+
+[33mcommit b43688f74b62b31780b0ab375503c7a08c076a57[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Sun Mar 8 20:18:19 2015 +0100
+
+    edit user/my data
+
+[33mcommit 1ba15270dc10ecd969c07c90e26459c5fa4dac03[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Sun Mar 8 17:59:34 2015 +0100
+
+    link to userIndex from couponTemplate
+
+[33mcommit 37dbbbecbebf02017d301fb29b3fd36c87f262dc[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Sun Mar 8 17:56:21 2015 +0100
+
+    change couponTemplate to receive object User, insted of user name as String
+
+[33mcommit 7778ff99023bcd9143810f8e9135e933f02fe384[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Sun Mar 8 17:36:03 2015 +0100
+
+    resolve conflict
+
+[33mcommit cd634e004f03171c2d4323eb6414601595677572[m
+Merge: 73b446e ae42d99
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Sun Mar 8 17:31:57 2015 +0100
+
+    merge conflict
+
+[33mcommit ae42d9960c75c4530afdf25e0a10653ff6cc6624[m
+Author: Emir Imamovic <emir92@outlook.com>
+Date:   Sun Mar 8 17:09:31 2015 +0100
+
+    added delete coupon functionality, integration tests for coupon deletion
+
+[33mcommit 73b446e5623fcf29cf0eb767f2772992baa2dcf7[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Sun Mar 8 16:29:31 2015 +0100
+
+    fix bind from request for picture to read from (picture) instead from price field
+
+[33mcommit 76e33b777e2293f7b590c25549692a63a7f7d727[m
+Merge: 76b47cc 4b8cc47
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Sun Mar 8 16:07:30 2015 +0100
+
+    cache
+
+[33mcommit 76b47cc887feea689affeea8051121f3925df367[m
+Merge: 5f64c99 31c6bf5
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Sun Mar 8 16:03:36 2015 +0100
+
+    Merge branch 'develop' of github.com:Jesenko88/bitCoupon.ba into develop
+
+[33mcommit b95ababe0a338c3322185488f8e83c896b139517[m
+Author: Emir Imamovic <emir92@outlook.com>
+Date:   Sat Mar 7 22:24:41 2015 +0100
+
+    integration tests for coupon deletion added and some method comments added
+
+[33mcommit 6b9b8667f77bc40b5582df947f7f1d4746c110bb[m
+Author: Emir Imamovic <emir92@outlook.com>
+Date:   Sat Mar 7 17:36:52 2015 +0100
+
+    optimized method deleteCoupon
+
+[33mcommit abd453d576777fe6b3f4dda7e23645faef0af30b[m
+Author: Emir Imamovic <emir92@outlook.com>
+Date:   Sat Mar 7 12:30:36 2015 +0100
+
+    add functionality for button deleteCoupon
+
+[33mcommit b872a35bd6b206de9a262e870be2a5d9baac4bc4[m
+Author: Emir Imamovic <emir92@outlook.com>
+Date:   Sat Mar 7 10:44:01 2015 +0100
+
+    nothing to commit
+
+[33mcommit 31c6bf55f2319c50bd3429784775e54f6c8174fa[m
+Author: emir-imamovic <emir92@outlook.com>
+Date:   Fri Mar 6 19:43:35 2015 +0100
+
+    test coupon delete, and delete existing test
+
+[33mcommit 4b8cc478156730d7375434c4075fdc8507b09fd2[m
+Author: selmatab <selma_st@live.com>
+Date:   Fri Mar 6 19:26:54 2015 +0100
+
+    Price format changed
+
+[33mcommit 5f64c9945d50a592a6367f76b8ac525f53f3347c[m
+Merge: 2b1ace9 8dbb096
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Fri Mar 6 19:20:29 2015 +0100
+
+    Merge pull request #26 from Jesenko88/develop
+    
+    Develop
+
+[33mcommit 8dbb09681ee7ec01843aee7c9af7462f4a9532d2[m
+Merge: dfe9bd7 42ab57a
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Fri Mar 6 19:16:37 2015 +0100
+
+    merge deleteCoupon to develop
+
+[33mcommit 42ab57afea594701db5194c6ae7d657c25652f39[m
+Author: emir-imamovic <emir92@outlook.com>
+Date:   Fri Mar 6 18:52:20 2015 +0100
+
+    set admin/user dependencies for coupon buy/delete
+
+[33mcommit 2b1ace90d1e64846a646e551be52025e4ae9501c[m
+Merge: 590592d 39519c9
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Fri Mar 6 18:39:02 2015 +0100
+
+    Merge pull request #25 from Jesenko88/develop
+    
+    Develop
+
+[33mcommit dfe9bd7493bb7334f1efeac5d36fbfa3a5fa45ae[m
+Merge: 5784443 39519c9
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Fri Mar 6 18:36:32 2015 +0100
+
+    Merge branch 'develop' of github.com:Jesenko88/bitCoupon.ba into develop
+
+[33mcommit 578444325cdded335f7ceebf06e3e54021db23fc[m
+Merge: 9e7b1a5 cc3a679
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Fri Mar 6 18:36:17 2015 +0100
+
+    Merge branch 'priceInput' into develop
+
+[33mcommit 39519c96160c9619799951c279090aceaff39cea[m
+Merge: 9e7b1a5 cc3a679
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Fri Mar 6 18:35:45 2015 +0100
+
+    Merge pull request #24 from Jesenko88/priceInput
+    
+    hadle price input if comma instead of dot
+
+[33mcommit cc3a679615842e3291dfc639c462687ed6f15979[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Fri Mar 6 18:35:08 2015 +0100
+
+    hadle price input if comma instead of dot
+
+[33mcommit 9e7b1a5ff602818f18c23ddb4a3c78b8a3febf66[m
+Merge: a987fb5 1db45bb
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Fri Mar 6 17:17:02 2015 +0100
+
+    Merge pull request #23 from Jesenko88/priceInput
+    
+    handle price input if character
+
+[33mcommit 1db45bb83aadc2cdf7fbc106219057a3e7b344d1[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Fri Mar 6 17:16:06 2015 +0100
+
+    handle price input if character
+
+[33mcommit a987fb51900a6a6659cf4c7b9f46831aeaf334fa[m
+Author: emir-imamovic <emir92@outlook.com>
+Date:   Fri Mar 6 16:22:44 2015 +0100
+
+    set default coupon picture
+
+[33mcommit 590592d069a85201b21b507859b95e09ac6996cd[m
+Merge: 7b5c9c2 f1abe67
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Fri Mar 6 12:45:21 2015 +0100
+
+    Merge pull request #22 from Jesenko88/develop
+    
+    fix min length input in coupon name field
+
+[33mcommit f1abe67f506d4d9a719fa4038bd119c1890812a3[m
+Author: Jesenko88 <jeshko2√hotmail.com>
+Date:   Fri Mar 6 12:44:50 2015 +0100
+
+    fix min length input in coupon name field
+
+[33mcommit 7b5c9c2fa35e09bee96b186fe9f8c0f282e08876[m
+Merge: 7bb52ce cac2570
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Fri Mar 6 12:19:52 2015 +0100
+
+    Merge pull request #21 from Jesenko88/develop
+    
+    Develop
+
+[33mcommit cac257070e95fb30054de8fefff5bbb3d12c5cf6[m
+Author: Jesenko88 <jeshko2√hotmail.com>
+Date:   Fri Mar 6 12:15:00 2015 +0100
+
+    build
+
+[33mcommit f1a4d21a24adc5cad65eabe157a0e3ba241a1f32[m
+Author: Jesenko88 <jeshko2√hotmail.com>
+Date:   Fri Mar 6 12:14:50 2015 +0100
+
+    add required for all fields except field: remark
+
+[33mcommit 4fae09d33ba520f9bcb2e5b8838ff343d7755021[m
+Author: Jesenko88 <jeshko2√hotmail.com>
+Date:   Fri Mar 6 12:14:16 2015 +0100
+
+    test findNonExisting coupon
+
+[33mcommit 8651d78e188ce895285e73e7a4ea6bd2272dcd78[m
+Author: Jesenko88 <jeshko2√hotmail.com>
+Date:   Fri Mar 6 12:13:19 2015 +0100
+
+    add test if coupon is showed after creating
+
+[33mcommit bc099dc036e36bd8548ff030d95074e3be1f1e69[m
+Merge: 9bb0f9b 234f38e
+Author: Jesenko88 <jeshko2√hotmail.com>
+Date:   Fri Mar 6 11:52:28 2015 +0100
+
+    build conflict
+
+[33mcommit 234f38ec33bbde1191d6fb84bfc9968ce7f42a73[m
+Author: Jesenko88 <jeshko2√hotmail.com>
+Date:   Fri Mar 6 11:51:39 2015 +0100
+
+    cache
+
+[33mcommit 9bb0f9b363008e0e77169ea28278f50e46c830a5[m
+Author: Jesenko88 <jeshko2√hotmail.com>
+Date:   Fri Mar 6 11:47:39 2015 +0100
+
+    build
+
+[33mcommit 8857f9a1e041f3649ed2ceea07b9464db3fcc1b9[m
+Author: Jesenko88 <jeshko2√hotmail.com>
+Date:   Fri Mar 6 11:47:26 2015 +0100
+
+    exclude ie javascript because of play framework testing issues
+
+[33mcommit 7c8e91a7f1828e1747fb802dd54b5bfa63c9d2cc[m
+Author: Jesenko88 <jeshko2√hotmail.com>
+Date:   Fri Mar 6 11:46:33 2015 +0100
+
+    add test couponCreate
+
+[33mcommit 0cee40f6f5ac94e0f99d728b8b2df05c77c7ac8b[m
+Author: Jesenko88 <jeshko2√hotmail.com>
+Date:   Fri Mar 6 11:45:58 2015 +0100
+
+    refactor login test
+
+[33mcommit 4b8b09ec46e7ec5656ec91f94a515caadbc34982[m
+Author: Jesenko88 <jeshko2√hotmail.com>
+Date:   Fri Mar 6 11:45:20 2015 +0100
+
+    add check exist by name in User.class
+
+[33mcommit 732c37438c9bff2119d509554cc810a8c7de8809[m
+Author: Jesenko88 <jeshko2√hotmail.com>
+Date:   Fri Mar 6 11:44:26 2015 +0100
+
+    add check if exist by name
+
+[33mcommit aeeded089061f2fde5b712dd4adf3676e33f0898[m
+Author: Jesenko88 <jeshko2√hotmail.com>
+Date:   Fri Mar 6 11:43:43 2015 +0100
+
+    fix unwanted replication in global
+
+[33mcommit 0aa099a83ad3ca5138ad2a34af403f948b15bf3e[m
+Author: edibi <edibimamovic@BitCamps-Mac-mini-31.local>
+Date:   Fri Mar 6 11:34:20 2015 +0100
+
+    Redesign of index page, added opaque on rollover at coupon, at coupon template added container for image so image can be responsive.
+
+[33mcommit 7bb52ce45f1fb0a73995b8da513eeaacdfa5edf6[m
+Merge: 65fda6a f5c42c5
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Fri Mar 6 09:46:03 2015 +0100
+
+    Merge pull request #20 from Jesenko88/develop
+    
+    Develop
+
+[33mcommit f5c42c5e4a9e4572a9ec34a7e6b0591f711ad0ce[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Fri Mar 6 09:28:49 2015 +0100
+
+    set default coupons in global class
+
+[33mcommit cad9c6b4496039da0d41b47a39069e5098843d0b[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Fri Mar 6 07:44:46 2015 +0100
+
+    add required mark to name and price field in userIndex
+
+[33mcommit 995e48566b6768dd2ddc79ff963d2af3626dbab5[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Fri Mar 6 07:44:19 2015 +0100
+
+    chenge admin pass to bitadmin
+
+[33mcommit 1c46becd08f5857b777ccc9a9b6d4f256744bf4d[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Fri Mar 6 06:42:54 2015 +0100
+
+    build
+
+[33mcommit 65fda6a317883af511e5673c5a4277db0adf9dd4[m
+Merge: 43d77b3 1ad42f7
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Thu Mar 5 18:31:24 2015 +0100
+
+    Merge pull request #19 from Jesenko88/develop
+    
+    Develop
+
+[33mcommit 1ad42f7fed116bce6f8a26f0b81c02b853326513[m
+Merge: 00d8c30 fa98f36
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Thu Mar 5 18:25:32 2015 +0100
+
+    build conflict
+
+[33mcommit 00d8c30821d6db433eef3d2476e412d2ac8f29df[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Thu Mar 5 18:22:10 2015 +0100
+
+    build
+
+[33mcommit fa98f3652375fc5bde1dbf97869409f96e0b4c5b[m
+Author: Uqluiorrae <hariskrkalic@gmail.com>
+Date:   Thu Mar 5 18:13:10 2015 +0100
+
+    add admin rule and global admin in DB
+
+[33mcommit 8dc346592b54e0db7cdef72e6703ba897adc2efc[m
+Merge: 442d6e9 875e0c2
+Author: Uqluiorrae <hariskrkalic@gmail.com>
+Date:   Thu Mar 5 17:27:23 2015 +0100
+
+    resolve conflict
+
+[33mcommit 875e0c217157d84943ae000dc1e6f6a3eea022cd[m
+Author: Uqluiorrae <hariskrkalic@gmail.com>
+Date:   Thu Mar 5 17:12:39 2015 +0100
+
+    added some hotfixes
+
+[33mcommit 442d6e91373c6ae75eea79755f16c4e9de195163[m
+Author: edibi <edibimamovic@BitCamps-Mac-mini-31.local>
+Date:   Thu Mar 5 17:05:07 2015 +0100
+
+    correct redirections to userIndex page
+
+[33mcommit 1cca83e2c5728cc03f614a73f79b94874d6f1de2[m
+Author: Uqluiorrae <hariskrkalic@gmail.com>
+Date:   Thu Mar 5 14:56:21 2015 +0100
+
+    fix admin
+
+[33mcommit df4980a5e47da18ece5726d65bc2195bd207c16a[m
+Merge: 91df2a4 e9430e4
+Author: Uqluiorrae <hariskrkalic@gmail.com>
+Date:   Thu Mar 5 14:39:11 2015 +0100
+
+    resolve conflicts
+
+[33mcommit e9430e480454431a4ba7857937c5ed8c9199f733[m
+Author: Uqluiorrae <hariskrkalic@gmail.com>
+Date:   Thu Mar 5 14:27:12 2015 +0100
+
+    added admin/user and admin/user dependencies
+
+[33mcommit 43d77b3e67b15c05d26160e9beb17a45249d1b50[m
+Merge: 87d42b6 91df2a4
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Thu Mar 5 14:18:44 2015 +0100
+
+    Merge pull request #16 from Jesenko88/develop
+    
+    Develop
+
+[33mcommit 7f5cb80b03ef77e06677e9c8c2e265a97f5a183f[m
+Merge: 4f89102 91df2a4
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Thu Mar 5 14:13:21 2015 +0100
+
+    build
+
+[33mcommit 4f89102821a78d09f5bf3160a7fbb05637bb9c4a[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Thu Mar 5 14:11:49 2015 +0100
+
+    .cache
+
+[33mcommit 91df2a4d55d3370f6fcb8272a71e0ee431693338[m
+Merge: 812968c 75a1524
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Thu Mar 5 14:10:57 2015 +0100
+
+    Merge pull request #15 from Jesenko88/showCoupon
+    
+    Show coupon
+
+[33mcommit 75a15248a040bff394f9cc2d1b856ad5f8905295[m
+Author: emir-imamovic <emir92@outlook.com>
+Date:   Thu Mar 5 13:51:55 2015 +0100
+
+    add view of certain coupon
+
+[33mcommit 9affa20ab367c04c5cf34252cd3cb23be9bc4c6c[m
+Author: emir-imamovic <emir92@outlook.com>
+Date:   Thu Mar 5 13:05:29 2015 +0100
+
+    build
+
+[33mcommit 812968c09e02a0a306ca45a4d5efdeb479c3e6dd[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Thu Mar 5 12:25:37 2015 +0100
+
+    security correction
+
+[33mcommit 87d42b61784371025275c5e1f144b2d82b48efee[m
+Merge: ad8ce3b e84e8c1
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Thu Mar 5 11:21:21 2015 +0100
+
+    Merge pull request #13 from Jesenko88/develop
+    
+    Develop
+
+[33mcommit e84e8c1367797cbe3bb2baaec3c37ffcf493fef4[m
+Merge: f9cbe5e 37d4cbe
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Thu Mar 5 11:15:32 2015 +0100
+
+    Merge pull request #12 from Jesenko88/bind
+    
+    Bind
+
+[33mcommit 37d4cbe125eb23cb060819456e126b3f6828f9da[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Thu Mar 5 11:12:52 2015 +0100
+
+    add global class for coupoons seed on startup
+
+[33mcommit 33fb4698f2faf54bc2417f04ec35060ee1b5f0d4[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Thu Mar 5 10:48:05 2015 +0100
+
+    show coupons from the database n the index page
+
+[33mcommit e6984cb17731d7f15db17f8d5ff4ce0b4cf4b21a[m
+Author: Uqluiorrae <hariskrkalic@gmail.com>
+Date:   Thu Mar 5 10:03:21 2015 +0100
+
+    test
+
+[33mcommit af5dba88c1ae791f5b3ce04170b1a79f56d22da5[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Thu Mar 5 00:43:26 2015 +0100
+
+    reorgnize controllers, working on security holes
+
+[33mcommit 93e14588068eed810b4f909b3482bb31545a6172[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Wed Mar 4 22:39:23 2015 +0100
+
+    add coupon to database
+
+[33mcommit eb9b9a026a474159c9213986cf6c6661f469f949[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Wed Mar 4 20:53:55 2015 +0100
+
+    grammar correction
+
+[33mcommit f9cbe5ea41a29e9e9009f09e51ce6d843e0907f6[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Wed Mar 4 20:43:21 2015 +0100
+
+    simplified the password comfirmation and renamed route register to: signin
+
+[33mcommit df5c7e1dbf1eb2d9f293b69c0ec2653862c02bef[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Wed Mar 4 19:56:51 2015 +0100
+
+    build
+
+[33mcommit 10d415dd0a031fa46d4ae698594a7d4f067c6346[m
+Merge: ce14c16 f874ebe
+Author: emir-imamovic <emir92@outlook.com>
+Date:   Wed Mar 4 16:59:44 2015 +0100
+
+    Merge pull request #11 from Jesenko88/devController
+    
+    Dev controller
+
+[33mcommit 83b8392a2e9511443b973d07fd18a82703f9f7d9[m
+Author: Uqluiorrae <hariskrkalic@gmail.com>
+Date:   Wed Mar 4 16:57:18 2015 +0100
+
+    test
+
+[33mcommit f874ebe6aad9dc6625964aac524183c427d0319d[m
+Author: emir-imamovic <emir92@outlook.com>
+Date:   Wed Mar 4 16:52:08 2015 +0100
+
+    modified evolution
+
+[33mcommit dc337b267503e1096bae200c13a3f0631477ef23[m
+Merge: 0eaa062 11d79d0
+Author: emir-imamovic <emir92@outlook.com>
+Date:   Wed Mar 4 16:48:06 2015 +0100
+
+    conflict solve
+
+[33mcommit 11d79d0ef94ef25726dca2c6874cac6d5f8a2328[m
+Merge: 17493ec ce14c16
+Author: emir-imamovic <emir92@outlook.com>
+Date:   Wed Mar 4 16:42:00 2015 +0100
+
+    Merge branch 'develop' of github.com:Jesenko88/bitCoupon.ba into develop
+
+[33mcommit 0eaa0620fca53be4e8f077e404a0f58caee93d5d[m
+Author: emir-imamovic <emir92@outlook.com>
+Date:   Wed Mar 4 16:41:04 2015 +0100
+
+    couponController corrected
+
+[33mcommit 70c03c8713dee6e07b992c35aafb6e962e444f50[m
+Author: emir-imamovic <emir92@outlook.com>
+Date:   Wed Mar 4 16:33:36 2015 +0100
+
+    add CouponController class
+
+[33mcommit ce14c16c94683234bf6b32b014ff6d54be25d88a[m
+Merge: 7251db5 08c6635
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Wed Mar 4 16:24:37 2015 +0100
+
+    merge
+
+[33mcommit 7251db5173691dfdf65c4871ea6df5a404500f8a[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Wed Mar 4 16:21:25 2015 +0100
+
+    conflict handle
+
+[33mcommit 0f21e5b72b8aaccabbdfee1d99347c41f8bb2ab4[m
+Author: emir-imamovic <emir92@outlook.com>
+Date:   Wed Mar 4 16:17:50 2015 +0100
+
+    add CouponController class
+
+[33mcommit e10056bab87b10ace1c1a98c2509ad19e550dfcd[m
+Merge: 318a2c4 cb55699
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Wed Mar 4 16:14:54 2015 +0100
+
+    merge frontend2
+
+[33mcommit 318a2c4447238d0e28b1a4b93af042c0ab1f261f[m
+Merge: 2008f5a 5d2279e
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Wed Mar 4 16:09:02 2015 +0100
+
+    Merge pull request #9 from Jesenko88/devred
+    
+    correct user login and register redirection route
+
+[33mcommit ad8ce3b66806de0295497290ffe6a26606abd3e4[m
+Merge: 0dc9f02 5d2279e
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Wed Mar 4 16:07:51 2015 +0100
+
+    Merge pull request #8 from Jesenko88/devred
+    
+    Devred
+
+[33mcommit 5d2279e11dddbcb97ed37e9e335bf670b29417a7[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Wed Mar 4 16:02:25 2015 +0100
+
+    correct user login and register redirection route
+
+[33mcommit 08c66358d31f82d051250fb3fe21bb50cde9bce9[m
+Author: edibi <edibimamovic@BitCamps-Mac-mini-31.local>
+Date:   Wed Mar 4 15:41:28 2015 +0100
+
+    coupon template and some minor changes in design
+
+[33mcommit 2008f5ae7be89b08ed2ca87343867cd98a9331b8[m
+Merge: 957a914 16bcd13
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Wed Mar 4 15:07:52 2015 +0100
+
+    Merge pull request #7 from Jesenko88/tests
+    
+    continue tests from sprint 1
+
+[33mcommit 16bcd1331f7dc0bc884c932adace4a8cd21f1300[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Wed Mar 4 15:06:31 2015 +0100
+
+    continue tests from sprint 1
+
+[33mcommit 0e3dc53e82ccf92d8c144f9f0ef5e62b25bd8bc9[m
+Author: Uqluiorrae <hariskrkalic@gmail.com>
+Date:   Wed Mar 4 14:54:41 2015 +0100
+
+    tryout
+
+[33mcommit 957a914fb34c11ce338d2203bd4a953b98a71649[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Wed Mar 4 12:22:49 2015 +0100
+
+    remove error import
+
+[33mcommit ab88c467c0343eb38d009abcf24c26629d9a6d61[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Wed Mar 4 12:21:43 2015 +0100
+
+    build
+
+[33mcommit 17493ec2ffb225b4cb2b90eba3112b8d2d0f9fd6[m
+Author: emir-imamovic <emir92@outlook.com>
+Date:   Wed Mar 4 12:18:10 2015 +0100
+
+    remove inport
+
+[33mcommit 2fe605a7b8568c0c2752a8d9473f967a2c8d183f[m
+Merge: 24b2bee 634dc4e
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Wed Mar 4 11:35:22 2015 +0100
+
+    Merge pull request #6 from Jesenko88/devkupon
+    
+    Add Coupon Entity
+
+[33mcommit 634dc4e4d5532db30108fababc8660a11a6cbe31[m
+Author: selmatab <selma_st@live.com>
+Date:   Wed Mar 4 11:09:32 2015 +0100
+
+    Add Coupon Entity
+
+[33mcommit cb55699c97edca0b1dcfea4db99e4a44a95b5643[m
+Author: edibi <edib.imamovic@gmail.com>
+Date:   Tue Mar 3 23:40:35 2015 +0100
+
+    Put fields of registration and login to line and centered , added names for pages, fixed few bugs.
+
+[33mcommit 5a66ba6a0849ed2953069f70a1376e3d03965dee[m
+Author: edibi <edib.imamovic@gmail.com>
+Date:   Tue Mar 3 23:14:32 2015 +0100
+
+    Added user panel with fields for adding information about coupons
+
+[33mcommit 857afb87adc954a5ad20d48b739d2f7028e8754c[m
+Author: edibi <edib.imamovic@gmail.com>
+Date:   Tue Mar 3 22:02:01 2015 +0100
+
+    change i made in this commit: nav bar, added nav bar to login, registration and user panel (Loginpage.scala.html)
+
+[33mcommit 66288df3bf4b2e086bdfb628dfb6566f6c5f3a47[m
+Author: edibi <edib.imamovic@gmail.com>
+Date:   Tue Mar 3 21:08:53 2015 +0100
+
+    Added if statement for enable od disable button in case of login.
+     Changes to be committed:
+    	modified:   app/views/Loginpage.scala.html
+    	modified:   app/views/index.scala.html
+    	modified:   bin/views/Loginpage.scala.html
+    	modified:   bin/views/index.scala.html
+
+[33mcommit b8c8eda4d654168433880855fda8e6cb2e7f0228[m
+Author: edibi <edib.imamovic@gmail.com>
+Date:   Mon Mar 2 23:43:49 2015 +0100
+
+    Added modified index page with example coupons.
+
+[33mcommit 4df13daa59572883a021419420a33b37598cd79b[m
+Author: edibi <edib.imamovic@gmail.com>
+Date:   Mon Mar 2 17:34:35 2015 +0100
+
+    I put the link/script which enabled work on Internet Explorer
+
+[33mcommit 0dc9f02649783dda32487caf9ee9c4c03fed1f33[m
+Merge: 5699409 24b2bee
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Mon Mar 2 13:15:28 2015 +0100
+
+    Merge pull request #5 from Jesenko88/develop
+    
+    Develop
+
+[33mcommit 24b2beea6d5d4e71dcbd7d007d81dac7a7a64a28[m
+Merge: 8568742 12d917e
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Mon Mar 2 13:08:43 2015 +0100
+
+    .cache0
+
+[33mcommit 8568742c426aba7936aa9d4c0879ebf8742d3279[m
+Merge: 1697b67 2825511
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Mon Mar 2 11:43:55 2015 +0100
+
+    merge frontend
+
+[33mcommit 12d917ef15bca357891df82ff219b89f71fd551a[m
+Author: Ulquiorrae <hariskrkalic@gmail.com>
+Date:   Mon Mar 2 02:07:40 2015 +0100
+
+    added password confirmation and fixed some redirection bugs
+
+[33mcommit cc22be343f5be4799b04a4b0f4fdbe0c0566b60d[m
+Author: Ulquiorrae <hariskrkalic@gmail.com>
+Date:   Mon Mar 2 02:06:05 2015 +0100
+
+    dada
+
+[33mcommit 1697b670c868c9eb725d1b5ac61069b47285ebbf[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Sun Mar 1 14:31:40 2015 +0100
+
+    handel the null pointer, clean code
+
+[33mcommit a3792956730a29780588c0b69e242ee54381eb65[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Sun Mar 1 14:28:19 2015 +0100
+
+    handle the null pointer exception during login, and add some comments
+
+[33mcommit 2825511ee6fd8d75b02a55a135e8b1cc1731d5af[m
+Author: edibi <edib.imamovic@gmail.com>
+Date:   Sun Mar 1 13:22:18 2015 +0100
+
+    In this version I changed all the paths leading to the folders js and css , html is now implemented with play framework . I noted a couple of bugs that 'll put in during the day.
+    
+     Changes to be committed:
+    	modified:   .cache
+    	modified:   app/views/Loginpage.scala.html
+    	modified:   app/views/main.scala.html
+    	modified:   app/views/registration.scala.html
+    	modified:   bin/routes
+    	modified:   bin/views/Loginpage.scala.html
+    	modified:   bin/views/main.scala.html
+    	modified:   bin/views/registration.scala.html
+    	modified:   build.sbt
+    	modified:   conf/routes
+
+[33mcommit a264a96eb47d2a77f45e6ebf45f049f3b39bc9cc[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Sun Mar 1 12:26:10 2015 +0100
+
+    fix empty field bug in html
+
+[33mcommit fb152e0567638a4330d4cfde0dc7170a251da994[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Sun Mar 1 11:50:49 2015 +0100
+
+    fix bug empty field and min-length during user registration
+
+[33mcommit 37d90e354fb2f0c76cacd9cb92ad1101dee8685a[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Sat Feb 28 14:41:37 2015 +0100
+
+    handle min username length
+
+[33mcommit 09d18ddea69893508959e1caff7e283238f554af[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Sat Feb 28 14:19:17 2015 +0100
+
+    handle empty field submit
+
+[33mcommit 30ba465461908cbc5229e57c56a2dc0fc0b92316[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Sat Feb 28 13:16:39 2015 +0100
+
+    password hashing
+
+[33mcommit f3fff775cab23009a299e9b0652627fa194e81bc[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Sat Feb 28 11:47:51 2015 +0100
+
+    separate UserController from ApplicationController
+
+[33mcommit 15bd9f731a7ac7e763f659c08b00ca643553478e[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Sat Feb 28 11:13:24 2015 +0100
+
+    bind info message within login attempt
+
+[33mcommit 94921a3362929dcc7610b6457b9878f35337dd7b[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Fri Feb 27 20:12:37 2015 +0100
+
+    make redirection to home frome login and registration page
+
+[33mcommit 1ead6414e8af66bffa35d88d4a03c544434ba85d[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Fri Feb 27 19:53:16 2015 +0100
+
+    correct warning message
+
+[33mcommit 4a633971606fcf697c751defd4d7a3e3fa67578e[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Fri Feb 27 19:39:04 2015 +0100
+
+    bind html theme with login and registration view
+
+[33mcommit 6747e5e8daaafe06afaba22ee55c0028e0c4e1d0[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Fri Feb 27 12:33:04 2015 +0100
+
+    chenge redirection after registration error to registration page again
+
+[33mcommit db2ee0d7feb29c16fda2c3dedd99f9abd2c525e7[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Fri Feb 27 12:20:47 2015 +0100
+
+    add coments
+
+[33mcommit b279e884e57c449126a55b5d5a27ec0166e4f7cf[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Fri Feb 27 11:46:01 2015 +0100
+
+    add comments
+
+[33mcommit 21900daec7e6cca7ec9c621d3e2b7b429952d8bc[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Fri Feb 27 11:36:26 2015 +0100
+
+    fix mail exist check while registering, and add comments to application controller
+
+[33mcommit 7bebb1fd3b9f9ee58b7d64685781f3c2b2f831cf[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Fri Feb 27 10:45:47 2015 +0100
+
+    change login to verify email
+
+[33mcommit 616ebfbb8d1099623030da6fedd6b60ed7b656d2[m
+Author: Uqluiorrae <hariskrkalic@gmail.com>
+Date:   Fri Feb 27 09:47:14 2015 +0100
+
+    fixed redirect and session bugs
+
+[33mcommit 7b0bb0ed6bbd50e6a14301ebbbe6bfa2403b052e[m
+Author: Emir Imamovic <emir92@outlook.com>
+Date:   Fri Feb 27 04:03:21 2015 +0100
+
+    added tests
+
+[33mcommit 3d5d69e930d7fddf23f3a74ed91430f81a4e6ef3[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Thu Feb 26 18:36:58 2015 +0100
+
+    password input hiding
+
+[33mcommit 0661ea248436e87ead24a72bc4e037d411473ae9[m
+Author: Uqluiorrae <hariskrkalic@gmail.com>
+Date:   Thu Feb 26 17:44:17 2015 +0100
+
+    added some fixes and sorted out views
+
+[33mcommit d7af8064c01c39168db0f26b276f1e4c385bad8c[m
+Author: Uqluiorrae <hariskrkalic@gmail.com>
+Date:   Thu Feb 26 17:29:58 2015 +0100
+
+    added logout button
+
+[33mcommit ff5a4150c96a4ff98b77ef5d46b4beefcba033bf[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Thu Feb 26 16:20:30 2015 +0100
+
+    initial commit, registration and login, basic stage
+
+[33mcommit 5699409af96aa116c51c0f15187d8f6104efeecf[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Mon Feb 23 21:01:18 2015 +0100
+
+    initial commit
+
+[33mcommit 2e9ca1ca5dc8d15869921c378c9963e47ff4714e[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Mon Feb 23 20:43:07 2015 +0100
+
+    Delete README.md
+
+[33mcommit 36ebc15cfbc25172949adb4986758b15d7dd8f30[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Mon Feb 23 20:42:59 2015 +0100
+
+    Delete .project
+
+[33mcommit 1f2f69f9520ae509651f631b4b6da2815930b054[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Mon Feb 23 20:42:54 2015 +0100
+
+    Delete .gitignore
+
+[33mcommit 44c141a9661dd3a6cb8707c1b4036065697d1243[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Mon Feb 23 20:42:49 2015 +0100
+
+    Delete .classpath
+
+[33mcommit 77d5f3efe44fe867da65516c11e5e76cd05d7abc[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Sun Feb 22 17:55:12 2015 +0100
+
+    ver5 with coloured lines for better overview
+
+[33mcommit 7baa7c8882e6abb132c6d9d601d6f6f51c26fa5f[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Sun Feb 22 17:54:36 2015 +0100
+
+    ver5
+
+[33mcommit 9d127883da6ac9554b534df04a0071fd70b77397[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Sun Feb 22 17:54:19 2015 +0100
+
+    ver4b
+
+[33mcommit d9e3d2f3ada00487aff3180d3634a5faa7ddb745[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Sun Feb 22 17:54:01 2015 +0100
+
+    ver4
+
+[33mcommit 256a1165b5d82f50814d5b9f255a915b5dbb5ecd[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Sun Feb 22 17:53:42 2015 +0100
+
+    ver.3
+
+[33mcommit 6f4753bc62203c7670a9d014300594b59f1f953b[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Sat Feb 21 22:48:05 2015 +0100
+
+    logic model No.2
+
+[33mcommit bbca2abd27f69b27b519f5aae3f7680bc77a9028[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Fri Feb 20 23:08:51 2015 +0100
+
+    logic under construction..
+
+[33mcommit 6b2ccd87e610627c0c9a733ef1bcc51584ba36c1[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Thu Feb 19 22:35:21 2015 +0100
+
+    gitignore, classpath..
+
+[33mcommit 45ca657f67b9c37ee2a30358b2c37ae1bbc2851c[m
+Author: Jesenko <jeshko2@hotmail.com>
+Date:   Thu Feb 19 22:28:22 2015 +0100
+
+    Initial commit
