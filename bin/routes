@@ -17,13 +17,15 @@ POST   /updateUser					  	  controllers.UserController.updateUser(username: Stri
 GET    /updateUser						  controllers.UserController.userUpdateView()
 GET	   /userPanel						  controllers.UserController.listUsers()
 GET	   /deletUser						  controllers.UserController.deleteUser(username: String)
+GET	   /@editUser/:id					  controllers.UserController.adminEditUserView(id: Long)
+POST   /@updateUser/:id					  controllers.UserController.adminUpdateUser(id: Long)
 
 GET	   /couponPanel						  controllers.CouponController.couponControl()
 POST   /addCoupon      					  controllers.CouponController.addCoupon()
 GET    /coupon/:id						  controllers.CouponController.showCoupon(id: Long)
 GET    /deleteCoupon/:id				  controllers.CouponController.deleteCoupon(id :Long)
-POST   /editCoupon/:id      controllers.CouponController.updateCoupon(id: Long)
-GET    /editCoupon/:id      controllers.CouponController.editCoupon(id: Long)
+POST   /editCoupon/:id     				  controllers.CouponController.updateCoupon(id: Long)
+GET    /editCoupon/:id     				  controllers.CouponController.editCoupon(id: Long)
 
 
 

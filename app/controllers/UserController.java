@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.Date;
+
 import com.avaje.ebeaninternal.server.persist.BindValues.Value;
 
 import helpers.HashHelper;
@@ -101,6 +103,30 @@ public class UserController extends Controller {
 		User u = User.find(session("name"));
 		return ok(userUpdate.render(u, "Update account"));
 	}
+	
+	public static Result adminEditUserView(long id){
+		User u = User.find(id);
+		return ok(adminEditUser.render(u, "Update user"));
+	}
+	
+	public static Result adminUpdateUser(long id){
+		
+		String username = userForm.bindFromRequest().field("username").value();
+		String email = userForm.bindFromRequest().field("email").value();
+		String newPass = userForm.bindFromRequest().field("newPassword")
+				.value();
+		String admin = userForm.bindFromRequest().field("isAdmin").value();
+
+		User cUser = User.find(id);
+		cUser.username = username;
+		cUser.email = email;
+		if (newPass != null) { cUser.password = HashHelper.createPassword(newPass); }
+	    cUser.isAdmin = Boolean.parseBoolean(admin);
+	    cUser.updated = new Date();
+		cUser.save();
+		return ok(adminEditUser.render(cUser, "Update successful!"));
+	}
+	
 
 	public static Result controlPanel(long id) {
 

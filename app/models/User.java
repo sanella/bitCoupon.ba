@@ -2,7 +2,9 @@ package models;
 
 import helpers.HashHelper;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Stack;
 
 import javax.persistence.*;
 
@@ -34,6 +36,10 @@ public class User extends Model {
 	public String password;
 
 	public boolean isAdmin;
+	
+	public Date created;
+	
+	public Date updated;
 
 	static Finder<Long, User> find = new Finder<Long, User>(Long.class,
 			User.class);
@@ -43,6 +49,7 @@ public class User extends Model {
 		this.username = username;
 		this.email = email;
 		this.password = password;
+		this.created = new Date();
 		this.isAdmin = isAdmin;
 	}
 
@@ -176,7 +183,6 @@ public class User extends Model {
 		
 	}
 	
-	
 
 	
-}
+}//end of class User
