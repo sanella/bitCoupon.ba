@@ -7,6 +7,9 @@ public class MailHelper {
 
 	public static void send(String email, String message) {
 
+		/**
+		 * Set subject, body and sender of mail and send mail
+		 */
 		Email mail = new Email();
 		mail.setSubject("Mail for registration to bitCoupon.ba");
 		mail.setFrom("bitCoupon.ba <bit.play.test@gmail.com>");

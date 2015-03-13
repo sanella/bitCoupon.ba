@@ -34,6 +34,11 @@ public class EmailVerification extends Model {
 	@Required
 	public boolean isVerified;
 
+	/**
+	 * Constructor for EmailVerification
+	 * @param userId - id of user which e-mail needs to be verified
+	 * @param isVerified - is user e-mail verified or not
+	 */
 	public EmailVerification(long userId, boolean isVerified) {
 		this.id = HashHelper.createPassword(userId + new Date().toString())
 				.replace('/', '1');
@@ -48,21 +53,40 @@ public class EmailVerification extends Model {
 //	public EmailVerification(String recordId) {
 //	}
 
+	/**
+	 * Add verification e-mail to user and sets it to nonverified
+	 * @param userId - user id
+	 * @return - id of EmailVerification table
+	 */
 	public static String addNewRecord(long userId) {
 		EmailVerification verify = new EmailVerification(userId, false);
 		verify.save();
 		return verify.id;
 	}
 
+	/**
+	 * Sets verification e-mail to verified
+	 * @param recordToUpdate - verification e-mail
+	 */
 	public static void updateRecord(EmailVerification recordToUpdate) {
 		recordToUpdate.isVerified = true;
 		recordToUpdate.save();
 	}
 
+	/**
+	 * Finds verification email
+	 * @param id -  id of EmailVerification table
+	 * @return verification mail
+	 */
 	public static EmailVerification find(String id) {
 		return find.byId(id);
 	}
 
+	/**
+	 * Check if the e-mail is verified
+	 * @param userId - id of user which we check
+	 * @return true if the user e-mail is verified, else return false
+	 */
 	public static boolean isEmailVerified(long userId) {
 		List<EmailVerification> list = find.where().eq("userId", userId)
 				.orderBy("createdOn").findList();
