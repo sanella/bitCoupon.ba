@@ -225,6 +225,12 @@ public class UserController extends Controller {
 
 	}
 	
+	/**
+	 * Compare if the verification period is expired and send
+	 * verification mail to user e-mail adress
+	 * @param id - verification mail
+	 * @return redirect to the login view
+	 */
 	public static Result verifyEmail(String id){
 		EmailVerification recordToUpdate = EmailVerification.find(id);
 		String message = "";
