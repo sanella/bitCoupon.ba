@@ -8,9 +8,9 @@ public class MailHelper {
 	public static void send(String email, String message){
 		
 		Email mail = new Email();
-		mail.setSubject("Njam.ba verification mail");
-		mail.setFrom("Njam.ba <bit.play.test@gmail.com>");
-		mail.addTo("Bitter Contact <bit.play.test@gmail.com>");
+		mail.setSubject("Mail for registration to bitCoupon.ba");
+		mail.setFrom("bitCoupon.ba <bit.play.test@gmail.com>");
+		mail.addTo("bitCoupon.ba Contact <bit.play.test@gmail.com>");
 		mail.addTo(email);
 		
 		// adds attachment
