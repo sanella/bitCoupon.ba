@@ -6,6 +6,7 @@ import helpers.HashHelper;
 
 import org.junit.*;
 
+import controllers.UserController;
 import play.test.WithApplication;
 import static org.fest.assertions.Assertions.assertThat;
 import static org.junit.Assert.*;
@@ -71,6 +72,21 @@ public class ModelsTest extends WithApplication {
 		Coupon.delete(2);
 		Coupon c = Coupon.find(2);
 		assertNull(c);
+	}
+	
+	@Test
+	public void updateUser(){
+		User.createUser("tester", "tester@bitcamp.ba",
+				HashHelper.createPassword("123456"), false);
+		EmailVerification setVerified = new EmailVerification(2, true);
+		setVerified.save();
+		
+		User user = User.find(2);
+		user.username = "fixer";
+		user.isAdmin = true;
+		assertEquals(user.username, "fixer");
+		assertEquals(user.isAdmin, true);
+		
 	}
 
 }

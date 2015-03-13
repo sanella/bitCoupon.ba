@@ -5,6 +5,7 @@ import java.util.Date;
 import com.avaje.ebeaninternal.server.persist.BindValues.Value;
 
 import helpers.HashHelper;
+import helpers.MailHelper;
 import play.*;
 import play.api.mvc.Session;
 import play.data.Form;
@@ -68,12 +69,16 @@ public class UserController extends Controller {
 		 * are no errors
 		 */
 		else if (User.verifyRegistration(username, mail) == true) {
-			session().clear();
-			session("name", username);
+			/*session().clear();
+			session("name", username);*/
 
 			long id = User.createUser(username, mail, hashPass, false);
-			User cc = User.getUser(mail);
-			return ok(index.render(cc, Coupon.all()));
+			String verificationEmail = EmailVerification.addNewRecord(id);
+			MailHelper.send(mail, "Click on the link below to verify your e-mail adress <br>"
+					+ "http://localhost:9000/verifyEmail/" + verificationEmail);
+			//User cc = User.getUser(mail);
+			
+			return ok(Loginpage.render("A verification mail has been sent to your email address"));
 
 		} else {
 			return ok(signup.render("Username or email allready exists!",
@@ -218,6 +223,25 @@ public class UserController extends Controller {
 			User.delete(id);
 		return ok( userList.render(session("name"),User.all()) );
 
+	}
+	
+	/**
+	 * Compare if the verification period is expired and send
+	 * verification mail to user e-mail adress
+	 * @param id - verification mail
+	 * @return redirect to the login view
+	 */
+	public static Result verifyEmail(String id){
+		EmailVerification recordToUpdate = EmailVerification.find(id);
+		String message = "";
+		if(recordToUpdate.createdOn.compareTo(new Date()) < 0){
+			EmailVerification.updateRecord(recordToUpdate);
+			message = "You're e-mail is now verified. To login click on the button below";
+		}
+		else{
+			message = "Verification period is expired. If you want to receive a new verification mail, click on the button 'Resend'";
+		}		
+		return ok(verifyEmail.render(message));
 	}
 
 }

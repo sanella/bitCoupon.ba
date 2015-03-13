@@ -84,7 +84,7 @@
 		
 	</section>
 	<div class="container">
-	<div class="col-sm-8">
+	<div class="col-sm-9">
 							<div class="product-image-wrapper">
 								<div class="single-products">
 									<div class="productinfo text-center">
@@ -105,15 +105,14 @@
 										<!-- edibe dodaj css za ovaj form sa id-eom macic -->
 
 				
+						   <a href='@routes.CouponController.editCoupon(coupon.id)' class="btn btn-fefault cart">Update coupon</a>
+							
 						   <a href='@routes.CouponController.deleteCoupon(coupon.id)' onclick="return confirm('Are you sure you want to delete this coupon?');"
 					class="btn btn-fefault cart">Delete coupon</a>
 							
+							
 
-							<form action="@routes.CouponController.editCoupon(coupon.id)" id="update" method ="GET" >
-							<button type="submit" id="update" class="btn btn-fefault cart">
-							Update Coupon
-							</button>
-							</form>
+							
 
 							}
 								</span>
