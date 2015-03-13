@@ -1,5 +1,6 @@
 import helpers.HashHelper;
 import models.Coupon;
+import models.EmailVerification;
 import models.User;
 import play.Application;
 import play.GlobalSettings;
@@ -25,6 +26,8 @@ public class Global extends GlobalSettings {
 		
 		if (User.check("admin@mail.com") == false){
 		User.createUser("Admin", "admin@mail.com", HashHelper.createPassword("bitadmin"), true);
+		EmailVerification setVerified = new EmailVerification(1, true);
+		setVerified.save();
 		}
 		
 	}

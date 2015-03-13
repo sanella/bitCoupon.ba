@@ -41,6 +41,7 @@ public class User extends Model {
 	
 	public Date updated;
 
+
 	static Finder<Long, User> find = new Finder<Long, User>(Long.class,
 			User.class);
 
