@@ -41,6 +41,7 @@ public class User extends Model {
 	
 	public Date updated;
 
+
 	static Finder<Long, User> find = new Finder<Long, User>(Long.class,
 			User.class);
 
@@ -89,7 +90,13 @@ public class User extends Model {
 	public static boolean verifyLogin(String mail, String password) {
 		try {
 			User user = find.where().eq("email", mail).findUnique();
-			return HashHelper.checkPass(password, user.password);
+			if(user != null && EmailVerification.isEmailVerified(user.id)){
+				return HashHelper.checkPass(password, user.password);
+			}
+			else{
+				return false;
+			}
+				
 
 		} catch (NullPointerException e) {
 			return false;
