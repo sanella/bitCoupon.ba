@@ -88,5 +88,22 @@ public class ModelsTest extends WithApplication {
 		assertEquals(user.isAdmin, true);
 		
 	}
+	
+	
+	@SuppressWarnings("deprecation")
+	@Test
+	public  void updateCoupon(){
+		//Coupon.createCoupon("Rucak", 15, null, null, null, "Rucak","Test za rucak");
+		Coupon c = new Coupon("Rucak", 15, null, null, null, "Rucak za dvoje", "Test za rucak");
+		c.save();
+		Coupon coupon=Coupon.find(4);
+		coupon.name="Vecera";
+		coupon.description = "Rucak za troje";
+		coupon.remark = "Test za rucak promjena";
+		coupon.save();
+		assertEquals(coupon.name,"Vecera");
+		assertEquals(coupon.description,"Rucak za troje");
+		assertEquals(coupon.remark,"Test za rucak promjena");
+	}
 
 }
