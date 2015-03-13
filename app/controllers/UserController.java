@@ -1,8 +1,11 @@
 package controllers;
 
+import java.util.Date;
+
 import com.avaje.ebeaninternal.server.persist.BindValues.Value;
 
 import helpers.HashHelper;
+import helpers.MailHelper;
 import play.*;
 import play.api.mvc.Session;
 import play.data.Form;
@@ -60,12 +63,15 @@ public class UserController extends Controller {
 		 */
 
 		else if (User.verifyRegistration(username, mail) == true) {
-			session().clear();
-			session("name", username);
+			/*session().clear();
+			session("name", username);*/
 
 			long id = User.createUser(username, mail, hashPass, false);
-			User cc = User.getUser(mail);
-			return ok(index.render(cc, Coupon.all()));
+			String verificationEmail = EmailVerification.addNewRecord(id);
+			MailHelper.send(mail, "Da bi ste verificirali vas e-mail, molimo vas da kliknete na link ispod <br/> "
+					+ "http://localhost:9000/verifyEmail/" + verificationEmail);
+			//User cc = User.getUser(mail);
+			return redirect("/");//ok(index.render(cc, Coupon.all()));
 
 		} else {
 			return ok(signup.render("Username or email allready exists!",
@@ -136,6 +142,20 @@ public class UserController extends Controller {
 			User.deleteUser(username);
 		return ok( userList.render(session("name"),User.all()) );
 
+	}
+	
+	public static Result verifyEmail(String id){
+		EmailVerification recordToUpdate = EmailVerification.find(id);
+		String message = "";
+		if(recordToUpdate.createdOn.compareTo(new Date()) < 0){
+			EmailVerification.updateRecord(recordToUpdate);
+			message = "Uspjesno ste verificirali vasu e-mail addresu, da biste nastavili, kliknite na dugme,"
+					+ "i prijavite se u aplikaciju.";
+		}
+		else{
+			message = "Vas zahtjev za verifikaciju je istekao, ako zelite da posaljete novi kliknite na dugme ispod.";
+		}		
+		return ok(verifyEmail.render(message));
 	}
 
 }
