@@ -30,6 +30,8 @@ create table user (
   email                     varchar(255),
   password                  varchar(255),
   is_admin                  boolean,
+  created                   timestamp,
+  updated                   timestamp,
   constraint pk_user primary key (id))
 ;
 

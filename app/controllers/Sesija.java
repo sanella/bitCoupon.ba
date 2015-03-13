@@ -9,6 +9,11 @@ import play.mvc.Security;
  */
 public class Sesija extends Security.Authenticator {
 	
+	/**
+	 * Returns username from the User that is in the
+	 * current session
+	 * @return username String
+	 */
 	public String getUsername(Context ctx){
 		if ( !ctx.session().containsKey("user_id") ){
 			return null;
@@ -26,6 +31,12 @@ public class Sesija extends Security.Authenticator {
 		return redirect(routes.Application.index());
 	}
 	
+	/**
+	 * Returns User from an active session
+	 * or null the session is empty
+	 * @param ctx
+	 * @return User or null
+	 */
 	public static User getCurrentUser(Context ctx){
 		if ( !ctx.session().containsKey("name") ){
 			return null;
@@ -35,11 +46,13 @@ public class Sesija extends Security.Authenticator {
 		return u;
 	}
 	
+	/**
+	 * Checks if the user from the current session is Admin
+	 * @param ctx
+	 * @return true or false
+	 */
 	public static boolean adminCheck(Context ctx) {
-//		if ( !ctx.session().containsKey("isAdmin") ){
-//			return false;
-//		}
-//		boolean isAdmin = Boolean.parseBoolean(ctx.session().get("user_isAdmin"));
+
 		if(getCurrentUser(ctx) == null)
 			return false;
 		return getCurrentUser(ctx).isAdmin;

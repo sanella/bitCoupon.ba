@@ -1,5 +1,7 @@
 package models;
 
+import java.util.Date;
+
 import helpers.HashHelper;
 
 import org.junit.*;
@@ -44,7 +46,7 @@ public class ModelsTest extends WithApplication {
 	@Test
 	public void testCouponCreate(){
 		
-		Coupon.createCoupon("Test", 55, "11.11.1111", "11.11.2222", "url", "category", "description", "remark");
+		Coupon.createCoupon("Test", 55.3, new Date(), "url", "category", "description", "remark");
 		Coupon c = Coupon.find(4);
 		assertNotNull(c);
 		
@@ -58,7 +60,7 @@ public class ModelsTest extends WithApplication {
 	
 	@Test
 	public void deleteCoupon(){
-		Coupon.createCoupon("test", 2.22, "12.12.2012", "13.12.2012", "testurl", "category", "description", "remark");
+		Coupon.createCoupon("test", 2.22, new Date(), "testurl", "category", "description", "remark");
 		Coupon.delete(4);
 		Coupon c = Coupon.find(4);
 		assertNull(c);

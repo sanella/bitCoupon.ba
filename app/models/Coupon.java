@@ -112,43 +112,54 @@ public class Coupon extends Model {
 		return newCoupon.id;
 	}
 
+	/**
+	 * 
+	 * @return price as String in 00.00 format
+	 */
 	public String getPriceString() {
 		return String.format("%1.2f",price);
 	}
 
-	/*
-	 * Find list of all Coupons
+	/**
+	 * 
+	 * @return all coupons as List<Coupon>
 	 */
 	public static List<Coupon> all() {
 		List<Coupon> coupons = find.findList();
 		return coupons;
 	}
 
-	/*
-	 * Find Coupon by ID
+	/**
+	 * Find coupon by id
+	 * @param id long
+	 * @return Coupon
 	 */
-
 	public static Coupon find(long id) {
 		return find.byId(id);
 	}
 
-	/*
-	 * Delete Coupon by id
+	
+	/**
+	 * Delete coupon by id
+	 * @param id long
 	 */
-
 	public static void delete(long id) {
 		find.byId(id).delete();
 	}
 	
 	/**
 	 * Checks if the coupon exists
-	 * @param name - name of coupon
-	 * @return true if exists, else return false
+	 * @param name of coupon String
+	 * @return true or false
 	 */
 	public static boolean checkByName(String name){
 		return find.where().eq("name", name).findUnique() != null;
 	}
 	
+	/**
+	 * Updates coupon
+	 * @param coupon
+	 */
 	public static void updateCoupon(Coupon coupon){
 		coupon.save();
 	}

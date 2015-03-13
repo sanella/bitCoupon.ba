@@ -14,13 +14,11 @@ public class Application extends Controller {
 
 
 	/**
-	 * 
-	 * @return redirects to index according to session name
+	 * @return render the index page
 	 */
 	public static Result index() {
 		name = session("name");
 		if (name == null) {
-			//name = "Public user";
 			return ok(index.render(null, Coupon.all()));
 		} else {
 			User currentUser = User.find(name);
@@ -38,9 +36,11 @@ public class Application extends Controller {
 	 */
 	public static Result login() {
 		Form<Login> login = new Form<Login>(Login.class);
+		
 		if (login.hasGlobalErrors()) {
 			return ok(Loginpage.render(loginMsg));
 		}
+		
 		String mail = login.bindFromRequest().get().email;
 		String password = login.bindFromRequest().get().password;
 
@@ -52,15 +52,14 @@ public class Application extends Controller {
 			User cc = User.getUser(mail);
 			session().clear();
 			session("name", cc.username);
-			 return ok(index.render(cc, Coupon.all()));
+			return ok(index.render(cc, Coupon.all()));
 		}
 
 		return ok(Loginpage.render("Invalid email or password"));
 
 	}
 
-	/**
-	 * 
+	/** 
 	 * @return renders the loginpage view
 	 */
 	public static Result loginpage() {
@@ -68,8 +67,7 @@ public class Application extends Controller {
 	}
 
 	/**
-	 * Clears the session
-	 * 
+	 * Logs out the User and clears the session
 	 * @return redirects to index
 	 */
 	public static Result logout() {
