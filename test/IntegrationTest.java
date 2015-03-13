@@ -2,6 +2,7 @@ import java.util.Date;
 
 import helpers.HashHelper;
 import models.Coupon;
+import models.EmailVerification;
 import models.User;
 
 import org.junit.*;
@@ -25,10 +26,8 @@ public class IntegrationTest {
 		running(testServer(3333, fakeApplication(inMemoryDatabase())),
 				HTMLUNIT, new Callback<TestBrowser>() {
 					public void invoke(TestBrowser browser) {
-						browser.goTo("http://localhost:3333");
-						assertThat(browser.pageSource()).contains("Welcome ");
-						assertThat(browser.pageSource()).contains(
-								"Registration");
+						browser.goTo("http://localhost:3333");					
+						assertThat(browser.pageSource()).contains("Registration");
 						assertThat(browser.pageSource()).contains("Login");
 
 					}
@@ -50,9 +49,9 @@ public class IntegrationTest {
 						browser.fill("#password").with("123456");
 						browser.fill("#confirmPassword").with("123456");
 						browser.submit("#submit");
-						assertThat(browser.pageSource()).contains("tester");
-						assertThat(browser.pageSource()).contains("Home");
-						assertThat(browser.pageSource()).contains("Logout");
+						assertThat(browser.pageSource()).contains("Registration");
+						assertThat(browser.pageSource()).contains("Login");
+						assertThat(browser.pageSource()).contains("A verification mail has been sent to your email address");
 
 					}
 				});
@@ -71,6 +70,8 @@ public class IntegrationTest {
 
 						User.createUser("tester", "tester@bitcamp.ba",
 								HashHelper.createPassword("123456"), true);
+						EmailVerification setVerified = new EmailVerification(2, true);
+						setVerified.save();
 
 						browser.goTo("http://localhost:3333/loginpage");
 						browser.fill("#email").with("tester@bitcamp.ba");
@@ -78,8 +79,7 @@ public class IntegrationTest {
 						browser.submit("#submit");
 						assertThat(browser.pageSource()).contains("tester");
 						assertThat(browser.pageSource()).contains("Home");
-						assertThat(browser.pageSource()).contains(
-								"Available Coupons");
+						assertThat(browser.pageSource()).contains("Available Coupons");
 
 					}
 				});
