@@ -74,10 +74,11 @@ public class UserController extends Controller {
 
 			long id = User.createUser(username, mail, hashPass, false);
 			String verificationEmail = EmailVerification.addNewRecord(id);
-			MailHelper.send(mail, "Da bi ste verificirali vas e-mail, molimo vas da kliknete na link ispod <br/> "
+			MailHelper.send(mail, "Da bi ste verificirali vas e-mail, molimo vas da kliknete na link ispod <br>"
 					+ "http://localhost:9000/verifyEmail/" + verificationEmail);
 			//User cc = User.getUser(mail);
-			return redirect("/");//ok(index.render(cc, Coupon.all()));
+			
+			return ok(Loginpage.render("A verification mail has been sent to your email address"));
 
 		} else {
 			return ok(signup.render("Username or email allready exists!",

@@ -101,7 +101,7 @@ public class IntegrationTest {
 						browser.goTo("http://localhost:3333/");
 						assertThat(browser.pageSource()).contains("TestCoupon");
 						assertThat(browser.pageSource()).contains(
-								"Only 55.4 KM");
+								"Only 55.40 KM");
 
 					}
 				});
