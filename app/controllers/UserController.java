@@ -74,7 +74,7 @@ public class UserController extends Controller {
 
 			long id = User.createUser(username, mail, hashPass, false);
 			String verificationEmail = EmailVerification.addNewRecord(id);
-			MailHelper.send(mail, "Da bi ste verificirali vas e-mail, molimo vas da kliknete na link ispod <br>"
+			MailHelper.send(mail, "Click on the link below to verify your e-mail adress <br>"
 					+ "http://localhost:9000/verifyEmail/" + verificationEmail);
 			//User cc = User.getUser(mail);
 			
@@ -230,11 +230,10 @@ public class UserController extends Controller {
 		String message = "";
 		if(recordToUpdate.createdOn.compareTo(new Date()) < 0){
 			EmailVerification.updateRecord(recordToUpdate);
-			message = "Uspjesno ste verificirali vasu e-mail addresu, da biste nastavili, kliknite na dugme,"
-					+ "i prijavite se u aplikaciju.";
+			message = "You're e-mail is now verified. To login click on the button below";
 		}
 		else{
-			message = "Vas zahtjev za verifikaciju je istekao, ako zelite da posaljete novi kliknite na dugme ispod.";
+			message = "Verification period is expired. If you want to receive a new verification mail, click on the button 'Resend'";
 		}		
 		return ok(verifyEmail.render(message));
 	}
