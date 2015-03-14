@@ -76,6 +76,13 @@ public class User extends Model {
 	public static List<User> all() {
 		return find.all();
 	}
+	
+	
+	public void setAdmin(boolean isAdmin){
+		this.isAdmin = isAdmin;
+		save();
+			
+	}
 
 	/**
 	 * Login verification Verifies if the email and password exists by checking
