@@ -66,7 +66,12 @@ public class CouponController extends Controller {
 			return ok(couponPanel.render(session("name"), "Enter a valid price"));
 		}
 		
-		Date date = couponForm.bindFromRequest().get().dateExpire;		
+		Date current = new Date();
+		Date date = couponForm.bindFromRequest().get().dateExpire;	
+		if ( date.before(current)){
+			return ok(couponPanel.render(session("name"), "Enter a valid expiration date"));
+		}
+		
 		String picture = couponForm.bindFromRequest().field("picture").value();
 		String category = couponForm.bindFromRequest().field("category").value();
 		String description = couponForm.bindFromRequest().field("description").value();
