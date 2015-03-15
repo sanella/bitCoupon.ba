@@ -76,4 +76,8 @@ public class Application extends Controller {
 		return redirect("/");
 	}
 
+	public static Result loginToComplete() {
+		return badRequest(loginToComplete.render("Login to complete this action"));
+	}
+	
 }

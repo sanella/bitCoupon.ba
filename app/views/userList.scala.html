@@ -1,6 +1,7 @@
 @(name: String)(users: List[User])
   @import helper._
 
+@if(Sesija.getCurrentUser( ctx() ) != null ){
 @main("User List") {
 	<div class="header_top"><!--header_top-->
 		
@@ -19,9 +20,6 @@
 			</div>
 		</div>
 	
-	
-	
-
 		<div class="header-middle"><!--header-middle-->
 			<div class="container">
 				<div class="row">
@@ -100,5 +98,14 @@
 	</section><!--/form-->
 							</div>
 
+}
+} else {
+@main("Login to Complete"){
+	<div class="container">
+		<div class="col-md-5 col-md-offset-3">
+			<h1> :( You need to login to access this page.</h1>
+		</div>
+	</div>
+}
 }
 	

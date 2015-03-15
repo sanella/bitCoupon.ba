@@ -4,6 +4,8 @@ import java.util.Date;
 
 import com.avaje.ebeaninternal.server.persist.BindValues.Value;
 
+import helpers.CurrentUserFilter;
+import helpers.AdminFilter;
 import helpers.HashHelper;
 import helpers.MailHelper;
 import play.*;
@@ -91,6 +93,7 @@ public class UserController extends Controller {
 	 * Method sends the current user to the userUpdate() method
 	 * @return Renders the user update view for editing profile
 	 */
+	@Security.Authenticated(CurrentUserFilter.class)
 	public static Result userUpdateView() {
 		User u = User.find(session("name"));
 		return ok(userUpdate.render(u, "Update account"));
@@ -136,6 +139,7 @@ public class UserController extends Controller {
 	 * @param id of the User (long)
 	 * @return Result render adminEditUser
 	 */
+	@Security.Authenticated(AdminFilter.class)
 	public static Result adminEditUserView(long id){
 		if (Sesija.adminCheck(ctx()) != true){
 			return redirect("/");
@@ -149,6 +153,7 @@ public class UserController extends Controller {
 	 * @param id of the user to update
 	 * @return Result render the vies
 	 */
+	@Security.Authenticated(AdminFilter.class)
 	public static Result adminUpdateUser(long id){
 		
 		if (Sesija.adminCheck(ctx()) != true){
@@ -181,6 +186,7 @@ public class UserController extends Controller {
 	 * 
 	 * 
 	 */
+	@Security.Authenticated(AdminFilter.class)
 	public static Result controlPanel(long id) {
 
 		User u = User.find(id);
@@ -212,6 +218,7 @@ public class UserController extends Controller {
 	 *
 	 * @return Result
 	 */
+	@Security.Authenticated(AdminFilter.class)
 	public static Result listUsers(){
 		
 		return ok( userList.render(session("name"),User.all()) );
@@ -224,6 +231,7 @@ public class UserController extends Controller {
 	 * @param id Long
 	 * @return Result renders the same view
 	 */
+	@Security.Authenticated(AdminFilter.class)
 	public static Result deleteUser(Long id){
 		User currentUser = Sesija.getCurrentUser(ctx());
 		if (currentUser.id == id || Sesija.adminCheck(ctx()))
