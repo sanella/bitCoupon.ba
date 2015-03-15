@@ -137,6 +137,9 @@ public class UserController extends Controller {
 	 * @return Result render adminEditUser
 	 */
 	public static Result adminEditUserView(long id){
+		if (Sesija.adminCheck(ctx()) != true){
+			return redirect("/");
+		}
 		User u = User.find(id);
 		return ok(adminEditUser.render(u, "Update user"));
 	}
@@ -147,6 +150,10 @@ public class UserController extends Controller {
 	 * @return Result render the vies
 	 */
 	public static Result adminUpdateUser(long id){
+		
+		if (Sesija.adminCheck(ctx()) != true){
+			return redirect("/");
+		}
 		
 		if (userForm.hasErrors()) {
 			return redirect("/@editUser/:"+id); //provjeriti
