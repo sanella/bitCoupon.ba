@@ -43,12 +43,43 @@
 				</div>
 			</div>
 			
-			<div class="container">
-					<div class="features_items"><!--features_items-->
-						<h2 class="title text-center">Contact</h2>
 						
 		
-	
+		<div class="container">
+					
+					<div class="features_items"><!--features_items-->
+						<h2 class="title text-center">Contact</h2>
+						<div class="col-sm-6 col-sm-offset-1">
+						
+						<h4>Contact form</h4>
+					
+					<div class="signup-form"><!--contact form-->
+						<form action="@routes.UserController.updateUser(user.username)" method ="POST" >
+							<input type="text" name="username" id="username" placeholder="Name and surname"  required/>
+							<input type="text" name="email" id="email" placeholder=Email  required/>
+							
+							<textarea name="message" id="message" placeholder="Your message to us!" cols="54" rows="6"></textarea>
+							<br></br>
+							
+							<div class="btn-toolbar" role="toolbar">
+							<div class="btn-group">
+							<button type="submit" class="btn btn-default">Send</button>
+							</div>
+							<div class="btn-group">
+							<button type="reset" value="Clean" class="btn btn-default">Clean</button>
+							</div>
+							</div>
+							</div>
+								<p></p>
+									<p></p>
+										<p></p>
+											<p></p>
+						</form>
+					</div><!--/sign up form-->
+					
+				</div>
+			</div>
+		</div>
 	
 	
 	
