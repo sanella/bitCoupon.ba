@@ -82,8 +82,12 @@
 								
 						   				<label for="isAdmin">Option for promoting user to administrator. Option "false" for removing user from Administrators and option "true" for adding user to Administrator group.</label>
 						    			<select id="isAdmin" name="isAdmin" id="isAdmin" value=@user.isAdmin>
-					     					<option selected="selected">false</option>
-						     				<option>true</option> 			
+					     					<option selected="selected">@user.isAdmin</option>
+					     					@if( user.isAdmin == true ){
+						     				<option>false</option> 
+						     				} else{
+						     				<option>true</option> 
+						     				}					     							
 					    				</select>
 					    				<br>
 					    				<br>
