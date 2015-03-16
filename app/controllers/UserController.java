@@ -21,6 +21,7 @@ public class UserController extends Controller {
 	static String message = "Welcome ";
 	static String bitName = "bitCoupon";
 	static String name = null;
+	
 
 	static Form<User> userForm = new Form<User>(User.class);
 

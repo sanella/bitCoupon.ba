@@ -1,4 +1,4 @@
-@(name: String)(users: List[User])
+@(username: String)(users: List[User])
   @import helper._
 
 @if(Sesija.getCurrentUser( ctx() ) != null ){
@@ -11,7 +11,7 @@
 						<div class="col-sm-12">
 						
 							<ul class="nav navbar-nav">
- 							<li><a class="active"> @name </a></li>
+ 							<li><a href="@routes.UserController.profilePage(username)" class="active"> @username </a></li>
  							<li><a href="/logout" class="active"><i class="active"></i> Logout</a></li>					
 							</ul>
 						</div>

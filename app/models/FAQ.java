@@ -33,7 +33,8 @@ public class FAQ extends Model {
 	}
 	
 	public static List<FAQ> all(){
-		return find.all();
+		List<FAQ> faqs = find.findList();
+		return faqs;
 	}
 
 }

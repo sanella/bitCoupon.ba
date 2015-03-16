@@ -1,4 +1,4 @@
-@(username: String)(coupon: Coupon)(message: String)
+@(coupon: Coupon)(message: String)
 
 @import helper._
 
@@ -14,7 +14,7 @@
 						<div class="col-sm-12">
 						
 							<ul class="nav navbar-nav">
- 							<li><a href="@routes.UserController.profilePage(username)" class="active">@username </a></li>
+ 							<li><a href="@routes.UserController.profilePage(Sesija.getCurrentUser(ctx()).username)" class="active">username </a></li>
  							<li><a href="/logout" class="active"><i class="active"></i> Logout</a></li>					
 							</ul>
 						</div>
