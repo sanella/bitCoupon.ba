@@ -46,6 +46,9 @@ public class CouponController extends Controller {
 			return ok(couponPanel.render(session("name"), "Name must be 4 characters long"));
 
 		}
+		if(name.length()>120){
+			return ok(couponPanel.render(session("name"),"Name must be max 120 characters long"));
+		}
 		
 		/* Taking the price value from the string and checking if it's valid*/
 		double price;
@@ -138,7 +141,11 @@ public class CouponController extends Controller {
 
 		coupon.name = couponForm.bindFromRequest().field("name").value();
 		if (coupon.name.length() < 4) {
-			return ok(updateCouponView.render(coupon, "Name must be minimal 4 characters"));		}
+			return ok(updateCouponView.render(coupon, "Name must be minimal 4 characters"));
+			}
+		if(coupon.name.length() > 120){
+			return ok(couponPanel.render(session("name"),"Name must be max 120 characters long"));
+		}
 
 		String strPrice = couponForm.bindFromRequest().field("price").value();
 		strPrice = strPrice.replace(",", ".");
