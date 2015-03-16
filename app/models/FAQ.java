@@ -36,5 +36,5 @@ public class FAQ extends Model {
 		List<FAQ> faqs = find.findList();
 		return faqs;
 	}
-
+	
 }
