@@ -1,4 +1,4 @@
-@(name: String)(addCouponInfo: String)
+@(user: User)(addCouponInfo: String)
 
 @import helper._
 
@@ -14,7 +14,7 @@
 						<div class="col-sm-12">
 						
 							<ul class="nav navbar-nav">
- 							<li><a class="active"> @name </a></li>
+ 							<li><a href="@routes.UserController.profilePage(user.username)" class="active"> @user.username </a></li>
  							<li><a href="/logout" class="active"><i class="fa fa-lock"></i> Logout</a></li>					
 							</ul>
 						</div>

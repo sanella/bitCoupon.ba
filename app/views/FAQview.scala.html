@@ -1,0 +1,31 @@
+@(faqs: List[FAQ])
+
+@import helper._
+
+@main("Welcome to bitCoupon") {
+	
+	
+	
+	<div class="container">
+					<div class="features_items"><!--features_items-->
+						<h2 class="title text-center">FAQ</h2>
+						
+				@for(question <- faqs){
+					
+						<div class="col-sm-4">
+							<div class="product-image-wrapper">
+								<div class="single-products">
+									<div class="productinfo text-center">
+									
+										<h2> @question.title </h2>
+										<p> @question.content </p>
+										
+									</div>					
+								</div>
+							</div>
+						</div>
+			}			
+
+		</ul>
+</body>
+}
