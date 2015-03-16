@@ -3,8 +3,43 @@ package controllers;
 import models.*;
 import play.*;
 import play.data.Form;
+import play.data.validation.Constraints.Email;
+import play.data.validation.Constraints.Required;
 import play.mvc.*;
 import views.html.*;
+
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+
+import helpers.MailHelper;
+import models.User;
+import play.Logger;
+import play.Play;
+import play.data.DynamicForm;
+import play.data.Form;
+import play.data.validation.Constraints.Email;
+import play.data.validation.Constraints.Required;
+import play.libs.F.Function;
+import play.libs.F.Promise;
+import play.libs.ws.WS;
+import play.libs.ws.WSResponse;
+import play.mvc.Controller;
+import play.mvc.Http.MultipartFormData;
+import play.mvc.Http.MultipartFormData.FilePart;
+import play.mvc.Result;
+import models.*;
+
+import com.fasterxml.jackson.databind.JsonNode;
+
+
+
+
+
+
+import com.google.common.io.Files;
 
 public class Application extends Controller {
 
@@ -12,7 +47,15 @@ public class Application extends Controller {
 	static String loginMsg = "Login to your account";
 	static String name = null;
 
-
+	public static class Contact {
+		@Required
+		@Email
+		public String email;
+		@Required
+		public String message;
+	}
+	
+	
 	/**
 	 * @return render the index page
 	 */
@@ -79,5 +122,17 @@ public class Application extends Controller {
 	public static Result loginToComplete() {
 		return badRequest(loginToComplete.render("Login to complete this action"));
 	}
+	
+	public static Result contact() {
+		name = session("name");
+		if (name == null) {
+			return ok(contact.render(null));
+		} else {
+			User currentUser = User.find(name);
+			return ok(contact.render(currentUser));
+		}
+	}
+	
+
 	
 }
