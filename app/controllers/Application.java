@@ -138,7 +138,47 @@ public class Application extends Controller {
 	}
 	
 	public static Promise<Result> sendMail() {
-		return (Promise<Result>) TODO;
+		//need this to get the google recapctha value
+				final DynamicForm temp = DynamicForm.form().bindFromRequest();
+				
+				/* send a request to google recaptcha api with the value of our secret code and the value
+				 * of the recaptcha submitted by the form */
+				Promise<Result> holder = WS
+						.url("https://www.google.com/recaptcha/api/siteverify")
+						.setContentType("application/x-www-form-urlencoded")
+						.post(String.format("secret=%s&response=%s",
+								//get the API key from the config file
+								Play.application().configuration().getString("recaptchaKey"),
+								temp.get("g-recaptcha-response")))
+						.map(new Function<WSResponse, Result>() {
+							//once we get the response this method is loaded
+							public Result apply(WSResponse response) {
+								//get the response as JSON
+								JsonNode json = response.asJson();
+								Form<Contact> submit = Form.form(Contact.class)
+										.bindFromRequest();
+								
+								//check if value of success is true
+								if (json.findValue("success").asBoolean() == true
+										&& !submit.hasErrors()) {
+
+									Contact newMessage = submit.get();
+									String email = newMessage.email;
+									String message = newMessage.message;
+
+									flash("success", "Message sent");
+									MailHelper.send(email, message);
+									return redirect("/");
+								} else {
+									flash("error", "There has been a problem");
+									User currentUser = User.find(name);
+									return ok(contact.render(currentUser,submit));
+
+								}
+							}
+						});
+				//return the promisse
+				return holder;
 	}
 
 	
