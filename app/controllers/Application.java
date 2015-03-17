@@ -141,29 +141,68 @@ public class Application extends Controller {
 		}
 	}
 	
+//	public static Promise<Result> sendMail() {
+//		//need this to get the google recapctha value
+//				final DynamicForm temp = DynamicForm.form().bindFromRequest();
+//				
+//				/* send a request to google recaptcha api with the value of our secret code and the value
+//				 * of the recaptcha submitted by the form */
+//				Promise<Result> holder = WS
+//						.url("https://www.google.com/recaptcha/api/siteverify")
+//						.setContentType("application/x-www-form-urlencoded")
+//						.post(String.format("secret=%s&response=%s",
+//								//get the API key from the config file
+//								Play.application().configuration().getString("recaptchaKey"),
+//								temp.get("g-recaptcha-response")))
+//						.map(new Function<WSResponse, Result>() {
+//							//once we get the response this method is loaded
+//							public Result apply(WSResponse response) {
+//								//get the response as JSON
+//								JsonNode json = response.asJson();
+//								Form<Contact> submit = Form.form(Contact.class).bindFromRequest();
+//								
+//								//check if value of success is true
+//								if (json.findValue("success").asBoolean() == true
+//										&& !submit.hasErrors()) {
+//
+//									Contact newMessage = submit.get();
+//									String email = newMessage.email;
+//									String name = newMessage.name;
+//									String phone = newMessage.phone;
+//									String message = newMessage.message;
+//
+//									flash("success", "Message sent");
+//									MailHelper.sendFeedback(email, name, phone, message);
+//									return redirect("/contact");
+//								} else {
+//									flash("error", "There has been a problem");
+//									User currentUser = User.find(name);
+//									return ok(contact.render(currentUser,submit));
+//
+//								}
+//							}
+//						});
+//				return holder;
+//	}
+	
 	public static Promise<Result> sendMail() {
-		//need this to get the google recapctha value
 				final DynamicForm temp = DynamicForm.form().bindFromRequest();
 				
-				/* send a request to google recaptcha api with the value of our secret code and the value
-				 * of the recaptcha submitted by the form */
 				Promise<Result> holder = WS
 						.url("https://www.google.com/recaptcha/api/siteverify")
 						.setContentType("application/x-www-form-urlencoded")
 						.post(String.format("secret=%s&response=%s",
-								//get the API key from the config file
+
 								Play.application().configuration().getString("recaptchaKey"),
 								temp.get("g-recaptcha-response")))
 						.map(new Function<WSResponse, Result>() {
-							//once we get the response this method is loaded
+
 							public Result apply(WSResponse response) {
-								//get the response as JSON
+
 								JsonNode json = response.asJson();
 								Form<Contact> submit = Form.form(Contact.class).bindFromRequest();
 								
-								//check if value of success is true
-								if (json.findValue("success").asBoolean() == true
-										&& !submit.hasErrors()) {
+								if (json.findValue("success").asBoolean() == true && !submit.hasErrors()) {
 
 									Contact newMessage = submit.get();
 									String email = newMessage.email;
@@ -174,12 +213,33 @@ public class Application extends Controller {
 									flash("success", "Message sent");
 									MailHelper.sendFeedback(email, name, phone, message);
 									return redirect("/contact");
-								} else {
-									flash("error", "There has been a problem");
+								} 
+								
+								if(json.findValue("error-codes").toString().equals("missing-input-secret")){
+									flash("error", "You are missing secret key!");
 									User currentUser = User.find(name);
 									return ok(contact.render(currentUser,submit));
-
+								} 
+								
+								if(json.findValue("error-codes").toString().equals("invalid-input-secret")){
+									flash("error", "INVALID SECRET KEY!");
+									User currentUser = User.find(name);
+									return ok(contact.render(currentUser,submit));
 								}
+								
+								if(json.findValue("error-codes").toString().equals("missing-input-response")){
+									flash("error", "The response parameter is missing.");
+									User currentUser = User.find(name);
+									return ok(contact.render(currentUser,submit));
+								}
+								
+								if(json.findValue("error-codes").toString().equals("invalid-input-response")){
+									flash("error", "The response parameter is invalid or malformed.");
+									User currentUser = User.find(name);
+									return ok(contact.render(currentUser,submit));
+								}
+								
+								return redirect("/contact");
 							}
 						});
 				return holder;

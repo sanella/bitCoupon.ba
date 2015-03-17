@@ -23,6 +23,8 @@ public class MailHelper {
 		MailerPlugin.send(mail);
 
 	}
+	
+	
 	/**
 	 * This is a specific mail sender for contact form, used for sending feedback to admins.
 	 * @param email
@@ -48,16 +50,15 @@ public class MailHelper {
 				.format("<html>"
 						+ "<body>"
 						+ "<strong> My email </strong>: " + "%s"
-						+"\n"
+						+ "<br></br>"
 						+ "<strong> My name  </strong>: " + "%s"
-						+"\n"
+						+ "<br></br>"
 						+ "<strong> My phone number </strong>: " + "%s" 
-						+"\n"
-						+"\n"
+						+ "<br></br>"
 						+ "<p> %s </p> "
 						+ "</body>"
 						+ "</html>",
-						name, phone, email, message));
+						email, name, phone, message));
 		MailerPlugin.send(mail);
 
 	}
