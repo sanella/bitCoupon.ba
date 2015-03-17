@@ -2,12 +2,15 @@ package controllers;
 
 import java.text.ParseException;
 import java.util.Date;
+
 import models.Coupon;
 import models.User;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.Logger;
 import views.html.coupon.*;
+
 
 public class CouponController extends Controller {
 	
@@ -59,13 +62,14 @@ public class CouponController extends Controller {
 				return ok(couponPanel.render(session("name"), "Enter a valid price"));
 			}
 		} catch (NumberFormatException e){
-			//TODO Logger(e);
+			Logger.error(stringPrice, e.getMessage());
 			return ok(couponPanel.render(session("name"), "Enter a valid price"));
 		}
 		
 		Date current = new Date();
 		Date date = couponForm.bindFromRequest().get().dateExpire;	
 		if ( date.before(current)){
+			Logger.debug("Enter a valid expiration date");
 			return ok(couponPanel.render(session("name"), "Enter a valid expiration date"));
 		}
 		
@@ -78,7 +82,7 @@ public class CouponController extends Controller {
 		Coupon.createCoupon(name, price, date, picture, category,
 				description, remark);
 
-
+		Logger.info("Coupon added");
 		return ok(couponPanel.render( session("name"), "Coupon \"" + name
 				+ "\" added"));
 	}

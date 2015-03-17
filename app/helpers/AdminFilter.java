@@ -1,6 +1,7 @@
 package helpers;
 
 import models.User;
+import play.Logger;
 import play.mvc.Result;
 import play.mvc.Http.Context;
 import play.mvc.Security;
@@ -30,6 +31,7 @@ public class AdminFilter extends Security.Authenticator {
 
 	@Override
 	public Result onUnauthorized(Context ctx) {
+		Logger.error("Login To Complete");
 		return redirect("/loginToComplete");
 	}
 

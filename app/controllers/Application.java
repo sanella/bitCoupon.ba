@@ -85,6 +85,7 @@ public class Application extends Controller {
 		Form<Login> login = new Form<Login>(Login.class);
 		
 		if (login.hasGlobalErrors()) {
+			Logger.info(loginMsg);
 			return ok(Loginpage.render(loginMsg));
 		}
 		
@@ -92,6 +93,7 @@ public class Application extends Controller {
 		String password = login.bindFromRequest().get().password;
 
 		if (mail.isEmpty() || password.length() < 6) {
+			Logger.info(loginMsg);
 			return ok(Loginpage.render(loginMsg));
 		}
 
@@ -101,15 +103,16 @@ public class Application extends Controller {
 			session("name", cc.username);
 			return ok(index.render(cc, Coupon.all()));
 		}
-
+		Logger.info("User tried to login with invalid email or password");
 		return ok(Loginpage.render("Invalid email or password"));
-
+		
 	}
 
 	/** 
 	 * @return renders the loginpage view
 	 */
 	public static Result loginpage() {
+		Logger.info(loginMsg);
 		return ok(Loginpage.render(loginMsg));
 	}
 
@@ -120,10 +123,12 @@ public class Application extends Controller {
 	public static Result logout() {
 
 		session().clear();
+		Logger.info("User has logout");
 		return redirect("/");
 	}
 
 	public static Result loginToComplete() {
+		Logger.info("Login to complete this action");
 		return badRequest(loginToComplete.render("Login to complete this action"));
 	}
 	
@@ -166,7 +171,8 @@ public class Application extends Controller {
 									String name = newMessage.name;
 									String phone = newMessage.phone;
 									String message = newMessage.message;
-
+									
+									Logger.info("Message sent via contact form");
 									flash("success", "Message sent");
 									MailHelper.sendFeedback(email, name, phone, message);
 									return redirect("/contact");
