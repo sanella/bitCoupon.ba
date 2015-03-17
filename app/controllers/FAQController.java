@@ -1,9 +1,11 @@
 package controllers;
 
+import helpers.AdminFilter;
 import models.FAQ;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 import views.html.admin.faq.*;
 
 public class FAQController extends Controller{
@@ -15,13 +17,15 @@ public class FAQController extends Controller{
 		return ok(FAQview.render(session("name"), FAQ.all()));
 	}
 	
-	//TODO admin check
+	//TODO flash message
+	@Security.Authenticated(AdminFilter.class)
 	public static Result addFAQView(){
 		
 		return ok(NewFAQ.render(session("name"), "infoMSG")); //TODO
 	}
 	
-	//TODO admin check, error handling
+	//TODO  error handling
+	@Security.Authenticated(AdminFilter.class)
 	public static Result addFAQ(){
 		
 		Form<FAQ> form = new Form<FAQ>(FAQ.class); 
@@ -32,13 +36,15 @@ public class FAQController extends Controller{
 		return ok(NewFAQ.render(session("name"), "..created")); 
 	}
 	
+	@Security.Authenticated(AdminFilter.class)
 	public static Result editFAQView(int id){
 		
 		FAQ question = FAQ.find(id);
 		return ok(EditFAQ.render(session("name"), question));
 	}
 	
-	//TODO admin check, error handling, flash message..
+	//TODO  error handling, flash message..
+	@Security.Authenticated(AdminFilter.class)
 	public static Result updateFAQ(int id){
 		Form<FAQ> form = new Form<FAQ>(FAQ.class);
 		String question = form.bindFromRequest().get().question;
@@ -52,6 +58,7 @@ public class FAQController extends Controller{
 	}
 	
 	//TODO flash message
+	@Security.Authenticated(AdminFilter.class)
 	public static Result deleteFAQ(int id){
 		FAQ.delete(id);
 		return ok(FAQview.render(session("name"), FAQ.all()));
