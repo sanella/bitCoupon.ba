@@ -68,7 +68,7 @@ public class Global extends GlobalSettings {
 		}
 		
 		
-		if (FAQ.checkByTitle("Želim kupiti današnju ponudu. Kako da to učinim?") == false){
+		if (FAQ.checkByQuestion("Želim kupiti današnju ponudu. Kako da to učinim?") == false){
 			FAQ.createFAQ("Želim kupiti današnju ponudu. Kako da to učinim?", "Morate biti "
 					+ "registrovani i ulogovani na stranicu. Ukoliko još nemate nalog,"
 					+ " registracija je besplatna i traje manje od 30 sekundi, a također se "
@@ -76,7 +76,7 @@ public class Global extends GlobalSettings {
 					+ " dugme Kupi i pratite jednostavne korake.");
 		}
 		
-		if (FAQ.checkByTitle("Na koji način plaćam ponudu i je li sigurno?") == false){
+		if (FAQ.checkByQuestion("Na koji način plaćam ponudu i je li sigurno?") == false){
 			FAQ.createFAQ("Na koji način plaćam ponudu i je li sigurno?", "Plaćanje možete obaviti na"
 					+ " jedan od sljedećih načina:"
 					+"1.	Putem eKredita – eKredit možete uplatiti u banci ili pošti na naš transkcijski "
@@ -95,7 +95,7 @@ public class Global extends GlobalSettings {
 					+"5. Kupovina poklon bona na ime i prezime osobe koju želite bez obzira da li je registrovan korisnik ili ne.");
 		}
 		
-		if (FAQ.checkByTitle("Šta se dešava ako ponuda dana ne dosegne minimalan broj kupaca?")==false){
+		if (FAQ.checkByQuestion("Šta se dešava ako ponuda dana ne dosegne minimalan broj kupaca?")==false){
 			FAQ.createFAQ("Šta se dešava ako ponuda dana ne dosegne minimalan broj kupaca?", "Da bi ponuda "
 					+ "uspjela mora dostići minimalan broj kupaca koji se određuje u dogovoru s partnerima."
 					+ "U slučaju da se ne kupi dovoljan broj kupona, ponuda propada i ništa Vam se ne naplaćuje. "

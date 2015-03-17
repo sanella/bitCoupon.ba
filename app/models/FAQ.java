@@ -41,7 +41,7 @@ public class FAQ extends Model {
 		return faqs;
 	}
 	
-	public static boolean checkByTitle(String question){
+	public static boolean checkByQuestion(String question){
 		return find.where().eq("question", question).findUnique() != null;
 	}
 	

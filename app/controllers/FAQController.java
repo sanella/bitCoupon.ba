@@ -2,6 +2,7 @@ package controllers;
 
 import helpers.AdminFilter;
 import models.FAQ;
+import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -11,31 +12,61 @@ import views.html.admin.faq.*;
 public class FAQController extends Controller{
 	
 	
-	
+	/**
+	 * Show FAQ page
+	 * @return
+	 */
 	public static Result showFAQ(){
 		
 		return ok(FAQview.render(session("name"), FAQ.all()));
 	}
 	
-	//TODO flash message
+	/**
+	 * Show 'Add new FAQ' page
+	 * @return
+	 */
 	@Security.Authenticated(AdminFilter.class)
 	public static Result addFAQView(){
 		
-		return ok(NewFAQ.render(session("name"), "infoMSG")); //TODO
+		return ok(NewFAQ.render(session("name")));
 	}
 	
-	//TODO  error handling
+	
+	/**
+	 * Add new FAQ to the database
+	 * @return
+	 */
 	@Security.Authenticated(AdminFilter.class)
 	public static Result addFAQ(){
 		
-		Form<FAQ> form = new Form<FAQ>(FAQ.class); 
-		String question = form.bindFromRequest().get().question;
-		String answer = form.bindFromRequest().get().answer;
-		FAQ.createFAQ(question, answer);
+	//TODO  error handling
+		DynamicForm form = Form.form().bindFromRequest();
 		
-		return ok(NewFAQ.render(session("name"), "..created")); 
+		if (form.hasErrors() || form.hasGlobalErrors()) {
+			flash("error"," Error! "); //TODO message
+			return ok((NewFAQ.render(session("name"))));
+		}
+		
+		String question = form.data().get("question");
+		String answer = form.data().get("answer");
+		
+		if (question.length() < 20 || answer.length() < 20){
+			flash("error","Please, fill out both fields with valid a form! "
+					+ "Each field should contain at least 20 characters.");
+			return ok((NewFAQ.render(session("name"))));
+		}
+		
+		FAQ.createFAQ(question, answer);	
+		flash("success","New Question added");
+		
+		return ok(NewFAQ.render(session("name"))); 
 	}
 	
+	/**
+	 * Show Edit FAQ page
+	 * @param id
+	 * @return
+	 */
 	@Security.Authenticated(AdminFilter.class)
 	public static Result editFAQView(int id){
 		
@@ -43,24 +74,50 @@ public class FAQController extends Controller{
 		return ok(EditFAQ.render(session("name"), question));
 	}
 	
-	//TODO  error handling, flash message..
+	/**
+	 * Edit existing FAQ and update it in the database
+	 * @param id
+	 * @return
+	 */
 	@Security.Authenticated(AdminFilter.class)
 	public static Result updateFAQ(int id){
-		Form<FAQ> form = new Form<FAQ>(FAQ.class);
-		String question = form.bindFromRequest().get().question;
-		String answer = form.bindFromRequest().get().answer;
+	
+	//TODO  error handling, flash message..
+		
+		DynamicForm form = Form.form().bindFromRequest();
 		FAQ FAQToUpdate = FAQ.find(id);
+		
+		if (form.hasErrors() || form.hasGlobalErrors()) {
+			flash("error"," Error! "); //TODO message
+			return ok((EditFAQ.render(session("name"), FAQToUpdate)));
+		}
+		
+		String question = form.data().get("question");
+		String answer =  form.data().get("answer");
+		
+		if (question.length() < 20 || answer.length() < 20){
+			flash("error","Please, fill out both fields with valid a form! "
+					+ "Each field should contain at least 20 characters.");
+			return ok((EditFAQ.render(session("name"), FAQToUpdate)));
+		}
+		
 		FAQToUpdate.question = question;
 		FAQToUpdate.answer = answer;
 		FAQ.update(FAQToUpdate);
 		
+		flash("success"," Update Successful! ");
 		return ok(EditFAQ.render(session("name"), FAQToUpdate));
 	}
 	
-	//TODO flash message
+	/**
+	 * Delete existing FAQ
+	 * @param id
+	 * @return
+	 */
 	@Security.Authenticated(AdminFilter.class)
 	public static Result deleteFAQ(int id){
 		FAQ.delete(id);
+		flash("success", "Question deleted!");
 		return ok(FAQview.render(session("name"), FAQ.all()));
 	}
 	

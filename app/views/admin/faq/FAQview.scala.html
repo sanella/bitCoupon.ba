@@ -69,14 +69,22 @@
 		</header>
 	</section>
 	
+	
+							@if(flash.get("success")){
+							<div class="alert alert-danger" role="alert"> 
+								<div class="container">
+									@flash.get("success") 
+								</div>
+							</div>
+							}
+	
 	<div class="container">
 		<div class="col-sm-9">
 					<div class="features_items"><!--features_items-->
 						<h2 class="title text-center">FAQ</h2>
 			  		
 				@for(currentFAQ <- faqs){
-					
-						
+												
 							<div class="product-image-wrapper">
 								<div class="single-products">
 									<div class="productinfo text-center">

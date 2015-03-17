@@ -1,4 +1,4 @@
-@(username: String)(infoMsg: String)
+@(username: String)
 
 @import helper._
 
@@ -59,14 +59,28 @@
 		</header>
 	</section>
 	
+	
+						@if(flash.get("success")){
+							<div class="alert alert-success" role="alert"> 
+								<div class="container">
+									@flash.get("success") 
+								</div>
+							</div>
+						}
+						
+						@if(flash.get("error")){
+							<div class="alert alert-danger" role="alert"> 
+								<div class="container">
+									@flash.get("error") 
+								</div>
+							</div>
+						}
 
 	<div class="container">
-					<h4> @infoMsg </h4>
+					
 					<div class="features_items"><!--features_items-->
 						<h2 class="title text-center"> Add new FAQ</h2>
 						<div class="col-sm-6 col-sm-offset-1">
-						
-						
 					
 					<div class="signup-form"><!--sign up form-->
 						<form action="@routes.FAQController.addFAQ()" method ="POST" >
