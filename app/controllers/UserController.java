@@ -13,6 +13,8 @@ import play.api.mvc.Session;
 import play.data.Form;
 import play.mvc.*;
 import views.html.*;
+import views.html.user.*;
+import views.html.admin.users.*;
 import models.*;
 
 public class UserController extends Controller {

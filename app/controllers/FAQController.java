@@ -4,7 +4,7 @@ import models.FAQ;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.*;
+import views.html.admin.faq.*;
 
 public class FAQController extends Controller{
 	
