@@ -123,6 +123,10 @@ public class Application extends Controller {
 		return badRequest(loginToComplete.render("Login to complete this action"));
 	}
 	
+	/**
+	 * Renders the contact form page
+	 * @return
+	 */
 	public static Result contact() {
 		name = session("name");
 		if (name == null) {
@@ -133,6 +137,9 @@ public class Application extends Controller {
 		}
 	}
 	
+	public static Promise<Result> sendMail() {
+		return (Promise<Result>) TODO;
+	}
 
 	
 }

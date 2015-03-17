@@ -54,7 +54,7 @@
 						<h4>Contact form</h4>
 					
 					<div class="signup-form"><!--contact form-->
-						<form action="@routes.UserController.updateUser(user.username)" method ="POST" >
+						<form action="@routes.Application.sendMail()" method ="POST" >
 							<input type="text" name="username" id="username" placeholder="Name and surname"  required/>
 							<input type="text" name="email" id="email" placeholder=Email  required/>
 							
