@@ -4,6 +4,8 @@ import java.util.Date;
 
 import com.avaje.ebeaninternal.server.persist.BindValues.Value;
 
+import helpers.CurrentUserFilter;
+import helpers.AdminFilter;
 import helpers.HashHelper;
 import helpers.MailHelper;
 import play.*;
@@ -11,6 +13,8 @@ import play.api.mvc.Session;
 import play.data.Form;
 import play.mvc.*;
 import views.html.*;
+import views.html.user.*;
+import views.html.admin.users.*;
 import models.*;
 
 public class UserController extends Controller {
@@ -19,6 +23,7 @@ public class UserController extends Controller {
 	static String message = "Welcome ";
 	static String bitName = "bitCoupon";
 	static String name = null;
+	
 
 	static Form<User> userForm = new Form<User>(User.class);
 
@@ -91,6 +96,7 @@ public class UserController extends Controller {
 	 * Method sends the current user to the userUpdate() method
 	 * @return Renders the user update view for editing profile
 	 */
+	@Security.Authenticated(CurrentUserFilter.class)
 	public static Result userUpdateView() {
 		User u = User.find(session("name"));
 		return ok(userUpdate.render(u, "Update account"));
@@ -136,7 +142,11 @@ public class UserController extends Controller {
 	 * @param id of the User (long)
 	 * @return Result render adminEditUser
 	 */
+	@Security.Authenticated(AdminFilter.class)
 	public static Result adminEditUserView(long id){
+		if (Sesija.adminCheck(ctx()) != true){
+			return redirect("/");
+		}
 		User u = User.find(id);
 		return ok(adminEditUser.render(u, "Update user"));
 	}
@@ -146,7 +156,12 @@ public class UserController extends Controller {
 	 * @param id of the user to update
 	 * @return Result render the vies
 	 */
+	@Security.Authenticated(AdminFilter.class)
 	public static Result adminUpdateUser(long id){
+		
+		if (Sesija.adminCheck(ctx()) != true){
+			return redirect("/");
+		}
 		
 		if (userForm.hasErrors()) {
 			return redirect("/@editUser/:"+id); //provjeriti
@@ -174,6 +189,7 @@ public class UserController extends Controller {
 	 * 
 	 * 
 	 */
+	@Security.Authenticated(AdminFilter.class)
 	public static Result controlPanel(long id) {
 
 		User u = User.find(id);
@@ -181,7 +197,7 @@ public class UserController extends Controller {
 			return redirect("/");
 		}
 
-		return ok(adminPanel.render(u.username, null));
+		return ok(adminPanel.render(u, null));
 
 	}
 
@@ -205,6 +221,7 @@ public class UserController extends Controller {
 	 *
 	 * @return Result
 	 */
+	@Security.Authenticated(AdminFilter.class)
 	public static Result listUsers(){
 		
 		return ok( userList.render(session("name"),User.all()) );
@@ -217,6 +234,7 @@ public class UserController extends Controller {
 	 * @param id Long
 	 * @return Result renders the same view
 	 */
+	@Security.Authenticated(AdminFilter.class)
 	public static Result deleteUser(Long id){
 		User currentUser = Sesija.getCurrentUser(ctx());
 		if (currentUser.id == id || Sesija.adminCheck(ctx()))

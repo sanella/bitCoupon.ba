@@ -1,4 +1,4 @@
-@(user: User)
+@(user: User)(message: String)
 
 @import helper._
 
@@ -14,12 +14,8 @@
 						<div class="col-sm-12">
 						
 							<ul class="nav navbar-nav">
- 							<li><a class="active">@user.username </a></li>
- 								<li><a href="@routes.UserController.userUpdateView">Edit profile</a>
- 							<li><a href="/logout" class="active"><i class="fa fa-lock"></i> Logout</a></li>	
- 							@if(Sesija.adminCheck(ctx()) == true) {
- 							<li><a href="@routes.UserController.controlPanel(user.id)" class="active"><i class="fa fa-lock"></i> Admin Panel</a></li>	
- 							}					
+ 							<li><a class="active"> @message </a></li>
+ 							<li><a href="/logout" class="active"><i class="active"></i> Logout</a></li>					
 							</ul>
 						</div>
 					</div>
@@ -54,23 +50,6 @@
 							<ul class="nav navbar-nav collapse navbar-collapse">
 								<li>
 								<a href="/">Home</a></li>
-								<li class="dropdown"><a href="#" class="active">Page1<i class="fa fa-angle-down"></i></a>
-                                    <ul role="menu" class="sub-menu">
-                                        <li><a href="/" class="active">Page2</a></li>
-										<li><a href="/">Page3</a></li> 
-										<li><a href="/">Page4</a></li> 
-										<li><a href="/">Page5</a></li> 
-										<li><a href="/loginpage">Login</a></li> 
-                                    </ul>
-                                </li> 
-								<li class="dropdown"><a href="#">Page6<i class="fa fa-angle-down"></i></a>
-                                    <ul role="menu" class="sub-menu">
-                                        <li><a href="/">Page7</a></li>
-										<li><a href="/">Page8</a></li>
-                                    </ul>
-                                </li> 
-								<li><a href="/">Page9</a></li>
-								<li><a href="/">Page10</a></li>
 							</ul>
 						</div>
 						
@@ -81,19 +60,47 @@
 		</header>
 	</section>
 	
+	
+	
 	<div class="container">
 					
 					<div class="features_items"><!--features_items-->
-						<h2 class="title text-center"> Profile page here </h2>
+						<h2 class="title text-center">Edit User @user.username</h2>
 						<div class="col-sm-6 col-sm-offset-1">
 						
-
+						<h4>@message</h4>
 					
-
+					<div class="signup-form"><!--sign up form-->
+						<form action="@routes.UserController.adminUpdateUser(user.id)" method ="POST" >
+						
+													
+							<input type="text" name="username" id="username" placeholder="Username" value=@user.username required/>
+							<input type="text" name="email" id="email" placeholder=Email value=@user.email required/>
+							<input type="password" name="newPassword" id="newPassword" placeholder="New Pasword" value="" />
+										
+										
+								
+						   				<label for="isAdmin">Option for promoting user to administrator. Option "false" for removing user from Administrators and option "true" for adding user to Administrator group.</label>
+						    			<select id="isAdmin" name="isAdmin" id="isAdmin" value=@user.isAdmin>
+					     					<option selected="selected">@user.isAdmin</option>
+					     					@if( user.isAdmin == true ){
+						     				<option>false</option> 
+						     				} else{
+						     				<option>true</option> 
+						     				}					     							
+					    				</select>
+					    				<br>
+					    				<br>
+							<button type="submit" class="btn btn-default">Update user</button>
+								<br>
+					    				<br>
+					    				<br>
+			
+						</form>
+					</div><!--/sign up form-->
+					
 				</div>
 			</div>
-	<img src='@routes.Assets.at("images/home/avatar.jpg")' class="avatar-profile"/>
-
 		</div>
 	</section><!--/form-->
 							</div>

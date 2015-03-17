@@ -3,8 +3,43 @@ package controllers;
 import models.*;
 import play.*;
 import play.data.Form;
+import play.data.validation.Constraints.Email;
+import play.data.validation.Constraints.Required;
 import play.mvc.*;
 import views.html.*;
+
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+
+import helpers.MailHelper;
+import models.User;
+import play.Logger;
+import play.Play;
+import play.data.DynamicForm;
+import play.data.Form;
+import play.data.validation.Constraints.Email;
+import play.data.validation.Constraints.Required;
+import play.libs.F.Function;
+import play.libs.F.Promise;
+import play.libs.ws.WS;
+import play.libs.ws.WSResponse;
+import play.mvc.Controller;
+import play.mvc.Http.MultipartFormData;
+import play.mvc.Http.MultipartFormData.FilePart;
+import play.mvc.Result;
+import models.*;
+
+import com.fasterxml.jackson.databind.JsonNode;
+
+
+
+
+
+
+import com.google.common.io.Files;
 
 public class Application extends Controller {
 
@@ -12,7 +47,19 @@ public class Application extends Controller {
 	static String loginMsg = "Login to your account";
 	static String name = null;
 
-
+	public static class Contact {
+		
+		@Required
+		@Email
+		public String email;
+		@Required
+		public String message;
+		
+		public String phone;
+		public String name;
+	}
+	
+	
 	/**
 	 * @return render the index page
 	 */
@@ -76,4 +123,86 @@ public class Application extends Controller {
 		return redirect("/");
 	}
 
+	public static Result loginToComplete() {
+		return badRequest(loginToComplete.render("Login to complete this action"));
+	}
+	
+	/**
+	 * Renders the contact form page
+	 * @return
+	 */
+	public static Result contact() {
+		name = session("name");
+		if (name == null) {
+			return ok(contact.render(null, new Form<Contact>(Contact.class)));
+		} else {
+			User currentUser = User.find(name);
+			return ok(contact.render(currentUser, new Form<Contact>(Contact.class)));
+		}
+	}
+	
+	
+	public static Promise<Result> sendMail() {
+				final DynamicForm temp = DynamicForm.form().bindFromRequest();
+				
+				Promise<Result> holder = WS
+						.url("https://www.google.com/recaptcha/api/siteverify")
+						.setContentType("application/x-www-form-urlencoded")
+						.post(String.format("secret=%s&response=%s",
+
+								Play.application().configuration().getString("recaptchaKey"),
+								temp.get("g-recaptcha-response")))
+						.map(new Function<WSResponse, Result>() {
+
+							public Result apply(WSResponse response) {
+
+								JsonNode json = response.asJson();
+								Form<Contact> submit = Form.form(Contact.class).bindFromRequest();
+								
+								if (json.findValue("success").asBoolean() == true && !submit.hasErrors()) {
+
+									Contact newMessage = submit.get();
+									String email = newMessage.email;
+									String name = newMessage.name;
+									String phone = newMessage.phone;
+									String message = newMessage.message;
+
+									flash("success", "Message sent");
+									MailHelper.sendFeedback(email, name, phone, message);
+									return redirect("/contact");
+								} 
+								
+								if(json.findValue("error-codes").toString().equals("missing-input-secret")){
+									flash("error", "You are missing secret key!");
+									User currentUser = User.find(name);
+									return ok(contact.render(currentUser,submit));
+								} 
+								
+								if(json.findValue("error-codes").toString().equals("invalid-input-secret")){
+									flash("error", "INVALID SECRET KEY!");
+									User currentUser = User.find(name);
+									return ok(contact.render(currentUser,submit));
+								}
+								
+								if(json.findValue("error-codes").toString().equals("missing-input-response")){
+									flash("error", "The response parameter is missing.");
+									User currentUser = User.find(name);
+									return ok(contact.render(currentUser,submit));
+								}
+								
+								if(json.findValue("error-codes").toString().equals("invalid-input-response")){
+									flash("error", "The response parameter is invalid or malformed.");
+									User currentUser = User.find(name);
+									return ok(contact.render(currentUser,submit));
+								}
+								
+								flash("error", "WARNING! An error occured! You need to fill in the captcha!");
+								return redirect("/contact");
+							}
+						});
+				return holder;
+	}
+	
+
+	
 }

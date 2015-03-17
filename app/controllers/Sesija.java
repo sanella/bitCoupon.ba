@@ -4,8 +4,9 @@ import play.mvc.Http.Context;
 import play.mvc.Result;
 import play.mvc.Security;
 
-/*
- * 
+/**
+ * This class is a session controller. It allows us to get
+ * info on currently logged in user and his attributes.
  */
 public class Sesija extends Security.Authenticator {
 	
@@ -15,10 +16,10 @@ public class Sesija extends Security.Authenticator {
 	 * @return username String
 	 */
 	public String getUsername(Context ctx){
-		if ( !ctx.session().containsKey("user_id") ){
+		if ( !ctx.session().containsKey("name") ){
 			return null;
 		}
-		long id = Long.parseLong(ctx.session().get("user_id"));
+		long id = Long.parseLong(ctx.session().get("name"));
 		User u = User.find(id);
 		if ( u != null){
 			return u.username;
