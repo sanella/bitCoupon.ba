@@ -130,10 +130,10 @@ public class Application extends Controller {
 	public static Result contact() {
 		name = session("name");
 		if (name == null) {
-			return ok(contact.render(null));
+			return ok(contact.render(null, new Form<Contact>(Contact.class)));
 		} else {
 			User currentUser = User.find(name);
-			return ok(contact.render(currentUser));
+			return ok(contact.render(currentUser, new Form<Contact>(Contact.class)));
 		}
 	}
 	

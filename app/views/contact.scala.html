@@ -1,4 +1,4 @@
-@(user: User)
+@(user: User)(contactForm: Form[Application.Contact])
 
 @import helper._
 
@@ -61,6 +61,13 @@
 							<textarea name="message" id="message" placeholder="Your message to us!" cols="54" rows="6"></textarea>
 							<br></br>
 							
+							 <div class="form-group">
+				   				 <div class="col-md-offset-2 col-sm-10 col-md-5">
+				  				<div class="g-recaptcha" data-sitekey="6LfjjAMTAAAAAIsphIuvNX_F5Yd76c9I6B9uhZmj"></div>
+				  			</div>
+			  				</div>
+							<br></br>
+							<br></br>
 							<div class="btn-toolbar" role="toolbar">
 							<div class="btn-group">
 							<button type="submit" class="btn btn-default">Send</button>
@@ -85,4 +92,6 @@
 	
 	
 	</body>
+	
+	<script src='https://www.google.com/recaptcha/api.js'></script>
 }
