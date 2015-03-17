@@ -1,8 +1,11 @@
 package models;
 
 import java.util.List;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
@@ -16,6 +19,7 @@ public class FAQ extends Model {
 	public String title;
 	
 	@Required
+	@Column(columnDefinition = "TEXT")
 	public String content;
 	
 	static Finder<Integer, FAQ> find = new Finder<Integer, FAQ>(Integer.class, FAQ.class);
@@ -35,6 +39,10 @@ public class FAQ extends Model {
 	public static List<FAQ> all(){
 		List<FAQ> faqs = find.findList();
 		return faqs;
+	}
+	
+	public static boolean checkByTitle(String title){
+		return find.where().eq("title", title).findUnique() != null;
 	}
 	
 }

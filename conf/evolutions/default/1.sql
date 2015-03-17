@@ -27,7 +27,7 @@ create table email_verification (
 create table faq (
   id                        integer not null,
   title                     varchar(255),
-  content                   varchar(255),
+  content                   TEXT,
   constraint pk_faq primary key (id))
 ;
 
