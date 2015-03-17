@@ -9,6 +9,8 @@ GET    /loginpage                controllers.Application.loginpage()
 POST   /login                    controllers.Application.login()
 GET    /logout                   controllers.Application.logout()
 GET	   /loginToComplete			 controllers.Application.loginToComplete()
+POST   /contact            		 controllers.Application.sendMail()
+GET    /contact					 controllers.Application.contact()
 
 GET    /signup        					  controllers.UserController.signup()
 POST   /register       					  controllers.UserController.register()
