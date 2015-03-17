@@ -48,11 +48,15 @@ public class Application extends Controller {
 	static String name = null;
 
 	public static class Contact {
+		
 		@Required
 		@Email
 		public String email;
 		@Required
 		public String message;
+		
+		public String phone;
+		public String name;
 	}
 	
 	
@@ -163,34 +167,24 @@ public class Application extends Controller {
 
 									Contact newMessage = submit.get();
 									String email = newMessage.email;
+									String name = newMessage.name;
+									String phone = newMessage.phone;
 									String message = newMessage.message;
 
-//									flash("success", "Message sent");
-									MailHelper.send(email, message);
-									return redirect("/");
+									flash("success", "Message sent");
+									MailHelper.sendFeedback(email, name, phone, message);
+									return redirect("/contact");
 								} else {
-//									flash("error", "There has been a problem");
+									flash("error", "There has been a problem");
 									User currentUser = User.find(name);
 									return ok(contact.render(currentUser,submit));
 
 								}
 							}
 						});
-				//return the promisse
 				return holder;
 	}
 	
-//	public static Result sendMail() {
-//		
-//		Form<Contact> submit = Form.form(Contact.class).bindFromRequest();
-//		
-//		Contact newMessage = submit.get();
-//		String email = newMessage.email;
-//		String message = newMessage.message;
-//		
-//		MailHelper.send(email, message);
-//		
-//		return redirect("/");
-//	}
+
 	
 }

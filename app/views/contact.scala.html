@@ -59,12 +59,19 @@
 					
 				 <div class="signup-form">
 						<form action="@routes.Application.sendMail"  method ="POST" >
-							<!--  <input type="text" name="username" id="username" placeholder="Name and surname"  required/> -->
+						
+							<input type="text" name="name" id="name" placeholder="Name and surname"  
+							class='@("error-input".when(contactForm("name").hasErrors)) form-control' 
+							value='@contactForm("name").value' required/> 
 							
 							
 							<input type="email" name="email" id="email" placeholder="youremail@@mail.com"
 							class='@("error-input".when(contactForm("email").hasErrors)) form-control' 
       						value='@contactForm("email").value'  required/>
+      						
+      						<input type="text" name="phone" id="phone" placeholder="Your phone number"  
+							class='@("error-input".when(contactForm("phone").hasErrors)) form-control' 
+							value='@contactForm("phone").value' required/> 
 							
 							<textarea name="message" id="message" placeholder="Your message to us!" cols="54" rows="6"
 							class='@("error-input".when(contactForm("message").hasErrors)) form-control' 
