@@ -155,8 +155,7 @@ public class Application extends Controller {
 							public Result apply(WSResponse response) {
 								//get the response as JSON
 								JsonNode json = response.asJson();
-								Form<Contact> submit = Form.form(Contact.class)
-										.bindFromRequest();
+								Form<Contact> submit = Form.form(Contact.class).bindFromRequest();
 								
 								//check if value of success is true
 								if (json.findValue("success").asBoolean() == true
@@ -166,11 +165,11 @@ public class Application extends Controller {
 									String email = newMessage.email;
 									String message = newMessage.message;
 
-									flash("success", "Message sent");
+//									flash("success", "Message sent");
 									MailHelper.send(email, message);
 									return redirect("/");
 								} else {
-									flash("error", "There has been a problem");
+//									flash("error", "There has been a problem");
 									User currentUser = User.find(name);
 									return ok(contact.render(currentUser,submit));
 
@@ -180,6 +179,18 @@ public class Application extends Controller {
 				//return the promisse
 				return holder;
 	}
-
+	
+//	public static Result sendMail() {
+//		
+//		Form<Contact> submit = Form.form(Contact.class).bindFromRequest();
+//		
+//		Contact newMessage = submit.get();
+//		String email = newMessage.email;
+//		String message = newMessage.message;
+//		
+//		MailHelper.send(email, message);
+//		
+//		return redirect("/");
+//	}
 	
 }

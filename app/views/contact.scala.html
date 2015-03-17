@@ -56,12 +56,13 @@
 						
 						<h4>Contact form</h4>
 					
-					<div class="signup-form"><!--contact form-->
+					
+				 <div class="signup-form">
 						<form action="@routes.Application.sendMail"  method ="POST" >
 							<!--  <input type="text" name="username" id="username" placeholder="Name and surname"  required/> -->
 							
 							
-							<input type="email" name="email" id="email" placeholder="email"
+							<input type="email" name="email" id="email" placeholder="youremail@@mail.com"
 							class='@("error-input".when(contactForm("email").hasErrors)) form-control' 
       						value='@contactForm("email").value'  required/>
 							
@@ -71,11 +72,11 @@
 							
 							<br></br>
 							
-							 <div class="form-group">
+							   <div class="form-group">
 				   				 <div class="col-md-offset-2 col-sm-10 col-md-5">
-				  				<div class="g-recaptcha" data-sitekey="6Lf8mQMTAAAAABp3ERTZa1THZj5MtnGgAtpXWQpn"></div>
+				  				<div class="g-recaptcha" data-sitekey="6LdMnAMTAAAAAD8tf0rTSe-DwRNThLwNGDTudxx1"></div>
 				  			</div>
-			  				</div>
+			  				</div> 
 							<br></br>
 							<br></br>
 							<div class="btn-toolbar" role="toolbar">
