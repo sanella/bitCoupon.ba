@@ -33,6 +33,9 @@ GET    /verifyEmail/:id         		  controllers.UserController.verifyEmail(id: S
 POST   /addFAQ							  controllers.FAQController.addFAQ()
 GET	   /addFAQ							  controllers.FAQController.addFAQView()
 GET	   /faq								  controllers.FAQController.showFAQ()
+POST   /editFAQ							  controllers.FAQController.updateFAQ(id: Integer)
+GET	   /editFAQ/@:id					  controllers.FAQController.editFAQView(id: Integer)
+GET    /deleteFAQ						  controllers.FAQController.deleteFAQ(id: Integer)
 
 # Map static resources from the /public folder to the /assets URL path
 GET    /assets/*file             controllers.Assets.at(path="/public", file)

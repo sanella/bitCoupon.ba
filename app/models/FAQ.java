@@ -16,22 +16,22 @@ public class FAQ extends Model {
 	public int id;
 	
 	@Required
-	public String title;
+	public String question;
 	
 	@Required
 	@Column(columnDefinition = "TEXT")
-	public String content;
+	public String answer;
 	
 	static Finder<Integer, FAQ> find = new Finder<Integer, FAQ>(Integer.class, FAQ.class);
 	
 	
-	public FAQ(String title, String content){
-		this.title = title;
-		this.content = content;
+	public FAQ(String question, String answer){
+		this.question = question;
+		this.answer = answer;
 	}
 	
-	public static int createFAQ(String title, String content){
-		FAQ newFaq = new FAQ(title, content);
+	public static int createFAQ(String question, String answer){
+		FAQ newFaq = new FAQ(question, answer);
 		newFaq.save();
 		return newFaq.id;
 	}
@@ -41,8 +41,20 @@ public class FAQ extends Model {
 		return faqs;
 	}
 	
-	public static boolean checkByTitle(String title){
-		return find.where().eq("title", title).findUnique() != null;
+	public static boolean checkByTitle(String question){
+		return find.where().eq("question", question).findUnique() != null;
+	}
+	
+	public static FAQ find(int id){
+		return find.byId(id);
+	}
+	
+	public static void update(FAQ faq){
+		faq.save();
+	}
+	
+	public static void delete(int id){
+		find.byId(id).delete();
 	}
 	
 }

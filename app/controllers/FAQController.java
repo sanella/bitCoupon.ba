@@ -25,11 +25,38 @@ public class FAQController extends Controller{
 	public static Result addFAQ(){
 		
 		Form<FAQ> form = new Form<FAQ>(FAQ.class); 
-		String title = form.bindFromRequest().get().title;
-		String content = form.bindFromRequest().get().content;
-		FAQ.createFAQ(title, content);
+		String question = form.bindFromRequest().get().question;
+		String answer = form.bindFromRequest().get().answer;
+		FAQ.createFAQ(question, answer);
 		
 		return ok(NewFAQ.render(session("name"), "..created")); 
 	}
+	
+	public static Result editFAQView(int id){
+		
+		FAQ question = FAQ.find(id);
+		return ok(EditFAQ.render(session("name"), question));
+	}
+	
+	//TODO admin check, error handling, flash message..
+	public static Result updateFAQ(int id){
+		Form<FAQ> form = new Form<FAQ>(FAQ.class);
+		String question = form.bindFromRequest().get().question;
+		String answer = form.bindFromRequest().get().answer;
+		FAQ FAQToUpdate = FAQ.find(id);
+		FAQToUpdate.question = question;
+		FAQToUpdate.answer = answer;
+		FAQ.update(FAQToUpdate);
+		
+		return ok(EditFAQ.render(session("name"), FAQToUpdate));
+	}
+	
+	//TODO flash message
+	public static Result deleteFAQ(int id){
+		FAQ.delete(id);
+		return ok(FAQview.render(session("name"), FAQ.all()));
+	}
+	
+	
 
 }
