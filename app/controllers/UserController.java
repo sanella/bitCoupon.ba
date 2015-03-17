@@ -13,6 +13,8 @@ import play.api.mvc.Session;
 import play.data.Form;
 import play.mvc.*;
 import views.html.*;
+import views.html.user.*;
+import views.html.admin.users.*;
 import models.*;
 
 public class UserController extends Controller {
@@ -21,6 +23,7 @@ public class UserController extends Controller {
 	static String message = "Welcome ";
 	static String bitName = "bitCoupon";
 	static String name = null;
+	
 
 	static Form<User> userForm = new Form<User>(User.class);
 
@@ -194,7 +197,7 @@ public class UserController extends Controller {
 			return redirect("/");
 		}
 
-		return ok(adminPanel.render(u.username, null));
+		return ok(adminPanel.render(u, null));
 
 	}
 

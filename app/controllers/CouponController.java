@@ -7,13 +7,12 @@ import models.User;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.*;
+import views.html.coupon.*;
 
 public class CouponController extends Controller {
 	
 	
 	static Form<Coupon> couponForm = new Form<Coupon>(Coupon.class);
-		
 	
 	/**
 	 * 
@@ -117,7 +116,7 @@ public class CouponController extends Controller {
 	 */
 	public static Result editCoupon(long id){
 		Coupon coupon=Coupon.find(id);
-		return ok(updateCouponView.render(coupon, null));
+		return ok(updateCouponView.render(session("name"),coupon, null));
 	
 	}
 	
@@ -141,7 +140,7 @@ public class CouponController extends Controller {
 
 		coupon.name = couponForm.bindFromRequest().field("name").value();
 		if (coupon.name.length() < 4) {
-			return ok(updateCouponView.render(coupon, "Name must be minimal 4 characters"));
+			return ok(updateCouponView.render(session("name"),coupon, "Name must be minimal 4 characters"));
 			}
 		if(coupon.name.length() > 120){
 			return ok(couponPanel.render(session("name"),"Name must be max 120 characters long"));
@@ -153,13 +152,13 @@ public class CouponController extends Controller {
 			coupon.price = Double.valueOf(strPrice);
 		} catch (NumberFormatException e){
 			//TODO Logger(e);
-			return ok(updateCouponView.render(coupon, null));
+			return ok(updateCouponView.render(session("name"), coupon, null));
 		}
 		Date current = new Date();
 		Date date = couponForm.bindFromRequest().get().dateExpire;
 		if (date != null){  
 			if ( date.before(current)){
-				return ok(updateCouponView.render(coupon, "Enter a valid expiration date"));
+				return ok(updateCouponView.render(session("name"), coupon, "Enter a valid expiration date"));
 			}
 			coupon.dateExpire = date;
 		}
@@ -171,7 +170,7 @@ public class CouponController extends Controller {
 		Coupon.updateCoupon(coupon);
 
 
-		return ok(updateCouponView.render(coupon, "updated"));
+		return ok(updateCouponView.render(session("name"), coupon, "updated"));
 	
 		
 	}

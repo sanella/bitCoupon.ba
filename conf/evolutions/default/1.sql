@@ -24,6 +24,13 @@ create table email_verification (
   constraint pk_email_verification primary key (id))
 ;
 
+create table faq (
+  id                        integer not null,
+  question                  varchar(255),
+  answer                    TEXT,
+  constraint pk_faq primary key (id))
+;
+
 create table user (
   id                        bigint not null,
   username                  varchar(255),
@@ -39,6 +46,8 @@ create sequence coupon_seq;
 
 create sequence email_verification_seq;
 
+create sequence faq_seq;
+
 create sequence user_seq;
 
 
@@ -52,6 +61,8 @@ drop table if exists coupon;
 
 drop table if exists email_verification;
 
+drop table if exists faq;
+
 drop table if exists user;
 
 SET REFERENTIAL_INTEGRITY TRUE;
@@ -59,6 +70,8 @@ SET REFERENTIAL_INTEGRITY TRUE;
 drop sequence if exists coupon_seq;
 
 drop sequence if exists email_verification_seq;
+
+drop sequence if exists faq_seq;
 
 drop sequence if exists user_seq;
 
