@@ -62,7 +62,7 @@ public class Global extends GlobalSettings {
 		
 		if (User.check("john@mail.com") == false) {
 			User.createUser("John", "john@mail.com",
-					HashHelper.createPassword("johndoe"), true);
+					HashHelper.createPassword("johndoe"), false);
 			EmailVerification setVerified = new EmailVerification(2, true);
 			setVerified.save();
 		}

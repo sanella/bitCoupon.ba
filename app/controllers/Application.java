@@ -67,10 +67,10 @@ public class Application extends Controller {
 		name = session("name");
 		if (name == null) {
 			return ok(index.render(null, Coupon.all()));
-		} else {
-			User currentUser = User.find(name);
-			return ok(index.render(currentUser, Coupon.all()));
-		}
+		} 
+		User currentUser = User.find(name);
+		return ok(index.render(currentUser, Coupon.all()));
+		
 	}
 
 	/**
@@ -85,14 +85,14 @@ public class Application extends Controller {
 		Form<Login> login = new Form<Login>(Login.class);
 		
 		if (login.hasGlobalErrors()) {
-			return ok(Loginpage.render(loginMsg));
+			return badRequest(Loginpage.render(loginMsg));
 		}
 		
 		String mail = login.bindFromRequest().get().email;
 		String password = login.bindFromRequest().get().password;
 
 		if (mail.isEmpty() || password.length() < 6) {
-			return ok(Loginpage.render(loginMsg));
+			return badRequest(Loginpage.render(loginMsg));
 		}
 
 		if (User.verifyLogin(mail, password) == true) {
@@ -102,7 +102,7 @@ public class Application extends Controller {
 			return ok(index.render(cc, Coupon.all()));
 		}
 
-		return ok(Loginpage.render("Invalid email or password"));
+		return badRequest(Loginpage.render("Invalid email or password"));
 
 	}
 
