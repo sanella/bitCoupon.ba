@@ -72,7 +72,6 @@ public class FAQController extends Controller{
 	 */
 	@Security.Authenticated(AdminFilter.class)
 	public static Result editFAQView(int id){
-		
 		FAQ question = FAQ.find(id);
 		return ok(EditFAQ.render(session("name"), question));
 	}
