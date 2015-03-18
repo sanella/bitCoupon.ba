@@ -62,22 +62,26 @@
 							<h3>@flash.get("error")</h3>
 							}
 						
-						<h4>Contact form</h4>
+					<!--  <h4>Contact form</h4> -->
 					
 					
 				 <div class="signup-form">
 						<form action="@routes.Application.sendMail"  method ="POST" >
 						
-							<input type="text" name="name" id="name" placeholder="Name and surname"  
+							<label for="name">Name and surname:</label>
+							<input type="text" name="name" id="name" placeholder="John Doe" maxlength="30" 
 							class='@("error-input".when(contactForm("name").hasErrors)) form-control' 
 							value='@contactForm("name").value' required/> 
 							
-							
+							<label for="email">Email adress:</label>
 							<input type="email" name="email" id="email" placeholder="youremail@@mail.com"
 							class='@("error-input".when(contactForm("email").hasErrors)) form-control' 
       						value='@contactForm("email").value'  required/>
-      						
-      						<input type="text" name="phone" id="phone" placeholder="Your phone number"  
+      				
+      						<!-- <input type="text" name="phone" id="phone" placeholder="Your phone number" -->
+      						<!-- <input type='tel' pattern='[\+]\d{2}[\(]\d{2}[\)]\d{4}[\-]\d{4}' title='Phone Number (Format: +99(99)9999-9999)' -->
+      						<label for="phonenum">Phone Number:</label>
+							<input name="phone" type="text" pattern="\d{3}[- ]?\d{3}[- ]?\d{3}" placeholder="Format: xxx xxx xxx" title='Phone Number Format: xxx xxx xxx(no dashes!)'
 							class='@("error-input".when(contactForm("phone").hasErrors)) form-control' 
 							value='@contactForm("phone").value' required/> 
 							
