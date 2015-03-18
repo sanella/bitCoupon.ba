@@ -79,13 +79,15 @@ public class UserController extends Controller {
 
 			long id = User.createUser(username, mail, hashPass, false);
 			String verificationEmail = EmailVerification.addNewRecord(id);
+
 			MailHelper.send(mail, "Click on the link below to verify your e-mail adress <br>"
 					+ "http://localhost:9000/verifyEmail/" + verificationEmail);
 			//User cc = User.getUser(mail);
-			
+			Logger.info("A verification mail has been sent to email address");
 			return ok(Loginpage.render("A verification mail has been sent to your email address"));
 
 		} else {
+			Logger.info("Username or email allready exists!");
 			return ok(signup.render("Username or email allready exists!",
 					username, mail));
 		}
@@ -129,6 +131,7 @@ public class UserController extends Controller {
 		if (HashHelper.checkPass(oldPass, cUser.password) == true) {
 			cUser.password = HashHelper.createPassword(newPass);
 			cUser.save();
+			Logger.info(cUser.username + " is updated");
 			return ok(userUpdate.render(cUser, "Update Successful"));
 		} else {
 			return ok(userUpdate.render(cUser, "Incorrect Password"));
@@ -181,6 +184,7 @@ public class UserController extends Controller {
 	    cUser.isAdmin = Boolean.parseBoolean(admin);
 	    cUser.updated = new Date();
 		cUser.save();
+		Logger.info(session("name") + " updated user: " + cUser.username);
 		return ok(adminEditUser.render(cUser, "Update successful!"));
 	}
 	
@@ -254,9 +258,11 @@ public class UserController extends Controller {
 		String message = "";
 		if(recordToUpdate.createdOn.compareTo(new Date()) < 0){
 			EmailVerification.updateRecord(recordToUpdate);
+			Logger.info("e-mail is now verified");
 			message = "You're e-mail is now verified. To login click on the button below";
 		}
 		else{
+			Logger.info("Verification period is expired");
 			message = "Verification period is expired. If you want to receive a new verification mail, click on the button 'Resend'";
 		}		
 		return ok(verifyEmail.render(message));

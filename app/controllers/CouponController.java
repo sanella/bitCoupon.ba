@@ -9,7 +9,9 @@ import play.Logger;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.Logger;
 import views.html.coupon.*;
+
 
 public class CouponController extends Controller {
 	
@@ -67,7 +69,7 @@ public class CouponController extends Controller {
 				return badRequest(couponPanel.render(session("name")));
 			}
 		} catch (NumberFormatException e){
-			Logger.info(e.getMessage(), "Invalid price input");
+			Logger.error(e.getMessage(), "Invalid price input");
 			flash("error", "Enter a valid price");
 			return badRequest(couponPanel.render(session("name")));
 		}
@@ -78,6 +80,7 @@ public class CouponController extends Controller {
 			Logger.info("Invalid date input");
 			flash("error", "Enter a valid expiration date");
 			return badRequest(couponPanel.render(session("name")));
+
 		}
 		
 		String picture = couponForm.bindFromRequest().field("picture").value();
@@ -90,8 +93,11 @@ public class CouponController extends Controller {
 				description, remark);
 
 
+
+		Logger.info("Coupon added");
 		flash("success", "Coupon " + name + " added");
 		return ok(couponPanel.render( session("name")));
+
 	}
 
 		
@@ -114,6 +120,7 @@ public class CouponController extends Controller {
 	 */
 	public static Result deleteCoupon(long id) {
 		Coupon.delete(id);
+		Logger.info("coupon deleted");
 		return redirect("/");
 	}
 	
@@ -127,8 +134,9 @@ public class CouponController extends Controller {
 	 */
 	public static Result editCoupon(long id){
 		Coupon coupon=Coupon.find(id);
+
 		return ok(updateCouponView.render(session("name"),coupon));
-	
+
 	}
 	
 	/**
@@ -144,6 +152,7 @@ public class CouponController extends Controller {
 		
 		Coupon coupon=Coupon.find(id);	
 		if (couponForm.hasErrors()) {
+			Logger.info("Coupon updated");
 			return redirect("/");
 		}
 
