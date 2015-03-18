@@ -1,10 +1,12 @@
 package controllers;
 
 import java.text.ParseException;
+
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.apache.log4j.Logger;
+
 
 import models.Coupon;
 import models.User;
@@ -15,7 +17,7 @@ import views.html.*;
 
 public class CouponController extends Controller {
 	
-	private static final Logger LOGGER = Logger.getLogger(CouponController.class);
+	
 	
 	static Form<Coupon> couponForm = new Form<Coupon>(Coupon.class);
 		
@@ -153,7 +155,7 @@ public class CouponController extends Controller {
 			coupon.price = Double.valueOf(strPrice);
 		} catch (NumberFormatException e){
 			//TODO Logger(e);
-			LOGGER.info(e.getMessage());
+			
 			return ok(updateCouponView.render(coupon, null));
 		}
 		coupon.dateExpire = couponForm.bindFromRequest().get().dateExpire;

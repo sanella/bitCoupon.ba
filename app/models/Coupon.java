@@ -1,6 +1,7 @@
 package models;
 
 import java.text.DecimalFormat;
+
 import java.util.Date;
 import java.util.List;
 
@@ -39,7 +40,8 @@ public class Coupon extends Model {
 
 	public String picture;
 
-	public String category;
+	@OneToMany
+	public Category category;
 
 	public String description;
 	
@@ -70,7 +72,7 @@ public class Coupon extends Model {
 	 */
 
 	public Coupon(String name, double price,
-			Date dateExpire, String picture, String category_id,
+			Date dateExpire, String picture, Category category,
 			String description, String remark) {
 
 		this.name = name;
@@ -78,7 +80,7 @@ public class Coupon extends Model {
 		this.dateCreated = new Date();
 		this.dateExpire = dateExpire;
 		this.picture = picture;
-		this.category = category_id;
+		this.category = category;
 		this.description = description;
 		this.remark=remark;
 		/*
@@ -101,7 +103,7 @@ public class Coupon extends Model {
 	 */
 
 	public static long createCoupon(String name, double price, Date dateExpire, String picture,
-			String category, String description,String remark) {
+			Category category, String description,String remark) {
 		if(!picture.contains("http://") ){
 			picture = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAyMuVdpfRWZohd288y7EIqVsnwJPi92txgrn5DBWxEOZDnhJL";
 		}

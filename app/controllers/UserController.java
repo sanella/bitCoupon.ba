@@ -1,6 +1,9 @@
 package controllers;
 
 import java.util.Date;
+import java.util.List;
+
+
 
 import com.avaje.ebeaninternal.server.persist.BindValues.Value;
 
@@ -218,10 +221,22 @@ public class UserController extends Controller {
 	 * @return Result renders the same view
 	 */
 	public static Result deleteUser(Long id){
+	    User user=User.find(id);
+	    List<User> adminList=User.findAdmins(true);
 		User currentUser = Sesija.getCurrentUser(ctx());
-		if (currentUser.id == id || Sesija.adminCheck(ctx()))
+		if (currentUser.id == id || Sesija.adminCheck(ctx())){
+			if((user.isAdmin==true)&&(adminList.size()>1)){
 			User.delete(id);
+			if(currentUser.id==id){
+				return redirect("/signup ");
+			}
+			}
+			else {
+				return ok( userList.render(session("name"),User.all()) );
+			}
+		}
 		return ok( userList.render(session("name"),User.all()) );
+		
 
 	}
 	

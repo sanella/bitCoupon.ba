@@ -27,6 +27,10 @@ GET    /coupon/:id						  controllers.CouponController.showCoupon(id: Long)
 GET    /deleteCoupon/:id				  controllers.CouponController.deleteCoupon(id :Long)
 POST   /editCoupon/:id     				  controllers.CouponController.updateCoupon(id: Long)
 GET    /editCoupon/:id     				  controllers.CouponController.editCoupon(id: Long)
+
+GET    /categoryPanel                     controllers.CategoryController.addCategoryView()
+POST   /addCategory                       controllers.CategoryController.addCategory()
+
 GET    /verifyEmail/:id          controllers.UserController.verifyEmail(id: String)
 
 # Map static resources from the /public folder to the /assets URL path
