@@ -1,15 +1,12 @@
 package controllers;
 
 import java.util.Date;
-
-import com.avaje.ebeaninternal.server.persist.BindValues.Value;
-
 import helpers.CurrentUserFilter;
 import helpers.AdminFilter;
 import helpers.HashHelper;
 import helpers.MailHelper;
 import play.*;
-import play.api.mvc.Session;
+import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.*;
 import views.html.*;
@@ -100,8 +97,8 @@ public class UserController extends Controller {
 	 */
 	@Security.Authenticated(CurrentUserFilter.class)
 	public static Result userUpdateView() {
-		User u = User.find(session("name"));
-		return ok(userUpdate.render(u, "Update account"));
+		User currentUser = User.find(session("name"));
+		return ok(userUpdate.render(currentUser));
 	}
 
 	/**
@@ -113,29 +110,41 @@ public class UserController extends Controller {
 	 * @return Result renders the update view with info messages
 	 * according to update success or fail
 	 */
-	public static Result updateUser(String useName) {
-
-		if (userForm.hasErrors()) {
+	public static Result updateUser(long id) {
+		DynamicForm updateForm = Form.form().bindFromRequest();
+		if (updateForm.hasErrors()) {
 			return redirect("/updateUser ");
 		}
 		
-		String username = userForm.bindFromRequest().field("username").value();
-		String email = userForm.bindFromRequest().field("email").value();
-		String oldPass = userForm.bindFromRequest().field("password").value();
-		String newPass = userForm.bindFromRequest().field("newPassword").value();
+		String username = updateForm.data().get("username");
+		String email = updateForm.data().get("email");
+		String oldPass = updateForm.data().get("password");
+		String newPass = updateForm.data().get("newPassword");
 
-		User cUser = User.find(useName);
+		User cUser = User.find(id);
 		cUser.username = username;
 		cUser.email = email;
-
-		if (HashHelper.checkPass(oldPass, cUser.password) == true) {
-			cUser.password = HashHelper.createPassword(newPass);
-			cUser.save();
-			Logger.info(cUser.username + " is updated");
-			return ok(userUpdate.render(cUser, "Update Successful"));
-		} else {
-			return ok(userUpdate.render(cUser, "Incorrect Password"));
+		cUser.updated = new Date();
+		
+		if ( oldPass.isEmpty() && !newPass.isEmpty() 
+				|| newPass.isEmpty() && !oldPass.isEmpty() ){
+			flash("error", "If you want to change your password,"
+					+ " please fill out both fields");
+			return ok(userUpdate.render(cUser));
 		}
+		
+		if( !oldPass.isEmpty() && !newPass.isEmpty() ){	
+			if (HashHelper.checkPass(oldPass, cUser.password) == false) {
+			flash("error", "You're old password is incorrect!");
+			return ok(userUpdate.render(cUser));
+			}	
+			cUser.password = HashHelper.createPassword(newPass);
+		}
+
+			cUser.save();
+			flash("success", "Profile updated!");
+			Logger.info(cUser.username + " is updated");
+			return ok(userUpdate.render(cUser));
 
 	}
 	
@@ -150,8 +159,8 @@ public class UserController extends Controller {
 		if (Sesija.adminCheck(ctx()) != true){
 			return redirect("/");
 		}
-		User u = User.find(id);
-		return ok(adminEditUser.render(u, "Update user"));
+		User userToUpdate = User.find(id);
+		return ok(adminEditUser.render(session("name"), userToUpdate));
 	}
 	
 	/**
@@ -184,8 +193,9 @@ public class UserController extends Controller {
 	    cUser.isAdmin = Boolean.parseBoolean(admin);
 	    cUser.updated = new Date();
 		cUser.save();
+		flash("success","User " + cUser.username +" updated!");
 		Logger.info(session("name") + " updated user: " + cUser.username);
-		return ok(adminEditUser.render(cUser, "Update successful!"));
+		return ok(adminEditUser.render(session("name"), cUser));
 	}
 	
 	/*
