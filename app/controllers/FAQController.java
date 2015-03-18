@@ -7,6 +7,7 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
+import play.Logger;
 import views.html.admin.faq.*;
 
 public class FAQController extends Controller{
@@ -43,6 +44,7 @@ public class FAQController extends Controller{
 		DynamicForm form = Form.form().bindFromRequest();
 		
 		if (form.hasErrors() || form.hasGlobalErrors()) {
+			Logger.debug("Error in form ");
 			flash("error"," Error! "); //TODO message
 			return ok((NewFAQ.render(session("name"))));
 		}
@@ -51,14 +53,15 @@ public class FAQController extends Controller{
 		String answer = form.data().get("answer");
 		
 		if (question.length() < 20 || answer.length() < 20){
+			Logger.debug("Error in form ");
 			flash("error","Please, fill out both fields with valid a form! "
 					+ "Each field should contain at least 20 characters.");
 			return ok((NewFAQ.render(session("name"))));
 		}
 		
-		FAQ.createFAQ(question, answer);	
+		FAQ.createFAQ(question, answer);
+		Logger.debug("New Question added");
 		flash("success","New Question added");
-		
 		return ok(NewFAQ.render(session("name"))); 
 	}
 	
@@ -88,6 +91,7 @@ public class FAQController extends Controller{
 		FAQ FAQToUpdate = FAQ.find(id);
 		
 		if (form.hasErrors() || form.hasGlobalErrors()) {
+			Logger.debug("Error in form ");
 			flash("error"," Error! "); //TODO message
 			return ok((EditFAQ.render(session("name"), FAQToUpdate)));
 		}
@@ -105,6 +109,7 @@ public class FAQController extends Controller{
 		FAQToUpdate.answer = answer;
 		FAQ.update(FAQToUpdate);
 		
+		Logger.info(" Update Successful! ");
 		flash("success"," Update Successful! ");
 		return ok(EditFAQ.render(session("name"), FAQToUpdate));
 	}
@@ -117,6 +122,7 @@ public class FAQController extends Controller{
 	@Security.Authenticated(AdminFilter.class)
 	public static Result deleteFAQ(int id){
 		FAQ.delete(id);
+		Logger.info("Question deleted!");
 		flash("success", "Question deleted!");
 		return ok(FAQview.render(session("name"), FAQ.all()));
 	}

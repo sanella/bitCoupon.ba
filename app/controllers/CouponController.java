@@ -2,12 +2,16 @@ package controllers;
 
 import java.text.ParseException;
 import java.util.Date;
+
 import models.Coupon;
 import models.User;
+import play.Logger;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.Logger;
 import views.html.coupon.*;
+
 
 public class CouponController extends Controller {
 	
@@ -20,7 +24,7 @@ public class CouponController extends Controller {
 	 */
 	public static Result addCouponView(){
 		
-		return ok(couponPanel.render(session("name"), null));
+		return ok(couponPanel.render(session("name")));
 	}
 	
 
@@ -42,11 +46,15 @@ public class CouponController extends Controller {
 
 		String name = couponForm.bindFromRequest().field("name").value();
 		if (name.length() < 4) {
-			return ok(couponPanel.render(session("name"), "Name must be 4 characters long"));
+			Logger.info("Entered a short coupon name");
+			flash("error","Name must be 4 characters long");
+			return badRequest(couponPanel.render(session("name")));
 
 		}
-		if(name.length()>120){
-			return ok(couponPanel.render(session("name"),"Name must be max 120 characters long"));
+		if(name.length() > 70){
+			Logger.info("Entered a too long coupon name");
+			flash("error","Name must be max 70 characters long");
+			return badRequest(couponPanel.render(session("name")));
 		}
 		
 		/* Taking the price value from the string and checking if it's valid*/
@@ -56,17 +64,23 @@ public class CouponController extends Controller {
 		try{
 			price = Double.valueOf(stringPrice);
 			if ( price <= 0){
-				return ok(couponPanel.render(session("name"), "Enter a valid price"));
+				Logger.info("Invalid price input");
+				flash("error","Enter a valid price");
+				return badRequest(couponPanel.render(session("name")));
 			}
 		} catch (NumberFormatException e){
-			//TODO Logger(e);
-			return ok(couponPanel.render(session("name"), "Enter a valid price"));
+			Logger.error(e.getMessage(), "Invalid price input");
+			flash("error", "Enter a valid price");
+			return badRequest(couponPanel.render(session("name")));
 		}
 		
 		Date current = new Date();
 		Date date = couponForm.bindFromRequest().get().dateExpire;	
 		if ( date.before(current)){
-			return ok(couponPanel.render(session("name"), "Enter a valid expiration date"));
+			Logger.info("Invalid date input");
+			flash("error", "Enter a valid expiration date");
+			return badRequest(couponPanel.render(session("name")));
+
 		}
 		
 		String picture = couponForm.bindFromRequest().field("picture").value();
@@ -79,8 +93,11 @@ public class CouponController extends Controller {
 				description, remark);
 
 
-		return ok(couponPanel.render( session("name"), "Coupon \"" + name
-				+ "\" added"));
+
+		Logger.info("Coupon added");
+		flash("success", "Coupon " + name + " added");
+		return ok(couponPanel.render( session("name")));
+
 	}
 
 		
@@ -103,6 +120,7 @@ public class CouponController extends Controller {
 	 */
 	public static Result deleteCoupon(long id) {
 		Coupon.delete(id);
+		Logger.info("coupon deleted");
 		return redirect("/");
 	}
 	
@@ -116,8 +134,9 @@ public class CouponController extends Controller {
 	 */
 	public static Result editCoupon(long id){
 		Coupon coupon=Coupon.find(id);
-		return ok(updateCouponView.render(session("name"),coupon, null));
-	
+
+		return ok(updateCouponView.render(session("name"),coupon));
+
 	}
 	
 	/**
@@ -133,6 +152,7 @@ public class CouponController extends Controller {
 		
 		Coupon coupon=Coupon.find(id);	
 		if (couponForm.hasErrors()) {
+			Logger.info("Coupon updated");
 			return redirect("/");
 		}
 
@@ -140,25 +160,37 @@ public class CouponController extends Controller {
 
 		coupon.name = couponForm.bindFromRequest().field("name").value();
 		if (coupon.name.length() < 4) {
-			return ok(updateCouponView.render(session("name"),coupon, "Name must be minimal 4 characters"));
+			flash("error","Name must be minimal 4 characters long");
+			return ok(updateCouponView.render(session("name"),coupon));
 			}
 		if(coupon.name.length() > 120){
-			return ok(couponPanel.render(session("name"),"Name must be max 120 characters long"));
+			flash("error", "Name must be max 120 characters long");
+			return ok(updateCouponView.render(session("name"),coupon));
 		}
 
 		String strPrice = couponForm.bindFromRequest().field("price").value();
 		strPrice = strPrice.replace(",", ".");
+		double price;
 		try{
-			coupon.price = Double.valueOf(strPrice);
+			price = Double.valueOf(strPrice);
+			if ( price <= 0){
+				Logger.info("Invalid price input");
+				flash("error","Enter a valid price");
+				return badRequest(updateCouponView.render(session("name"), coupon));
+			}
+			
 		} catch (NumberFormatException e){
-			//TODO Logger(e);
-			return ok(updateCouponView.render(session("name"), coupon, null));
+			//TODO logger
+			flash("error","Enter a valid price");
+			return ok(updateCouponView.render(session("name"), coupon));
 		}
+		coupon.price =  price;
 		Date current = new Date();
 		Date date = couponForm.bindFromRequest().get().dateExpire;
 		if (date != null){  
 			if ( date.before(current)){
-				return ok(updateCouponView.render(session("name"), coupon, "Enter a valid expiration date"));
+				flash("error", "Enter a valid expiration date");
+				return ok(updateCouponView.render(session("name"), coupon));
 			}
 			coupon.dateExpire = date;
 		}
@@ -169,8 +201,8 @@ public class CouponController extends Controller {
 		coupon.remark = couponForm.bindFromRequest().field("remark").value();
 		Coupon.updateCoupon(coupon);
 
-
-		return ok(updateCouponView.render(session("name"), coupon, "updated"));
+		flash("success", "Coupon updated");
+		return ok(updateCouponView.render(session("name"), coupon));
 	
 		
 	}

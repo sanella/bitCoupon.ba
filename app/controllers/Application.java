@@ -7,13 +7,10 @@ import play.data.validation.Constraints.Email;
 import play.data.validation.Constraints.Required;
 import play.mvc.*;
 import views.html.*;
-
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
-
 import helpers.MailHelper;
 import models.User;
 import play.Logger;
@@ -31,15 +28,8 @@ import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
 import play.mvc.Result;
 import models.*;
-
 import com.fasterxml.jackson.databind.JsonNode;
 
-
-
-
-
-
-import com.google.common.io.Files;
 
 public class Application extends Controller {
 
@@ -67,10 +57,10 @@ public class Application extends Controller {
 		name = session("name");
 		if (name == null) {
 			return ok(index.render(null, Coupon.all()));
-		} else {
-			User currentUser = User.find(name);
-			return ok(index.render(currentUser, Coupon.all()));
-		}
+		} 
+		User currentUser = User.find(name);
+		return ok(index.render(currentUser, Coupon.all()));
+		
 	}
 
 	/**
@@ -85,31 +75,35 @@ public class Application extends Controller {
 		Form<Login> login = new Form<Login>(Login.class);
 		
 		if (login.hasGlobalErrors()) {
-			return ok(Loginpage.render(loginMsg));
+			Logger.info("Login global error");
+			return badRequest(Loginpage.render(loginMsg));
 		}
 		
 		String mail = login.bindFromRequest().get().email;
 		String password = login.bindFromRequest().get().password;
 
 		if (mail.isEmpty() || password.length() < 6) {
-			return ok(Loginpage.render(loginMsg));
+
+			Logger.info("Invalid login form");
+			return badRequest(Loginpage.render(loginMsg));
 		}
 
 		if (User.verifyLogin(mail, password) == true) {
 			User cc = User.getUser(mail);
 			session().clear();
 			session("name", cc.username);
+			Logger.info(cc.username + " logged in");
 			return ok(index.render(cc, Coupon.all()));
 		}
-
-		return ok(Loginpage.render("Invalid email or password"));
-
+		Logger.info("User tried to login with invalid email or password");
+		return badRequest(Loginpage.render("Invalid email or password"));
 	}
 
 	/** 
 	 * @return renders the loginpage view
 	 */
 	public static Result loginpage() {
+		Logger.info(loginMsg);
 		return ok(Loginpage.render(loginMsg));
 	}
 
@@ -119,11 +113,13 @@ public class Application extends Controller {
 	 */
 	public static Result logout() {
 
+		Logger.info(session("name") + " has logout");
 		session().clear();
 		return redirect("/");
 	}
 
 	public static Result loginToComplete() {
+		Logger.info("Login to complete this action");
 		return badRequest(loginToComplete.render("Login to complete this action"));
 	}
 	
@@ -166,7 +162,8 @@ public class Application extends Controller {
 									String name = newMessage.name;
 									String phone = newMessage.phone;
 									String message = newMessage.message;
-
+									
+									Logger.info("Message sent via contact form");
 									flash("success", "Message sent");
 									MailHelper.sendFeedback(email, name, phone, message);
 									return redirect("/contact");

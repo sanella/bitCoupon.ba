@@ -1,6 +1,7 @@
 package helpers;
 
 import org.mindrot.jbcrypt.BCrypt;
+import play.Logger;
 
 public class HashHelper {
 	
@@ -31,6 +32,7 @@ public class HashHelper {
 	public static String createPassword(String clearString)throws IllegalArgumentException {
 
 			if (clearString == null) {
+				Logger.error("empty.password");
 				throw new IllegalArgumentException("empty.password");
 
 			}

@@ -1,4 +1,4 @@
-@(user: User)(message: String)
+@(username: String)(user: User)
 
 @import helper._
 
@@ -14,7 +14,7 @@
 						<div class="col-sm-12">
 						
 							<ul class="nav navbar-nav">
- 							<li><a class="active"> @message </a></li>
+ 							<li><a href="@routes.UserController.profilePage(username)" class="active"> @username </a></li>
  							<li><a href="/logout" class="active"><i class="active"></i> Logout</a></li>					
 							</ul>
 						</div>
@@ -60,15 +60,30 @@
 		</header>
 	</section>
 	
-	
+		@if(flash.get("success")){
+		<div class="alert alert-success" role="alert"> 
+			<div class="container">
+				@flash.get("success") 
+			</div>
+		</div>
+	}
+
+
+		@if(flash.get("error")){
+		<div class="alert alert-danger" role="alert"> 
+			<div class="container">
+				@flash.get("error") 
+			</div>
+		</div>
+		}
 	
 	<div class="container">
 					
 					<div class="features_items"><!--features_items-->
-						<h2 class="title text-center">Edit User @user.username</h2>
+						<h2 class="title text-center">Edit User</h2>
 						<div class="col-sm-6 col-sm-offset-1">
 						
-						<h4>@message</h4>
+						<h5>Edit user: @user.username</h5>
 					
 					<div class="signup-form"><!--sign up form-->
 						<form action="@routes.UserController.adminUpdateUser(user.id)" method ="POST" >

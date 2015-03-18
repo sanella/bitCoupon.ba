@@ -1,4 +1,4 @@
-@(name: String)(addCouponInfo: String)
+@(name: String)
 
 @import helper._
 
@@ -60,9 +60,25 @@
 		</header>
 	</section>
 	
+	@if(flash.get("success")){
+		<div class="alert alert-success" role="alert"> 
+			<div class="container">
+				@flash.get("success") 
+			</div>
+		</div>
+	}
+
+
+	@if(flash.get("error")){
+		<div class="alert alert-danger" role="alert"> 
+			<div class="container">
+				@flash.get("error") 
+			</div>
+		</div>
+	}
 
 	<div class="container">
-					<h4>@addCouponInfo</h4>
+					
 					<div class="features_items"><!--features_items-->
 						<h2 class="title text-center">Coupon Creation</h2>
 						<div class="col-sm-6 col-sm-offset-1">
