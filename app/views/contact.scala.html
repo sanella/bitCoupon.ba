@@ -81,7 +81,7 @@
       						<!-- <input type="text" name="phone" id="phone" placeholder="Your phone number" -->
       						<!-- <input type='tel' pattern='[\+]\d{2}[\(]\d{2}[\)]\d{4}[\-]\d{4}' title='Phone Number (Format: +99(99)9999-9999)' -->
       						<label for="phonenum">Phone Number:</label>
-							<input name="phone" type="text" pattern="\d{3}[- ]?\d{3}[- ]?\d{3}" placeholder="Format: xxx xxx xxx" title='Phone Number Format: xxx xxx xxx(no dashes!)'
+							<input name="phone" type="text" pattern="\d{3}[- ]?\d{3}[- ]?\d{3,4}" placeholder="Format: xxx xxx xxx" title='Phone Number Format: xxx xxx xxx(no dashes!)'
 							class='@("error-input".when(contactForm("phone").hasErrors)) form-control' 
 							value='@contactForm("phone").value' required/> 
 							
