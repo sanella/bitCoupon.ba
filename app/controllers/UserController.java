@@ -101,7 +101,6 @@ public class UserController extends Controller {
 	@Security.Authenticated(CurrentUserFilter.class)
 	public static Result userUpdateView() {
 		User u = User.find(session("name"));
-		Logger.info("Update account");
 		return ok(userUpdate.render(u, "Update account"));
 	}
 
@@ -132,6 +131,7 @@ public class UserController extends Controller {
 		if (HashHelper.checkPass(oldPass, cUser.password) == true) {
 			cUser.password = HashHelper.createPassword(newPass);
 			cUser.save();
+			Logger.info(cUser.username + " is updated");
 			return ok(userUpdate.render(cUser, "Update Successful"));
 		} else {
 			return ok(userUpdate.render(cUser, "Incorrect Password"));
@@ -184,7 +184,7 @@ public class UserController extends Controller {
 	    cUser.isAdmin = Boolean.parseBoolean(admin);
 	    cUser.updated = new Date();
 		cUser.save();
-		Logger.info("Update successful!");
+		Logger.info(session("name") + " updated user: " + cUser.username);
 		return ok(adminEditUser.render(cUser, "Update successful!"));
 	}
 	

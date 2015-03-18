@@ -85,7 +85,7 @@ public class Application extends Controller {
 		Form<Login> login = new Form<Login>(Login.class);
 		
 		if (login.hasGlobalErrors()) {
-			Logger.info(loginMsg);
+			Logger.info("Login global error");
 			return ok(Loginpage.render(loginMsg));
 		}
 		
@@ -101,6 +101,7 @@ public class Application extends Controller {
 			User cc = User.getUser(mail);
 			session().clear();
 			session("name", cc.username);
+			Logger.info(cc.username + " logged in");
 			return ok(index.render(cc, Coupon.all()));
 		}
 		Logger.info("User tried to login with invalid email or password");
@@ -122,8 +123,8 @@ public class Application extends Controller {
 	 */
 	public static Result logout() {
 
+		Logger.info(session("name") + " has logout");
 		session().clear();
-		Logger.info("User has logout");
 		return redirect("/");
 	}
 

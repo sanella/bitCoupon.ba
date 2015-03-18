@@ -45,10 +45,12 @@ public class CouponController extends Controller {
 
 		String name = couponForm.bindFromRequest().field("name").value();
 		if (name.length() < 4) {
+			Logger.info("Entered invalid name");
 			return ok(couponPanel.render(session("name"), "Name must be 4 characters long"));
 
 		}
 		if(name.length()>120){
+			Logger.info("Entered invalid name");
 			return ok(couponPanel.render(session("name"),"Name must be max 120 characters long"));
 		}
 		
@@ -59,10 +61,12 @@ public class CouponController extends Controller {
 		try{
 			price = Double.valueOf(stringPrice);
 			if ( price <= 0){
+				Logger.info("Entered invalid price for coupon");
 				return ok(couponPanel.render(session("name"), "Enter a valid price"));
 			}
 		} catch (NumberFormatException e){
 			Logger.error(stringPrice, e.getMessage());
+			Logger.info("Entered invalid price for coupon");
 			return ok(couponPanel.render(session("name"), "Enter a valid price"));
 		}
 		
@@ -107,6 +111,7 @@ public class CouponController extends Controller {
 	 */
 	public static Result deleteCoupon(long id) {
 		Coupon.delete(id);
+		Logger.info("coupon deleted");
 		return redirect("/");
 	}
 	
@@ -120,6 +125,7 @@ public class CouponController extends Controller {
 	 */
 	public static Result editCoupon(long id){
 		Coupon coupon=Coupon.find(id);
+		Logger.info("coupon edited");
 		return ok(updateCouponView.render(session("name"),coupon, null));
 	
 	}
@@ -137,6 +143,7 @@ public class CouponController extends Controller {
 		
 		Coupon coupon=Coupon.find(id);	
 		if (couponForm.hasErrors()) {
+			Logger.info("Coupon updated");
 			return redirect("/");
 		}
 
