@@ -99,8 +99,7 @@ public class FAQController extends Controller{
 		String answer =  form.data().get("answer");
 		
 		if (question.length() < 20 || answer.length() < 20){
-			flash("error","Please, fill out both fields with valid a form! "
-					+ "Each field should contain at least 20 characters.");
+			flash("error","Each field should contain at least 20 characters.");
 			return ok((EditFAQ.render(session("name"), FAQToUpdate)));
 		}
 		
@@ -108,7 +107,7 @@ public class FAQController extends Controller{
 		FAQToUpdate.answer = answer;
 		FAQ.update(FAQToUpdate);
 		
-		Logger.info(" Update Successful! ");
+		Logger.info("Question: " + FAQToUpdate.id + " updated by: " + session("name"));
 		flash("success"," Update Successful! ");
 		return ok(EditFAQ.render(session("name"), FAQToUpdate));
 	}
@@ -121,7 +120,7 @@ public class FAQController extends Controller{
 	@Security.Authenticated(AdminFilter.class)
 	public static Result deleteFAQ(int id){
 		FAQ.delete(id);
-		Logger.info("Question deleted!");
+		Logger.info("Question " + id + " deleted by: " + session("name"));
 		flash("success", "Question deleted!");
 		return ok(FAQview.render(session("name"), FAQ.all()));
 	}
