@@ -6,8 +6,11 @@ import models.FAQ;
 import models.User;
 import play.Application;
 import play.GlobalSettings;
+import play.Logger;
 
 public class Global extends GlobalSettings {
+	
+	
 	String nameCoupon1 = "Dvije noći za dvoje u Hotelu Sunce Neum";
 	String remarkCoupon1 = "Jedna osoba može kupiti maksimalno četiri kupona za ovu ponudu. Kuponi se mogu spajati.";
 
@@ -33,6 +36,12 @@ public class Global extends GlobalSettings {
 
 	@Override
 	public void onStart(Application app) {
+		
+		Logger.trace("test trace level");
+		Logger.debug("test debug level");
+		Logger.info("test info logger");
+		Logger.warn("test warn logger");
+		Logger.error("test error logger");
 		
 		Category food = new Category("Food");
 		food.save();
@@ -118,4 +127,5 @@ public class Global extends GlobalSettings {
 		}
 
 	}
+	
 }
