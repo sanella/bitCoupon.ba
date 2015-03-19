@@ -2,6 +2,7 @@ package helpers;
 
 import models.User;
 import controllers.routes;
+import play.Logger;
 import play.mvc.Result;
 import play.mvc.Security;
 import play.mvc.Http.Context;
@@ -26,6 +27,7 @@ public class CurrentUserFilter extends Security.Authenticator {
 
 	@Override
 	public Result onUnauthorized(Context ctx) {
+		Logger.error("Login To Complete");
 		return redirect("/loginToComplete");
 	}
 
