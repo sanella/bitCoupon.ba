@@ -9,6 +9,7 @@ import java.util.Stack;
 
 import javax.persistence.*;
 
+import play.Logger;
 import play.data.validation.Constraints.Email;
 import play.data.validation.Constraints.MinLength;
 import play.data.validation.Constraints.Required;
@@ -107,6 +108,7 @@ public class User extends Model {
 				
 
 		} catch (NullPointerException e) {
+			Logger.error(e.getMessage());
 			return false;
 		}
 

@@ -41,6 +41,7 @@ public class CouponController extends Controller {
 	public static Result addCoupon() throws ParseException {
 
 		if (couponForm.hasErrors()) {
+			Logger.debug("Error adding coupon");
 			return redirect("/couponPanel");
 		}
 
