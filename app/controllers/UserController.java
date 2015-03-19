@@ -29,7 +29,7 @@ public class UserController extends Controller {
 	 * @return Renders the registration view
 	 */
 	public static Result signup() {
-		return ok(signup.render("Registration", "Username", "Email"));
+		return ok(signup.render("Username", "Email"));
 	}
 
 	/**
@@ -53,18 +53,17 @@ public class UserController extends Controller {
 				.value();
 
 		if (username.length() < 4 || username.equals("Username")) {
-			return ok(signup.render(
-					"Enter a username with minimum 4 characters !", null, mail));
+			flash("error", "Usernam must be at least 4 chatacters");
+			return badRequest(signup.render(null, mail));
 		} else if (mail.equals("Email")) {
-			return ok(signup.render("Email required for registration !",
-					username, null));
+			flash("error", "Email is required for registration !");
+			return badRequest(signup.render(username, null));
 		} else if (password.length() < 6) {
-			return ok(signup.render(
-					"Enter a password with minimum 6 characters !", username,
-					mail));
+			flash("error", "Password must be at least 6 characters!");
+			return badRequest(signup.render(username,mail));
 		} else if (!password.equals(confPass)) {
-			return ok(signup.render("Passwords don't match, try again ",
-					username, mail));
+			flash("error", "Passwords don't match, try again ");
+			return badRequest(signup.render(username, mail));
 		}
 
 		/*
@@ -89,9 +88,9 @@ public class UserController extends Controller {
 					.render("A verification mail has been sent to your email address"));
 
 		} else {
+			flash("error","Username or email allready exists!");
 			Logger.info("Username or email allready exists!");
-			return ok(signup.render("Username or email allready exists!",
-					username, mail));
+			return badRequest(signup.render(username, mail));
 		}
 
 	}
@@ -132,17 +131,22 @@ public class UserController extends Controller {
 		// cUser.email = email;
 		cUser.updated = new Date();
 
+		/* if only one password field is filled out */
 		if (oldPass.isEmpty() && !newPass.isEmpty() || newPass.isEmpty()
 				&& !oldPass.isEmpty()) {
 			flash("error", "If you want to change your password,"
 					+ " please fill out both fields");
-			return ok(userUpdate.render(cUser));
+			return badRequest(userUpdate.render(cUser));
 		}
-
+		/* if there was a input in password fields */
 		if (!oldPass.isEmpty() && !newPass.isEmpty()) {
 			if (HashHelper.checkPass(oldPass, cUser.password) == false) {
 				flash("error", "You're old password is incorrect!");
-				return ok(userUpdate.render(cUser));
+				return badRequest(userUpdate.render(cUser));
+			}
+			if (newPass.length() < 6){
+				flash("error", "The password must be at least 6 characters");
+				return badRequest(userUpdate.render(cUser));
 			}
 			cUser.password = HashHelper.createPassword(newPass);
 		}
