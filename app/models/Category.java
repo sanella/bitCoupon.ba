@@ -19,9 +19,8 @@ public class Category extends Model{
 	
 	String image;
 	
-	public int numberOfCoupons;
 	
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
+    @OneToMany
 	public List<Coupon> coupons;
     
     
@@ -31,8 +30,19 @@ public class Category extends Model{
     public Category(String name, String image){
     	this.name=name;
     	this.image=image;
-    	this.numberOfCoupons=coupons.size();
+    	
     	}
+    
+    public Category(String name){
+    	this.name=name;
+    	
+    }
+    
+    public static long createCategory(String name){
+    	Category newCategory=new Category(name);
+    	newCategory.save();
+    	return newCategory.id;
+    }
     
     public static long createCategory(String name,String image){
     	Category newCategory=new Category(name, image);
@@ -48,6 +58,18 @@ public class Category extends Model{
     public static Category find(long id){
     	return find.byId(id);
     }
+    
+    public static Category findByName(String name){
+    	List<Category>list=find.where().eq("name", name).findList();
+    		return list.get(0);
+    	}
+    
+    public static boolean checkByName(String name){
+		 List<Category> list=find.where().eq("name", name).findList();
+		 if(list.size()>0)
+			 return true;
+		 return false;
+	}
     
     public static void delete(long id){
     	find.byId(id).delete();

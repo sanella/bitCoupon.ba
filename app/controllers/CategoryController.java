@@ -18,6 +18,11 @@ public class CategoryController extends Controller {
 		return ok(categoryPanel.render(session("name"), null));
 	}
 	
+	public static Result listCategories(){
+		
+		return ok(CategoriesList.render(session("name"), Category.all()));
+	}
+	
 	public static Result addCategory() {
 
 		if (categoryForm.hasErrors()) {
@@ -34,10 +39,15 @@ public class CategoryController extends Controller {
 		if(name.length()>120){
 			return ok(categoryPanel.render(session("name"),"Name must be max 120 characters long"));
 		}
+		if(!Category.checkByName(name)){
+			Category.createCategory(name);
+		}
+		//else()-dodati flash:"Category already exists!"
+		//return ok(categoryPanel.render( session("name"), "Category \"" + name));
+		//String image = categoryForm.bindFromRequest().field("image").value();
 		
-		String image = categoryForm.bindFromRequest().field("image").value();
+		//Category.createCategory(name,image);
 		
-		Category.createCategory(name,image);
 		
 		return ok(categoryPanel.render( session("name"), "Category \"" + name
 				+ "\" added"));

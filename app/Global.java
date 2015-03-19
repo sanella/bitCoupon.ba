@@ -1,4 +1,5 @@
 import helpers.HashHelper;
+import models.Category;
 import models.Coupon;
 import models.EmailVerification;
 import models.User;
@@ -24,16 +25,24 @@ public class Global extends GlobalSettings {
 	"Hotel Brass unikatan po mnogo čemu: dizajnu, usluzi te uslužnom osoblju."+
     "Upravo ovakav ambijent začinit će i uljepšati Vašu romantičnu večeru.";
 
-	
+
 	
 
 	@Override
 	public void onStart(Application app) {
+		
+		Category food = new Category("Food");
+		food.save();
+		Category travel = new Category("Travel");
+		travel.save();
+		Category sport = new Category("Sport");
+		sport.save();
+		
 
 		if (Coupon.checkByName(nameCoupon1) == false) {
 			Coupon.createCoupon(nameCoupon1, 80, null,
 					"http://static.panoramio.com/photos/large/26139268.jpg",
-					"Putovanja",descriptionCoupon1,
+			travel,descriptionCoupon1,
 					remarkCoupon1);
 		}
 		if (Coupon.checkByName(nameCoupon2) == false) {
@@ -42,7 +51,7 @@ public class Global extends GlobalSettings {
 					40,
 					null,
 					"http://www.thepullforhumanity.com/anytime_fitness/wp-content/gallery/general/gym-pics-097.jpg",
-					"Sport", descriptionCoupon2,
+					sport, descriptionCoupon2,
 					remarkCoupon2);
 		}
 		if (Coupon.checkByName(nameCoupon3) == false) {
@@ -51,7 +60,7 @@ public class Global extends GlobalSettings {
 					20,
 					null,
 					"http://www.mitara.com/wp-content/uploads/2015/02/Candle-Light-Dinner-With-Romantic-Design-For-Beautiful-Valentine-Candle-Light-Dinner-Inspiring-Design-Ideas.jpg",
-					"Food", descriptionCoupon3,
+					food, descriptionCoupon3,
 					remarkCoupon3);
 		}
 

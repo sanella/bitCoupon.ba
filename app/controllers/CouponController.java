@@ -8,6 +8,8 @@ import java.util.Date;
 
 
 
+
+import models.Category;
 import models.Coupon;
 import models.User;
 import play.data.Form;
@@ -73,7 +75,14 @@ public class CouponController extends Controller {
 		
 		Date date = couponForm.bindFromRequest().get().dateExpire;		
 		String picture = couponForm.bindFromRequest().field("picture").value();
-		String category = couponForm.bindFromRequest().field("category").value();
+		Category category=null;
+		String categoryName=couponForm.bindFromRequest().field("category").value();
+		if(!Category.checkByName(categoryName)){
+			Category.createCategory(categoryName);
+		}
+		else{
+			category=Category.findByName(categoryName);
+		}
 		String description = couponForm.bindFromRequest().field("description").value();
 		String remark = couponForm.bindFromRequest().field("remark").value();
 		
@@ -160,7 +169,7 @@ public class CouponController extends Controller {
 		}
 		coupon.dateExpire = couponForm.bindFromRequest().get().dateExpire;
 		coupon.picture = couponForm.bindFromRequest().field("picture").value();
-		coupon.category = couponForm.bindFromRequest().field("category").value();
+		coupon.category = Category.findByName(couponForm.bindFromRequest().field("category").value());
 		coupon.description = couponForm.bindFromRequest().field("description").value();
 		coupon.remark = couponForm.bindFromRequest().field("remark").value();
 		Coupon.updateCoupon(coupon);

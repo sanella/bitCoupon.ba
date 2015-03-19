@@ -29,7 +29,10 @@ POST   /editCoupon/:id     				  controllers.CouponController.updateCoupon(id: L
 GET    /editCoupon/:id     				  controllers.CouponController.editCoupon(id: Long)
 
 GET    /categoryPanel                     controllers.CategoryController.addCategoryView()
+GET    /categoryList                      controllers.CategoryController.listCategories()
 POST   /addCategory                       controllers.CategoryController.addCategory()
+GET    /deleteCategory/:id                controllers.CategoryController.deleteCategory(id: Long)
+
 
 GET    /verifyEmail/:id          controllers.UserController.verifyEmail(id: String)
 

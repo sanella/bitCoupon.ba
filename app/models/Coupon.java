@@ -1,12 +1,12 @@
 package models;
 
 import java.text.DecimalFormat;
-
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
 
+import play.Logger;
 import play.data.validation.Constraints.MinLength;
 import play.db.ebean.Model;
 import play.db.ebean.Model.Finder;
@@ -40,7 +40,7 @@ public class Coupon extends Model {
 
 	public String picture;
 
-	@OneToMany
+	@ManyToOne
 	public Category category;
 
 	public String description;
@@ -107,7 +107,7 @@ public class Coupon extends Model {
 		if(!picture.contains("http://") ){
 			picture = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAyMuVdpfRWZohd288y7EIqVsnwJPi92txgrn5DBWxEOZDnhJL";
 		}
-		
+		//Logger.debug(category.name);
 		Coupon newCoupon = new Coupon(name, price,dateExpire,
 				picture, category, description, remark);
 		newCoupon.save();
