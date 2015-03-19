@@ -18,6 +18,7 @@ GET	   /profile/@:username	   			  controllers.UserController.profilePage(userna
 POST   /updateUser					  	  controllers.UserController.updateUser(id: Long)
 GET    /updateUser						  controllers.UserController.userUpdateView()
 GET	   /userPanel						  controllers.UserController.listUsers()
+GET	   /verifyEmailUpdate/:username		  controllers.UserController.verifyEmailUpdate(username: String)
 
 GET	   /deletUser						  controllers.UserController.deleteUser(id: Long)
 GET	   /editUser/:id					  controllers.UserController.adminEditUserView(id: Long)
