@@ -1,8 +1,9 @@
 package controllers;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
-
+import models.Category;
 import models.Coupon;
 import models.User;
 import play.Logger;
@@ -15,6 +16,7 @@ import views.html.coupon.*;
 
 public class CouponController extends Controller {
 	
+
 	
 	static Form<Coupon> couponForm = new Form<Coupon>(Coupon.class);
 	
@@ -84,7 +86,14 @@ public class CouponController extends Controller {
 		}
 		
 		String picture = couponForm.bindFromRequest().field("picture").value();
-		String category = couponForm.bindFromRequest().field("category").value();
+		Category category=null;
+		String categoryName=couponForm.bindFromRequest().field("category").value();
+		if(!Category.checkByName(categoryName)){
+			Category.createCategory(categoryName);
+		}
+		else{
+			category=Category.findByName(categoryName);
+		}
 		String description = couponForm.bindFromRequest().field("description").value();
 		String remark = couponForm.bindFromRequest().field("remark").value();
 		
@@ -180,9 +189,11 @@ public class CouponController extends Controller {
 			}
 			
 		} catch (NumberFormatException e){
+
 			//TODO logger
 			flash("error","Enter a valid price");
 			return ok(updateCouponView.render(session("name"), coupon));
+
 		}
 		coupon.price =  price;
 		Date current = new Date();
@@ -196,7 +207,7 @@ public class CouponController extends Controller {
 		}
 	
 		coupon.picture = couponForm.bindFromRequest().field("picture").value();
-		coupon.category = couponForm.bindFromRequest().field("category").value();
+		coupon.category = Category.findByName(couponForm.bindFromRequest().field("category").value());
 		coupon.description = couponForm.bindFromRequest().field("description").value();
 		coupon.remark = couponForm.bindFromRequest().field("remark").value();
 		Coupon.updateCoupon(coupon);

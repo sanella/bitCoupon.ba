@@ -3,6 +3,7 @@ package models;
 import helpers.HashHelper;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
 
@@ -170,6 +171,12 @@ public class User extends Model {
 	public static User find(boolean isAdmin) {
 		return find.where().eq("isAdmin", isAdmin).findUnique();
 	}
+	/*
+	 * Find and return list of admins
+	 */
+	public static List<User>findAdmins(boolean isAdmin){
+		return find.where().eq("isAdmin",isAdmin).findList();//proba-provjeriti
+	}
 
 	/* 
 	 * Find and return user by username 
@@ -181,6 +188,5 @@ public class User extends Model {
 	public static boolean check(String mail) {
 		return find.where().eq("email", mail).findUnique() != null;
 	}
-		
 	
-}//end of class User
+}
