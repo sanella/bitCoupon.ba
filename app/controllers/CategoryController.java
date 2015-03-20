@@ -1,6 +1,7 @@
 package controllers;
 
 import java.text.ParseException;
+import java.util.List;
 
 import models.Category;
 import models.Coupon;
@@ -36,7 +37,7 @@ public class CategoryController extends Controller {
 			return ok(categoryPanel.render(session("name"), "Name must be 4 characters long"));
 
 		}
-		if(name.length()>120){
+		if(name.length()>20){
 			return ok(categoryPanel.render(session("name"),"Name must be max 120 characters long"));
 		}
 		if(!Category.checkByName(name)){
@@ -54,6 +55,14 @@ public class CategoryController extends Controller {
 	}
 	
 	public static Result deleteCategory(long id) {
+		Category c = Category.find(id);
+		List<Coupon> cpns = c.coupons;
+		for(Coupon cp : cpns){
+			cp.category = null;
+			cp.save();
+		}
+		c.coupons = null;
+		c.save();
 		Category.delete(id);
 		return redirect("/");
 	}
