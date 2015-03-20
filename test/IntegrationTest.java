@@ -66,7 +66,7 @@ public class IntegrationTest {
 
 						User.createUser("tester", "tester@bitcamp.ba",
 								HashHelper.createPassword("123456"), true);
-						EmailVerification setVerified = new EmailVerification(2, true);
+						EmailVerification setVerified = new EmailVerification(3, true);
 						setVerified.save();
 
 						browser.goTo("http://localhost:3333/loginpage");

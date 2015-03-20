@@ -16,8 +16,8 @@ public class ModelsTest extends WithApplication {
 	
 	@Test
 	public void testCreate() {
-		User.createUser("tester", "test@mail.com", "654321", false);
-		User u = User.find(2);
+		User.createUser("tester", "test@mail.com", "654321", false); //already 2 users in global class
+		User u = User.find(3);
 		assertNotNull(u);
 		assertEquals(u.username, "tester");
 		assertEquals(u.email, "test@mail.com");
