@@ -1,8 +1,11 @@
 package models;
 
 import java.util.Date;
+
 import helpers.HashHelper;
+
 import org.junit.*;
+
 import play.test.WithApplication;
 import static org.junit.Assert.*;
 import static play.test.Helpers.*;
@@ -72,6 +75,7 @@ public class ModelsTest extends WithApplication {
 		assertNull(c);
 	}
 	
+	
 	@Test
 	public void updateUser(){
 		User.createUser("tester", "tester@bitcamp.ba",
@@ -87,6 +91,28 @@ public class ModelsTest extends WithApplication {
 		
 	}
 	
+	@Test
+	public void testCategoryCreate(){
+		Category.createCategory("Test Category");
+		Category category=Category.findByName("Test Category");
+		assertNotNull(category);
+	}
+	
+	@Test public void testFindNonExistingCategory(){
+		Category category=Category.find(1333);
+		assertNull(category);
+	}
+	
+	@Test
+	public void deleteCategory(){
+		long id=Category.createCategory("New Category");
+		Category category=Category.find(id);
+		assertNotNull(category);
+		Category.delete(id);
+		Category c=Category.find(id);
+		assertNull(c);
+	}
+
 	
 	@SuppressWarnings("deprecation")
 	@Test

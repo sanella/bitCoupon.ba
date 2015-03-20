@@ -64,7 +64,7 @@ public class CategoryController extends Controller {
 		c.coupons = null;
 		c.save();
 		Category.delete(id);
-		return redirect("/");
+		return ok(CategoriesList.render(session("name"), Category.all()));
 	}
 	
 }
