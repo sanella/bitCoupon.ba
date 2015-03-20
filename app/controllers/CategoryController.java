@@ -7,25 +7,36 @@ import java.util.List;
 
 import models.Category;
 import models.Coupon;
+import models.User;
 import play.data.Form;
 import play.mvc.Result;
 import play.mvc.Security;
-import views.html.*;
+import views.html.category.*;
 import play.mvc.Controller;
 
 public class CategoryController extends Controller {
 
 	static Form<Category> categoryForm = new Form<Category>(Category.class);
+	
+	
+	public static Result categoryView(String categoryName){
+		
+		return ok(categoryPage.render(User.find(session("name")),Coupon.listByCategory(categoryName), categoryName));
+	}
+	
 	@Security.Authenticated(AdminFilter.class)
 	public static Result addCategoryView(){
 		
 		return ok(categoryPanel.render(session("name"), null));
 	}
+	
+	
 	@Security.Authenticated(AdminFilter.class)
 	public static Result listCategories(){
 		
 		return ok(CategoriesList.render(session("name"), Category.all()));
 	}
+	
 	@Security.Authenticated(AdminFilter.class)
 	public static Result addCategory() {
 
@@ -40,7 +51,7 @@ public class CategoryController extends Controller {
 			return ok(categoryPanel.render(session("name"), "Name must be 4 characters long"));
 
 		}
-		if(name.length()>20){
+		if(name.length() > 20){
 			return ok(categoryPanel.render(session("name"),"Name must be max 120 characters long"));
 		}
 		if(!Category.checkByName(name)){
@@ -56,6 +67,7 @@ public class CategoryController extends Controller {
 		return ok(categoryPanel.render( session("name"), "Category \"" + name
 				+ "\" added"));
 	}
+	
 	@Security.Authenticated(AdminFilter.class)
 	public static Result deleteCategory(long id) {
 		Category c = Category.find(id);

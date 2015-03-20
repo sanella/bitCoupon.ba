@@ -44,6 +44,7 @@ GET    /deleteFAQ						  controllers.FAQController.deleteFAQ(id: Integer)
 
 GET    /categoryPanel                     controllers.CategoryController.addCategoryView()
 GET    /categoryList                      controllers.CategoryController.listCategories()
+GET	   /category/						  controllers.CategoryController.categoryView(name: String)
 POST   /addCategory                       controllers.CategoryController.addCategory()
 GET    /deleteCategory/:id                controllers.CategoryController.deleteCategory(id: Long)
 
