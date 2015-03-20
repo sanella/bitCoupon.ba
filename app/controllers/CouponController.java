@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import org.h2.util.StringUtils;
+
 import com.google.common.io.Files;
 
 import models.Category;
@@ -277,9 +279,14 @@ public class CouponController extends Controller {
 		 */
 		// Path for saving file.
 		String assetsPath = imageUpload("coupon_photos");
-		Coupon.createCoupon(name, price, date, assetsPath, category,
+		if(!StringUtils.isNullOrEmpty(assetsPath)){
+			Coupon.createCoupon(name, price, date, assetsPath, category,
 				description, remark);
-		return redirect("/couponPanel/");
+			flash("success", "Coupon successfuly created.");
+			return redirect("/couponPanel");
+		}
+		flash("error", "SOmething went wrong");
+		return redirect("/couponPanel");
 	}
 	
 	/**
@@ -306,13 +313,13 @@ public class CouponController extends Controller {
 				&& !extension.equalsIgnoreCase(".jpg")
 				&& !extension.equalsIgnoreCase(".png")) {
 			flash("error", "Image type not valid");
-			redirect("/couponPanel/");
+			return null;
 		}
 
 		double megabyteSize = (image.length() / 1024) / 1024;
 		if (megabyteSize > 2) {
 			flash("error", "Image size not valid");
-			redirect("/couponPanel/");
+			return null;
 		}
 
 		try {
