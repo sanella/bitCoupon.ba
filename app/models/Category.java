@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.*;
 
 import play.data.validation.Constraints.MinLength;
+import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 import play.db.ebean.Model.Finder;
 
@@ -14,13 +15,12 @@ public class Category extends Model{
 	@Id
 	public long id;
 	
-	@MinLength(4)
+	@Required
 	public String name;
 	
 	String image;
 	
-	
-    @OneToMany
+	@OneToMany
 	public List<Coupon> coupons;
     
     

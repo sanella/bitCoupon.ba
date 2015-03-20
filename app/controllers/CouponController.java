@@ -90,7 +90,8 @@ public class CouponController extends Controller {
 		Category category=null;
 		String categoryName=couponForm.bindFromRequest().field("category").value();
 		if(!Category.checkByName(categoryName)){
-			Category.createCategory(categoryName);
+			category=Category.find(Category.createCategory(categoryName));
+		
 		}
 		else{
 			category=Category.findByName(categoryName);
@@ -208,7 +209,15 @@ public class CouponController extends Controller {
 		}
 	
 		coupon.picture = couponForm.bindFromRequest().field("picture").value();
-		coupon.category = Category.findByName(couponForm.bindFromRequest().field("category").value());
+		Category category=null;
+		String categoryName=couponForm.bindFromRequest().field("category").value();
+		if(!Category.checkByName(categoryName)){
+			category=Category.find(Category.createCategory(categoryName));
+		
+		}
+		else{
+			category=Category.findByName(categoryName);
+		}
 		coupon.description = couponForm.bindFromRequest().field("description").value();
 		coupon.remark = couponForm.bindFromRequest().field("remark").value();
 		Coupon.updateCoupon(coupon);
