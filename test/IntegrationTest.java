@@ -1,6 +1,7 @@
 import java.util.Date;
 
 import helpers.HashHelper;
+import models.Category;
 import models.Coupon;
 import models.EmailVerification;
 import models.User;
@@ -96,7 +97,7 @@ public class IntegrationTest {
 					public void invoke(TestBrowser browser) {
 
 						Coupon.createCoupon("TestCoupon", 55.4, 
-								new Date(), "url", "category", "description",
+								new Date(), "url", new Category("test"), "description",
 								"remark");
 						browser.goTo("http://localhost:3333/");
 						assertThat(browser.pageSource()).contains("TestCoupon");
@@ -135,7 +136,7 @@ public class IntegrationTest {
 				HTMLUNIT, new Callback<TestBrowser>() {
 					public void invoke(TestBrowser browser) {
 
-						long couponId = Coupon.createCoupon("TestCoupon", 55.8, new Date(), "url", "category",
+						long couponId = Coupon.createCoupon("TestCoupon", 55.8, new Date(), "url", new Category("category"),
 								"description", "remark");
 						Coupon.delete(couponId);
 						browser.goTo("http://localhost:3333/coupon/" + couponId);

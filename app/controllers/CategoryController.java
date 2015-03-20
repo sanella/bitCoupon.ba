@@ -58,4 +58,8 @@ public class CategoryController extends Controller {
 		return redirect("/");
 	}
 	
+	public static Result viewByCategory(String categoryName) {
+		return ok(category.render(session("name"), Coupon.all()));
+	}
+	
 }

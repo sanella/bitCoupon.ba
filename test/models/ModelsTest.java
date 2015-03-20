@@ -47,7 +47,7 @@ public class ModelsTest extends WithApplication {
 	@Test
 	public void testCouponCreate(){
 		
-		Coupon.createCoupon("Test", 55.3, new Date(), "url", "category", "description", "remark");
+		Coupon.createCoupon("Test", 55.3, new Date(), "url", new Category("sport"), "description", "remark");
 		Coupon c = Coupon.find(4);
 		assertNotNull(c);
 		
@@ -61,7 +61,7 @@ public class ModelsTest extends WithApplication {
 	
 	@Test
 	public void deleteCoupon(){
-		Coupon.createCoupon("test", 2.22, new Date(), "testurl", "category", "description", "remark");
+		Coupon.createCoupon("test", 2.22, new Date(), "testurl", new Category("food"), "description", "remark");
 		Coupon.delete(4);
 		Coupon c = Coupon.find(4);
 		assertNull(c);
