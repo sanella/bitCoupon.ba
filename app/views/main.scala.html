@@ -34,11 +34,11 @@
         <div class="categories">
 	        @for(category <- Category.all()){
 	        	@if(category.name == "Travel") {
-	        	<div class="child" onclick="window.location='/'">}
+	        	<div class="child" onclick="window.location='@routes.CategoryController.viewByCategory(category.name)'">}
 	        	@if(category.name == "Food") {
-	        	<div class="child" onclick="window.location='https://google.ba'">}
+	        	<div class="child" onclick="window.location='@routes.CategoryController.viewByCategory(category.name)'">}
 	        	@if(category.name == "Sport") {
-	     	     <div class="child" onclick="window.location='https://facebook.com'">}
+	     	     <div class="child" onclick="window.location='@routes.CategoryController.viewByCategory(category.name)'">}
 		        	<div class="image"></div>
 		        	<div class="text">@category.name</div>
 	        	</div>
