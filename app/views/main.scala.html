@@ -16,9 +16,10 @@
 	<link href="@routes.Assets.at("css/animate.css")" rel="stylesheet">
 	<link href="@routes.Assets.at("css/main.css")" rel="stylesheet">
 	<link href="@routes.Assets.at("css/responsive.css")" rel="stylesheet">
+	<link href="@routes.Assets.at("css/site.css")" rel="stylesheet">
 
-
-         
+	<script src="@routes.Assets.at("js/jquery.js")"></script>
+	<script src="@routes.Assets.at("js/main.js")"></script>
 
     <link rel="shortcut icon" href="home/logo.png">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
@@ -27,8 +28,22 @@
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
 </head><!--/head-->
     <body>
-    <div class="container">
+    <div class="container test">
         @content
+        </div>
+        <div class="categories">
+	        @for(category <- Category.all()){
+	        	@if(category.name == "Travel") {
+	        	<div class="child" onclick="window.location='/'">}
+	        	@if(category.name == "Food") {
+	        	<div class="child" onclick="window.location='https://google.ba'">}
+	        	@if(category.name == "Sport") {
+	     	     <div class="child" onclick="window.location='https://facebook.com'">}
+		        	<div class="image"></div>
+		        	<div class="text">@category.name</div>
+	        	</div>
+	        	<hr/>
+	        }
         </div>
     </body>
 </html>

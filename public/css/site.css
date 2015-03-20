@@ -1,0 +1,51 @@
+.categories {
+	width: 60px;
+	position: absolute;
+	left: 0px;
+	top: 400px;
+}
+
+.categories .child {
+	text-align: center;
+	width: 60px;
+	overflow: hidden;
+	clear: both;
+	height: 50px;
+}
+
+.categories .child .image {
+	background: url("../images/sprite.png");
+	background-position: 7px 0px;
+	float: left;
+	width: 50px;
+	height:50px;
+	margin-right: 5px;
+}
+
+.categories .child .text{
+	font-family: Arial;
+	font-size: 22px;
+	font-weight: bold;
+	float:left;
+	padding-top:10px;
+}
+
+div.child:hover {
+	background-color: #e6e6e6;;
+	width: 150px;
+	cursor:pointer;
+	-webkit-transition: all 500ms cubic-bezier(0.150, 0.755, 1.000, 1.000); 
+   -moz-transition: all 500ms cubic-bezier(0.150, 0.755, 1.000, 1.000); 
+     -o-transition: all 500ms cubic-bezier(0.150, 0.755, 1.000, 1.000); 
+        transition: all 500ms cubic-bezier(0.150, 0.755, 1.000, 1.000); /* custom */
+
+-webkit-transition-timing-function: cubic-bezier(0.150, 0.755, 1.000, 1.000); 
+   -moz-transition-timing-function: cubic-bezier(0.150, 0.755, 1.000, 1.000); 
+     -o-transition-timing-function: cubic-bezier(0.150, 0.755, 1.000, 1.000); 
+        transition-timing-function: cubic-bezier(0.150, 0.755, 1.000, 1.000); /* custom */
+}
+
+hr{
+	padding:0px;
+	margin:0px;
+}
