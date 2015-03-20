@@ -1,5 +1,7 @@
 package controllers;
 
+import helpers.AdminFilter;
+
 import java.text.ParseException;
 import java.util.List;
 
@@ -7,23 +9,24 @@ import models.Category;
 import models.Coupon;
 import play.data.Form;
 import play.mvc.Result;
+import play.mvc.Security;
 import views.html.*;
 import play.mvc.Controller;
 
 public class CategoryController extends Controller {
 
 	static Form<Category> categoryForm = new Form<Category>(Category.class);
-	
+	@Security.Authenticated(AdminFilter.class)
 	public static Result addCategoryView(){
 		
 		return ok(categoryPanel.render(session("name"), null));
 	}
-	
+	@Security.Authenticated(AdminFilter.class)
 	public static Result listCategories(){
 		
 		return ok(CategoriesList.render(session("name"), Category.all()));
 	}
-	
+	@Security.Authenticated(AdminFilter.class)
 	public static Result addCategory() {
 
 		if (categoryForm.hasErrors()) {
@@ -53,7 +56,7 @@ public class CategoryController extends Controller {
 		return ok(categoryPanel.render( session("name"), "Category \"" + name
 				+ "\" added"));
 	}
-	
+	@Security.Authenticated(AdminFilter.class)
 	public static Result deleteCategory(long id) {
 		Category c = Category.find(id);
 		List<Coupon> cpns = c.coupons;
