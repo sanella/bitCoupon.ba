@@ -93,7 +93,7 @@ public class Coupon extends Model {
 		 */
 	}
 
-	static Finder<Long, Coupon> find = new Finder<Long, Coupon>(Long.class,
+	public static Finder<Long, Coupon> find = new Finder<Long, Coupon>(Long.class,
 			Coupon.class);
 
 	/**
