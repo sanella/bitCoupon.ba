@@ -3,15 +3,19 @@ package controllers;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+
 import models.Category;
 import models.Coupon;
 import models.User;
 import play.Logger;
+import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.Logger;
 import views.html.coupon.*;
+import views.html.*;
 
 
 public class CouponController extends Controller {
@@ -225,7 +229,18 @@ public class CouponController extends Controller {
 		flash("success", "Coupon updated");
 		return ok(updateCouponView.render(session("name"), coupon));
 	
-		
 	}
+	
+		public static Result search(String q){
+			List<Coupon> coupons = Coupon.find.where().ilike("name", "%" + q + "%").findList();
+			
+			if(coupons.isEmpty()){
+				flash("error","No such coupon");
+				User u = User.find(session("name"));
+				return badRequest(index.render(u,Coupon.all()));
+			}
+				
+			return ok(index.render(null, coupons));
+		}
 }
 
