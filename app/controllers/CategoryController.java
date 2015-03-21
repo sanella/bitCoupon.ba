@@ -1,6 +1,7 @@
 package controllers;
 
 import helpers.AdminFilter;
+import helpers.FileUpload;
 
 import java.text.ParseException;
 import java.util.List;
@@ -43,8 +44,11 @@ public class CategoryController extends Controller {
 		if(name.length()>20){
 			return ok(categoryPanel.render(session("name"),"Name must be max 120 characters long"));
 		}
+		
+		String picture = FileUpload.imageUpload("category-photos");		
+		
 		if(!Category.checkByName(name)){
-			Category.createCategory(name);
+			Category.createCategory(name, picture);
 		}
 		//else()-dodati flash:"Category already exists!"
 		//return ok(categoryPanel.render( session("name"), "Category \"" + name));

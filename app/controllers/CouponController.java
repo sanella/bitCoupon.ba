@@ -40,7 +40,8 @@ public class CouponController extends Controller {
 
 		return ok(couponPanel.render(session("name")));
 	}
-
+	
+	
 	/**
 	 * First checks if the coupon form has errors. Creates a new coupon ot
 	 * renders the view again if any error occurs.
@@ -48,6 +49,7 @@ public class CouponController extends Controller {
 	 * @return redirect to create coupon view
 	 * @throws ParseException
 	 */
+	@Deprecated
 	public static Result addCoupon1() throws ParseException {
 
 		if (couponForm.hasErrors()) {
